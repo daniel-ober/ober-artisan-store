@@ -1,0 +1,2385 @@
+{
+  "generatedAt": "2026-05-21T08:05:31.961Z",
+  "sourceReviewPacketFile": "src/legacyPrint/reviewPlans/lane-c-high-value-shell-thickness-and-edge-review-packet.json",
+  "status": "LANE_C_DW_PDP_SHELL_THICKNESS_AND_EDGE_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "summary": {
+    "companyName": "DW / PDP",
+    "candidateCount": 93,
+    "groupCount": 33,
+    "sourceUrls": [
+      "https://www.dwdrums.com/drums/collectors-series/",
+      "https://www.sweetwater.com/store/detail/PDSN0610BWCR--pdp-concept-black-wax-maple-snare-drum-6-inches-by-10-inches",
+      "https://www.dwdrums.com/drums/snares/",
+      "https://www.sweetwater.com/store/detail/PSS6x14NT--dw-performance-series-snare-drum-6.5-inch-by-14-inch-natural-lacquer",
+      "https://www.thedwstore.com/collections/pdp-snares",
+      "https://www.pacificdrums.com/products/pdsn5514bwcr-concept-black-wax-snare-5-5x14/",
+      "https://www.musicradar.com/drums/pdp-concept-acrylic-kit-and-snare"
+    ],
+    "topGroups": [
+      {
+        "lineSeries": "Collector's Series",
+        "shellMaterial": "Maple",
+        "count": 20,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/"
+      },
+      {
+        "lineSeries": "PDP Concept Series",
+        "shellMaterial": "Maple",
+        "count": 6,
+        "primarySourceUrl": "https://www.sweetwater.com/store/detail/PDSN0610BWCR--pdp-concept-black-wax-maple-snare-drum-6-inches-by-10-inches"
+      },
+      {
+        "lineSeries": "DW Historical / Discontinued",
+        "shellMaterial": "Maple",
+        "count": 5,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/snares/"
+      },
+      {
+        "lineSeries": "Collector's Series",
+        "shellMaterial": "Birch",
+        "count": 4,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/"
+      },
+      {
+        "lineSeries": "Collector's Series",
+        "shellMaterial": "Cherry",
+        "count": 4,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/"
+      },
+      {
+        "lineSeries": "Collector's Series",
+        "shellMaterial": "Oak",
+        "count": 4,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/"
+      },
+      {
+        "lineSeries": "Collector's Series",
+        "shellMaterial": "Purpleheart",
+        "count": 4,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/"
+      },
+      {
+        "lineSeries": "Collector's Series",
+        "shellMaterial": "Aluminum",
+        "count": 4,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/"
+      },
+      {
+        "lineSeries": "Collector's Series",
+        "shellMaterial": "Walnut",
+        "count": 4,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/"
+      },
+      {
+        "lineSeries": "Collector's Specialty / Metal",
+        "shellMaterial": "Maple",
+        "count": 4,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/snares/"
+      },
+      {
+        "lineSeries": "Collector's Specialty / Metal",
+        "shellMaterial": "Stainless Steel",
+        "count": 3,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/snares/"
+      },
+      {
+        "lineSeries": "Design Series",
+        "shellMaterial": "Acrylic",
+        "count": 3,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/snares/"
+      },
+      {
+        "lineSeries": "Performance Series",
+        "shellMaterial": "Maple",
+        "count": 3,
+        "primarySourceUrl": "https://www.sweetwater.com/store/detail/PSS6x14NT--dw-performance-series-snare-drum-6.5-inch-by-14-inch-natural-lacquer"
+      },
+      {
+        "lineSeries": "PDP Limited",
+        "shellMaterial": "Maple",
+        "count": 3,
+        "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares"
+      },
+      {
+        "lineSeries": "Collector's Specialty / Metal",
+        "shellMaterial": "Brass",
+        "count": 2,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/snares/"
+      },
+      {
+        "lineSeries": "PDP Concept Acrylic",
+        "shellMaterial": "Acrylic",
+        "count": 2,
+        "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares"
+      },
+      {
+        "lineSeries": "DW Historical / Discontinued",
+        "shellMaterial": "Bamboo",
+        "count": 2,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/snares/"
+      },
+      {
+        "lineSeries": "DW Historical / Discontinued",
+        "shellMaterial": "Cherry",
+        "count": 1,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/snares/"
+      },
+      {
+        "lineSeries": "PDP Concept Series",
+        "shellMaterial": "Maple",
+        "count": 1,
+        "primarySourceUrl": "https://www.pacificdrums.com/products/pdsn5514bwcr-concept-black-wax-snare-5-5x14/"
+      },
+      {
+        "lineSeries": "Collector's Specialty / Metal",
+        "shellMaterial": "Aluminum",
+        "count": 1,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/snares/"
+      },
+      {
+        "lineSeries": "Collector's Specialty / Metal",
+        "shellMaterial": "Bronze",
+        "count": 1,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/snares/"
+      },
+      {
+        "lineSeries": "Collector's Specialty / Metal",
+        "shellMaterial": "Copper",
+        "count": 1,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/snares/"
+      },
+      {
+        "lineSeries": "Design Series",
+        "shellMaterial": "Brass",
+        "count": 1,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/snares/"
+      },
+      {
+        "lineSeries": "Design Series",
+        "shellMaterial": "Aluminum",
+        "count": 1,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/snares/"
+      },
+      {
+        "lineSeries": "Design Series",
+        "shellMaterial": "Steel",
+        "count": 1,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/snares/"
+      },
+      {
+        "lineSeries": "PDP Concept Acrylic",
+        "shellMaterial": "Acrylic",
+        "count": 1,
+        "primarySourceUrl": "https://www.musicradar.com/drums/pdp-concept-acrylic-kit-and-snare"
+      },
+      {
+        "lineSeries": "Collector's Specialty / Metal",
+        "shellMaterial": "Concrete Composite",
+        "count": 1,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/snares/"
+      },
+      {
+        "lineSeries": "Collector's Specialty / Metal",
+        "shellMaterial": "Titanium",
+        "count": 1,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/snares/"
+      },
+      {
+        "lineSeries": "DW Historical / Discontinued",
+        "shellMaterial": "Carbon Fiber",
+        "count": 1,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/snares/"
+      },
+      {
+        "lineSeries": "PDP Limited",
+        "shellMaterial": "Bubinga",
+        "count": 1,
+        "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares"
+      },
+      {
+        "lineSeries": "PDP Limited",
+        "shellMaterial": "Walnut",
+        "count": 1,
+        "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares"
+      },
+      {
+        "lineSeries": "PDP Signature",
+        "shellMaterial": "Steel",
+        "count": 1,
+        "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares"
+      },
+      {
+        "lineSeries": "PDP Signature",
+        "shellMaterial": "Maple",
+        "count": 1,
+        "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Series",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+      "sourceConfidence": "Medium",
+      "count": 20,
+      "models": [
+        "Collector's Classics 13x5.5",
+        "Collector's Classics 14x5.5",
+        "Collector's Classics 14x6.5",
+        "Collector's Classics 14x8",
+        "Collector's Maple HVX 13x5.5",
+        "Collector's Maple HVX 14x5.5",
+        "Collector's Maple HVX 14x6.5",
+        "Collector's Maple HVX 14x8",
+        "Collector's Maple Mahogany 13x5.5",
+        "Collector's Maple Mahogany 14x5.5",
+        "Collector's Maple Mahogany 14x6.5",
+        "Collector's Maple Mahogany 14x8",
+        "Collector's Maple VLT 13x5.5",
+        "Collector's Maple VLT 14x5.5",
+        "Collector's Maple VLT 14x6.5",
+        "Collector's Maple VLT 14x8",
+        "Collector's Maple X-Shell 13x5.5",
+        "Collector's Maple X-Shell 14x5.5",
+        "Collector's Maple X-Shell 14x6.5",
+        "Collector's Maple X-Shell 14x8"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-classics-13x5-5_13x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple_19065de4",
+          "label": "DW / PDP — Collector's Series — Collector's Classics 13x5.5 — 13x5.5",
+          "modelName": "Collector's Classics 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple/Poplar vintage-inspired layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-classics-14x5-5_14x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple_7fe4d7ae",
+          "label": "DW / PDP — Collector's Series — Collector's Classics 14x5.5 — 14x5.5",
+          "modelName": "Collector's Classics 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple/Poplar vintage-inspired layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-classics-14x6-5_14x6-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple_35d43bfc",
+          "label": "DW / PDP — Collector's Series — Collector's Classics 14x6.5 — 14x6.5",
+          "modelName": "Collector's Classics 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple/Poplar vintage-inspired layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-classics-14x8_14x8_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple-fla_8c54ad7e",
+          "label": "DW / PDP — Collector's Series — Collector's Classics 14x8 — 14x8",
+          "modelName": "Collector's Classics 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple/Poplar vintage-inspired layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-maple-hvx-13x5-5_13x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_2f96fd8f",
+          "label": "DW / PDP — Collector's Series — Collector's Maple HVX 13x5.5 — 13x5.5",
+          "modelName": "Collector's Maple HVX 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Common DW maple layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-maple-hvx-14x5-5_14x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_b5c6eb34",
+          "label": "DW / PDP — Collector's Series — Collector's Maple HVX 14x5.5 — 14x5.5",
+          "modelName": "Collector's Maple HVX 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Common DW maple layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-maple-hvx-14x6-5_14x6-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_d8ef42bd",
+          "label": "DW / PDP — Collector's Series — Collector's Maple HVX 14x6.5 — 14x6.5",
+          "modelName": "Collector's Maple HVX 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Common DW maple layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-maple-hvx-14x8_14x8_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple-fl_277f15ad",
+          "label": "DW / PDP — Collector's Series — Collector's Maple HVX 14x8 — 14x8",
+          "modelName": "Collector's Maple HVX 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Common DW maple layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-maple-mahogany-13x5-5_13x5-5_ply_maple_mahogany_lacquer-oil-natural-configurable_t_ad0d8f1e",
+          "label": "DW / PDP — Collector's Series — Collector's Maple Mahogany 13x5.5 — 13x5.5",
+          "modelName": "Collector's Maple Mahogany 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Mahogany\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple/Mahogany hybrid layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-maple-mahogany-14x5-5_14x5-5_ply_maple_mahogany_lacquer-oil-natural-configurable_t_900c3645",
+          "label": "DW / PDP — Collector's Series — Collector's Maple Mahogany 14x5.5 — 14x5.5",
+          "modelName": "Collector's Maple Mahogany 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Mahogany\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple/Mahogany hybrid layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-maple-mahogany-14x6-5_14x6-5_ply_maple_mahogany_lacquer-oil-natural-configurable_t_0d11d75c",
+          "label": "DW / PDP — Collector's Series — Collector's Maple Mahogany 14x6.5 — 14x6.5",
+          "modelName": "Collector's Maple Mahogany 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Mahogany\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple/Mahogany hybrid layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-maple-mahogany-14x8_14x8_ply_maple_mahogany_lacquer-oil-natural-configurable_true-_284f6c4c",
+          "label": "DW / PDP — Collector's Series — Collector's Maple Mahogany 14x8 — 14x8",
+          "modelName": "Collector's Maple Mahogany 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Mahogany\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple/Mahogany hybrid layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-maple-vlt-13x5-5_13x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_b0be3338",
+          "label": "DW / PDP — Collector's Series — Collector's Maple VLT 13x5.5 — 13x5.5",
+          "modelName": "Collector's Maple VLT 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"VLT maple layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-maple-vlt-14x5-5_14x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_a6b7a863",
+          "label": "DW / PDP — Collector's Series — Collector's Maple VLT 14x5.5 — 14x5.5",
+          "modelName": "Collector's Maple VLT 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"VLT maple layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-maple-vlt-14x6-5_14x6-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_7f7722fe",
+          "label": "DW / PDP — Collector's Series — Collector's Maple VLT 14x6.5 — 14x6.5",
+          "modelName": "Collector's Maple VLT 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"VLT maple layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-maple-vlt-14x8_14x8_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple-fl_7ebac9a9",
+          "label": "DW / PDP — Collector's Series — Collector's Maple VLT 14x8 — 14x8",
+          "modelName": "Collector's Maple VLT 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"VLT maple layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-maple-x-shell-13x5-5_13x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-t_ff2962c1",
+          "label": "DW / PDP — Collector's Series — Collector's Maple X-Shell 13x5.5 — 13x5.5",
+          "modelName": "Collector's Maple X-Shell 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"X-shell maple layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-maple-x-shell-14x5-5_14x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-t_2b2a9590",
+          "label": "DW / PDP — Collector's Series — Collector's Maple X-Shell 14x5.5 — 14x5.5",
+          "modelName": "Collector's Maple X-Shell 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"X-shell maple layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-maple-x-shell-14x6-5_14x6-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-t_b83b0f9e",
+          "label": "DW / PDP — Collector's Series — Collector's Maple X-Shell 14x6.5 — 14x6.5",
+          "modelName": "Collector's Maple X-Shell 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"X-shell maple layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-maple-x-shell-14x8_14x8_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_1bdd971d",
+          "label": "DW / PDP — Collector's Series — Collector's Maple X-Shell 14x8 — 14x8",
+          "modelName": "Collector's Maple X-Shell 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"X-shell maple layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "PDP Concept Series",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.sweetwater.com/store/detail/PDSN0610BWCR--pdp-concept-black-wax-maple-snare-drum-6-inches-by-10-inches",
+      "sourceConfidence": "High",
+      "count": 6,
+      "models": [
+        "Concept Black Wax Maple 10x6",
+        "Concept Black Wax Maple 12x6",
+        "Concept Black Wax Maple 13x5.5",
+        "Concept Black Wax Maple 13x7",
+        "Concept Black Wax Maple 14x6.5",
+        "Concept Black Wax Maple 14x8"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-10x6_10x6_ply_maple_black-wax-hand-applied-wax-based-sealer_triple-fla_68441786",
+          "label": "DW / PDP — PDP Concept Series — Concept Black Wax Maple 10x6 — 10x6",
+          "modelName": "Concept Black Wax Maple 10x6",
+          "diameter": "10",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.sweetwater.com/store/detail/PDSN0610BWCR--pdp-concept-black-wax-maple-snare-drum-6-inches-by-10-inches",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-12x6_12x6_ply_maple_black-wax-hand-applied-wax-based-sealer_triple-fla_aa986b89",
+          "label": "DW / PDP — PDP Concept Series — Concept Black Wax Maple 12x6 — 12x6",
+          "modelName": "Concept Black Wax Maple 12x6",
+          "diameter": "12",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.sweetwater.com/store/detail/PDSN0610BWCR--pdp-concept-black-wax-maple-snare-drum-6-inches-by-10-inches",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-13x5-5_13x5-5_ply_maple_black-wax-hand-applied-wax-based-sealer_triple_2f6ee285",
+          "label": "DW / PDP — PDP Concept Series — Concept Black Wax Maple 13x5.5 — 13x5.5",
+          "modelName": "Concept Black Wax Maple 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.sweetwater.com/store/detail/PDSN0610BWCR--pdp-concept-black-wax-maple-snare-drum-6-inches-by-10-inches",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-13x7_13x7_ply_maple_black-wax-hand-applied-wax-based-sealer_triple-fla_1e1a026b",
+          "label": "DW / PDP — PDP Concept Series — Concept Black Wax Maple 13x7 — 13x7",
+          "modelName": "Concept Black Wax Maple 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.sweetwater.com/store/detail/PDSN0610BWCR--pdp-concept-black-wax-maple-snare-drum-6-inches-by-10-inches",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-14x6-5_14x6-5_ply_maple_black-wax-hand-applied-wax-based-sealer_triple_185f847d",
+          "label": "DW / PDP — PDP Concept Series — Concept Black Wax Maple 14x6.5 — 14x6.5",
+          "modelName": "Concept Black Wax Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.sweetwater.com/store/detail/PDSN0610BWCR--pdp-concept-black-wax-maple-snare-drum-6-inches-by-10-inches",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-14x8_14x8_ply_maple_black-wax-hand-applied-wax-based-sealer_triple-fla_0cdf5cd6",
+          "label": "DW / PDP — PDP Concept Series — Concept Black Wax Maple 14x8 — 14x8",
+          "modelName": "Concept Black Wax Maple 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.sweetwater.com/store/detail/PDSN0610BWCR--pdp-concept-black-wax-maple-snare-drum-6-inches-by-10-inches",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "DW Historical / Discontinued",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+      "sourceConfidence": "Low",
+      "count": 5,
+      "models": [
+        "Craviotto Solid Maple by DW 14x5.5",
+        "Craviotto Solid Maple by DW 14x6.5",
+        "DW Maple 10+6 14x6",
+        "DW Neil Peart R40 Icon Snare 14x6.5",
+        "DW Workshop Series Maple 14x6"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_dw-historical-discontinued_craviotto-solid-maple-by-dw-14x5-5_14x5-5_solid-shell_maple_lacquer-natural-varies_tri_2023d543",
+          "label": "DW / PDP — DW Historical / Discontinued — Craviotto Solid Maple by DW 14x5.5 — 14x5.5",
+          "modelName": "Craviotto Solid Maple by DW 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Craviotto-associated solid maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "dw-pdp_dw-historical-discontinued_craviotto-solid-maple-by-dw-14x6-5_14x6-5_solid-shell_maple_lacquer-natural-varies_tri_a282f4ef",
+          "label": "DW / PDP — DW Historical / Discontinued — Craviotto Solid Maple by DW 14x6.5 — 14x6.5",
+          "modelName": "Craviotto Solid Maple by DW 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Craviotto-associated solid maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "dw-pdp_dw-historical-discontinued_dw-maple-10-6-14x6_14x6_ply_maple_lacquer-natural-varies_triple-flanged_31bca584",
+          "label": "DW / PDP — DW Historical / Discontinued — DW Maple 10+6 14x6 — 14x6",
+          "modelName": "DW Maple 10+6 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Older DW thick maple family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "dw-pdp_dw-historical-discontinued_dw-neil-peart-r40-icon-snare-14x6-5_14x6-5_ply_maple_lacquer-natural-varies_triple-fla_caab5483",
+          "label": "DW / PDP — DW Historical / Discontinued — DW Neil Peart R40 Icon Snare 14x6.5 — 14x6.5",
+          "modelName": "DW Neil Peart R40 Icon Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Icon series collector model\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "dw-pdp_dw-historical-discontinued_dw-workshop-series-maple-14x6_14x6_ply_maple_lacquer-natural-varies_triple-flanged_9c1dcfb5",
+          "label": "DW / PDP — DW Historical / Discontinued — DW Workshop Series Maple 14x6 — 14x6",
+          "modelName": "DW Workshop Series Maple 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Workshop/early production family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Series",
+      "shellMaterial": "Birch",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+      "sourceConfidence": "Medium",
+      "count": 4,
+      "models": [
+        "Collector's Birch 13x5.5",
+        "Collector's Birch 14x5.5",
+        "Collector's Birch 14x6.5",
+        "Collector's Birch 14x8"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-birch-13x5-5_13x5-5_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-fl_6cdafd5b",
+          "label": "DW / PDP — Collector's Series — Collector's Birch 13x5.5 — 13x5.5",
+          "modelName": "Collector's Birch 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Birch ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-birch-14x5-5_14x5-5_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-fl_dd12f9a9",
+          "label": "DW / PDP — Collector's Series — Collector's Birch 14x5.5 — 14x5.5",
+          "modelName": "Collector's Birch 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Birch ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-birch-14x6-5_14x6-5_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-fl_57e64c81",
+          "label": "DW / PDP — Collector's Series — Collector's Birch 14x6.5 — 14x6.5",
+          "modelName": "Collector's Birch 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Birch ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-birch-14x8_14x8_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-flange_ceb97f2e",
+          "label": "DW / PDP — Collector's Series — Collector's Birch 14x8 — 14x8",
+          "modelName": "Collector's Birch 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Birch ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Series",
+      "shellMaterial": "Cherry",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+      "sourceConfidence": "Medium",
+      "count": 4,
+      "models": [
+        "Collector's Cherry 13x5.5",
+        "Collector's Cherry 14x5.5",
+        "Collector's Cherry 14x6.5",
+        "Collector's Cherry 14x8"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-cherry-13x5-5_13x5-5_ply_cherry_lacquer-oil-natural-configurable_true-hoop-triple-_fb0b24a8",
+          "label": "DW / PDP — Collector's Series — Collector's Cherry 13x5.5 — 13x5.5",
+          "modelName": "Collector's Cherry 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Cherry ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-cherry-14x5-5_14x5-5_ply_cherry_lacquer-oil-natural-configurable_true-hoop-triple-_0ccae8d5",
+          "label": "DW / PDP — Collector's Series — Collector's Cherry 14x5.5 — 14x5.5",
+          "modelName": "Collector's Cherry 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Cherry ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-cherry-14x6-5_14x6-5_ply_cherry_lacquer-oil-natural-configurable_true-hoop-triple-_23f2053c",
+          "label": "DW / PDP — Collector's Series — Collector's Cherry 14x6.5 — 14x6.5",
+          "modelName": "Collector's Cherry 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Cherry ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-cherry-14x8_14x8_ply_cherry_lacquer-oil-natural-configurable_true-hoop-triple-flan_5f96d676",
+          "label": "DW / PDP — Collector's Series — Collector's Cherry 14x8 — 14x8",
+          "modelName": "Collector's Cherry 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Cherry ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Series",
+      "shellMaterial": "Oak",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+      "sourceConfidence": "Medium",
+      "count": 4,
+      "models": [
+        "Collector's Oak 13x5.5",
+        "Collector's Oak 14x5.5",
+        "Collector's Oak 14x6.5",
+        "Collector's Oak 14x8"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-oak-13x5-5_13x5-5_ply_oak_lacquer-oil-natural-configurable_true-hoop-triple-flange_3df711dc",
+          "label": "DW / PDP — Collector's Series — Collector's Oak 13x5.5 — 13x5.5",
+          "modelName": "Collector's Oak 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Oak ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-oak-14x5-5_14x5-5_ply_oak_lacquer-oil-natural-configurable_true-hoop-triple-flange_bf5eeecb",
+          "label": "DW / PDP — Collector's Series — Collector's Oak 14x5.5 — 14x5.5",
+          "modelName": "Collector's Oak 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Oak ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-oak-14x6-5_14x6-5_ply_oak_lacquer-oil-natural-configurable_true-hoop-triple-flange_05574206",
+          "label": "DW / PDP — Collector's Series — Collector's Oak 14x6.5 — 14x6.5",
+          "modelName": "Collector's Oak 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Oak ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-oak-14x8_14x8_ply_oak_lacquer-oil-natural-configurable_true-hoop-triple-flanged_b2a58dd2",
+          "label": "DW / PDP — Collector's Series — Collector's Oak 14x8 — 14x8",
+          "modelName": "Collector's Oak 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Oak ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Series",
+      "shellMaterial": "Purpleheart",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+      "sourceConfidence": "Medium",
+      "count": 4,
+      "models": [
+        "Collector's Purpleheart 13x5.5",
+        "Collector's Purpleheart 14x5.5",
+        "Collector's Purpleheart 14x6.5",
+        "Collector's Purpleheart 14x8"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-purpleheart-13x5-5_13x5-5_ply_purpleheart_lacquer-oil-natural-configurable_true-ho_064f73c9",
+          "label": "DW / PDP — Collector's Series — Collector's Purpleheart 13x5.5 — 13x5.5",
+          "modelName": "Collector's Purpleheart 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Purpleheart\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Purpleheart ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-purpleheart-14x5-5_14x5-5_ply_purpleheart_lacquer-oil-natural-configurable_true-ho_bcfa4329",
+          "label": "DW / PDP — Collector's Series — Collector's Purpleheart 14x5.5 — 14x5.5",
+          "modelName": "Collector's Purpleheart 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Purpleheart\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Purpleheart ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-purpleheart-14x6-5_14x6-5_ply_purpleheart_lacquer-oil-natural-configurable_true-ho_c0bbc665",
+          "label": "DW / PDP — Collector's Series — Collector's Purpleheart 14x6.5 — 14x6.5",
+          "modelName": "Collector's Purpleheart 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Purpleheart\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Purpleheart ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-purpleheart-14x8_14x8_ply_purpleheart_lacquer-oil-natural-configurable_true-hoop-t_a24ce298",
+          "label": "DW / PDP — Collector's Series — Collector's Purpleheart 14x8 — 14x8",
+          "modelName": "Collector's Purpleheart 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Purpleheart\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Purpleheart ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Series",
+      "shellMaterial": "Aluminum",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+      "sourceConfidence": "Medium",
+      "count": 4,
+      "models": [
+        "Collector's SonicPly Aluminum/Maple 13x5.5",
+        "Collector's SonicPly Aluminum/Maple 14x5.5",
+        "Collector's SonicPly Aluminum/Maple 14x6.5",
+        "Collector's SonicPly Aluminum/Maple 14x8"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-sonicply-aluminum-maple-13x5-5_13x5-5_ply_aluminum_maple_lacquer-oil-natural-confi_73ccbdcd",
+          "label": "DW / PDP — Collector's Series — Collector's SonicPly Aluminum/Maple 13x5.5 — 13x5.5",
+          "modelName": "Collector's SonicPly Aluminum/Maple 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"Maple\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Aluminum + maple hybrid\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-sonicply-aluminum-maple-14x5-5_14x5-5_ply_aluminum_maple_lacquer-oil-natural-confi_9f41b8c7",
+          "label": "DW / PDP — Collector's Series — Collector's SonicPly Aluminum/Maple 14x5.5 — 14x5.5",
+          "modelName": "Collector's SonicPly Aluminum/Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"Maple\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Aluminum + maple hybrid\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-sonicply-aluminum-maple-14x6-5_14x6-5_ply_aluminum_maple_lacquer-oil-natural-confi_116aa797",
+          "label": "DW / PDP — Collector's Series — Collector's SonicPly Aluminum/Maple 14x6.5 — 14x6.5",
+          "modelName": "Collector's SonicPly Aluminum/Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"Maple\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Aluminum + maple hybrid\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-sonicply-aluminum-maple-14x8_14x8_ply_aluminum_maple_lacquer-oil-natural-configura_b7ee6b5e",
+          "label": "DW / PDP — Collector's Series — Collector's SonicPly Aluminum/Maple 14x8 — 14x8",
+          "modelName": "Collector's SonicPly Aluminum/Maple 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"Maple\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Aluminum + maple hybrid\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Series",
+      "shellMaterial": "Walnut",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+      "sourceConfidence": "Medium",
+      "count": 4,
+      "models": [
+        "Collector's Walnut 13x5.5",
+        "Collector's Walnut 14x5.5",
+        "Collector's Walnut 14x6.5",
+        "Collector's Walnut 14x8"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-walnut-13x5-5_13x5-5_ply_walnut_lacquer-oil-natural-configurable_true-hoop-triple-_d80949bb",
+          "label": "DW / PDP — Collector's Series — Collector's Walnut 13x5.5 — 13x5.5",
+          "modelName": "Collector's Walnut 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Walnut ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-walnut-14x5-5_14x5-5_ply_walnut_lacquer-oil-natural-configurable_true-hoop-triple-_824a346f",
+          "label": "DW / PDP — Collector's Series — Collector's Walnut 14x5.5 — 14x5.5",
+          "modelName": "Collector's Walnut 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Walnut ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-walnut-14x6-5_14x6-5_ply_walnut_lacquer-oil-natural-configurable_true-hoop-triple-_9e72c6c9",
+          "label": "DW / PDP — Collector's Series — Collector's Walnut 14x6.5 — 14x6.5",
+          "modelName": "Collector's Walnut 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Walnut ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-series_collector-s-walnut-14x8_14x8_ply_walnut_lacquer-oil-natural-configurable_true-hoop-triple-flan_6d7a70c4",
+          "label": "DW / PDP — Collector's Series — Collector's Walnut 14x8 — 14x8",
+          "modelName": "Collector's Walnut 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Walnut ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Specialty / Metal",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+      "sourceConfidence": "Medium",
+      "count": 4,
+      "models": [
+        "DW Edge Maple/Metal 14x6",
+        "DW Super Solid Maple 14x5.5",
+        "DW Super Solid Maple 14x6.5",
+        "DW Top Edge Maple/Metal 14x5.5"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_collector-s-specialty-metal_dw-edge-maple-metal-14x6_14x6_hybrid_maple_varies_true-hoop-triple-flanged_375984f2",
+          "label": "DW / PDP — Collector's Specialty / Metal — DW Edge Maple/Metal 14x6 — 14x6",
+          "modelName": "DW Edge Maple/Metal 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Hybrid\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Edge shell family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "dw-pdp_collector-s-specialty-metal_dw-super-solid-maple-14x5-5_14x5-5_solid-shell_maple_varies_true-hoop-triple-flanged_021e6484",
+          "label": "DW / PDP — Collector's Specialty / Metal — DW Super Solid Maple 14x5.5 — 14x5.5",
+          "modelName": "DW Super Solid Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Solid maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-specialty-metal_dw-super-solid-maple-14x6-5_14x6-5_solid-shell_maple_varies_true-hoop-triple-flanged_8cda9d93",
+          "label": "DW / PDP — Collector's Specialty / Metal — DW Super Solid Maple 14x6.5 — 14x6.5",
+          "modelName": "DW Super Solid Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Solid maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-specialty-metal_dw-top-edge-maple-metal-14x5-5_14x5-5_hybrid_maple_varies_true-hoop-triple-flanged_a1266429",
+          "label": "DW / PDP — Collector's Specialty / Metal — DW Top Edge Maple/Metal 14x5.5 — 14x5.5",
+          "modelName": "DW Top Edge Maple/Metal 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Hybrid\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Top Edge shell family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Specialty / Metal",
+      "shellMaterial": "Stainless Steel",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+      "sourceConfidence": "Medium",
+      "count": 3,
+      "models": [
+        "DW Stainless Steel 14x6.5",
+        "DW True Sonic Stainless Steel 14x5",
+        "DW True Sonic Stainless Steel 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_collector-s-specialty-metal_dw-stainless-steel-14x6-5_14x6-5_metal_stainless-steel_varies_true-hoop-triple-flange_7c064417",
+          "label": "DW / PDP — Collector's Specialty / Metal — DW Stainless Steel 14x6.5 — 14x6.5",
+          "modelName": "DW Stainless Steel 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Stainless Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stainless steel shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-specialty-metal_dw-true-sonic-stainless-steel-14x5_14x5_metal_stainless-steel_varies_true-hoop-triple_a1ae903f",
+          "label": "DW / PDP — Collector's Specialty / Metal — DW True Sonic Stainless Steel 14x5 — 14x5",
+          "modelName": "DW True Sonic Stainless Steel 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Stainless Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stainless steel shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-specialty-metal_dw-true-sonic-stainless-steel-14x6-5_14x6-5_metal_stainless-steel_varies_true-hoop-tr_a925b00a",
+          "label": "DW / PDP — Collector's Specialty / Metal — DW True Sonic Stainless Steel 14x6.5 — 14x6.5",
+          "modelName": "DW True Sonic Stainless Steel 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Stainless Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stainless steel shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Design Series",
+      "shellMaterial": "Acrylic",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+      "sourceConfidence": "Medium",
+      "count": 3,
+      "models": [
+        "Design Series Acrylic 14x5.5",
+        "Design Series Acrylic 14x6.5",
+        "Design Series Acrylic 14x8"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_design-series_design-series-acrylic-14x5-5_14x5-5_acrylic_acrylic_clear-smoke-acrylic_true-hoop-triple-flanged_24bdf5bb",
+          "label": "DW / PDP — Design Series — Design Series Acrylic 14x5.5 — 14x5.5",
+          "modelName": "Design Series Acrylic 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Acrylic\",\"shellMaterialPrimary\":\"Acrylic\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Acrylic\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_design-series_design-series-acrylic-14x6-5_14x6-5_acrylic_acrylic_clear-smoke-acrylic_true-hoop-triple-flanged_d2ed25f9",
+          "label": "DW / PDP — Design Series — Design Series Acrylic 14x6.5 — 14x6.5",
+          "modelName": "Design Series Acrylic 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Acrylic\",\"shellMaterialPrimary\":\"Acrylic\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Acrylic\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_design-series_design-series-acrylic-14x8_14x8_acrylic_acrylic_clear-smoke-acrylic_true-hoop-triple-flanged_c1a3471b",
+          "label": "DW / PDP — Design Series — Design Series Acrylic 14x8 — 14x8",
+          "modelName": "Design Series Acrylic 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Acrylic\",\"shellMaterialPrimary\":\"Acrylic\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Acrylic\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Performance Series",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.sweetwater.com/store/detail/PSS6x14NT--dw-performance-series-snare-drum-6.5-inch-by-14-inch-natural-lacquer",
+      "sourceConfidence": "Medium",
+      "count": 3,
+      "models": [
+        "Performance Series HVX Maple 14x5.5",
+        "Performance Series HVX Maple 14x6.5",
+        "Performance Series HVX Maple 14x8"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_performance-series_performance-series-hvx-maple-14x5-5_14x5-5_ply_maple_lacquer_true-hoop-triple-flanged_ee472298",
+          "label": "DW / PDP — Performance Series — Performance Series HVX Maple 14x5.5 — 14x5.5",
+          "modelName": "Performance Series HVX Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"HVX maple shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.sweetwater.com/store/detail/PSS6x14NT--dw-performance-series-snare-drum-6.5-inch-by-14-inch-natural-lacquer",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_performance-series_performance-series-hvx-maple-14x6-5_14x6-5_ply_maple_lacquer_true-hoop-triple-flanged_7b3b34bc",
+          "label": "DW / PDP — Performance Series — Performance Series HVX Maple 14x6.5 — 14x6.5",
+          "modelName": "Performance Series HVX Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"HVX maple shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.sweetwater.com/store/detail/PSS6x14NT--dw-performance-series-snare-drum-6.5-inch-by-14-inch-natural-lacquer",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_performance-series_performance-series-hvx-maple-14x8_14x8_ply_maple_lacquer_true-hoop-triple-flanged_33783f76",
+          "label": "DW / PDP — Performance Series — Performance Series HVX Maple 14x8 — 14x8",
+          "modelName": "Performance Series HVX Maple 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"HVX maple shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.sweetwater.com/store/detail/PSS6x14NT--dw-performance-series-snare-drum-6.5-inch-by-14-inch-natural-lacquer",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "PDP Limited",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+      "sourceConfidence": "Low",
+      "count": 3,
+      "models": [
+        "PDP Ace 13x6.5",
+        "PDP Concept Limited Maple/Walnut 14x6.5",
+        "PDP Woody 13x7"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_pdp-limited_pdp-ace-13x6-5_13x6-5_ply_maple_triple-flanged_f52c9b71",
+          "label": "DW / PDP — PDP Limited — PDP Ace 13x6.5 — 13x6.5",
+          "modelName": "PDP Ace 13x6.5",
+          "diameter": "13",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "dw-pdp_pdp-limited_pdp-concept-limited-maple-walnut-14x6-5_14x6-5_ply_maple_walnut_triple-flanged_f850de7b",
+          "label": "DW / PDP — PDP Limited — PDP Concept Limited Maple/Walnut 14x6.5 — 14x6.5",
+          "modelName": "PDP Concept Limited Maple/Walnut 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Walnut\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "dw-pdp_pdp-limited_pdp-woody-13x7_13x7_ply_maple_triple-flanged_3845357d",
+          "label": "DW / PDP — PDP Limited — PDP Woody 13x7 — 13x7",
+          "modelName": "PDP Woody 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Specialty / Metal",
+      "shellMaterial": "Brass",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+      "sourceConfidence": "Medium",
+      "count": 2,
+      "models": [
+        "DW Brass 14x5.5",
+        "DW Brass 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_collector-s-specialty-metal_dw-brass-14x5-5_14x5-5_metal_brass_varies_true-hoop-triple-flanged_1e9dde9b",
+          "label": "DW / PDP — Collector's Specialty / Metal — DW Brass 14x5.5 — 14x5.5",
+          "modelName": "DW Brass 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Brass shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_collector-s-specialty-metal_dw-brass-14x6-5_14x6-5_metal_brass_varies_true-hoop-triple-flanged_b770c9bb",
+          "label": "DW / PDP — Collector's Specialty / Metal — DW Brass 14x6.5 — 14x6.5",
+          "modelName": "DW Brass 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Brass shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "PDP Concept Acrylic",
+      "shellMaterial": "Acrylic",
+      "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+      "sourceConfidence": "Medium",
+      "count": 2,
+      "models": [
+        "Concept Acrylic 14x5.5",
+        "Concept Acrylic 14x8"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_pdp-concept-acrylic_concept-acrylic-14x5-5_14x5-5_acrylic_acrylic_clear-colored-acrylic_triple-flanged_dca3397f",
+          "label": "DW / PDP — PDP Concept Acrylic — Concept Acrylic 14x5.5 — 14x5.5",
+          "modelName": "Concept Acrylic 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Acrylic\",\"shellMaterialPrimary\":\"Acrylic\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Acrylic\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "dw-pdp_pdp-concept-acrylic_concept-acrylic-14x8_14x8_acrylic_acrylic_clear-colored-acrylic_triple-flanged_cf275f56",
+          "label": "DW / PDP — PDP Concept Acrylic — Concept Acrylic 14x8 — 14x8",
+          "modelName": "Concept Acrylic 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Acrylic\",\"shellMaterialPrimary\":\"Acrylic\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Acrylic\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "DW Historical / Discontinued",
+      "shellMaterial": "Bamboo",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+      "sourceConfidence": "Low",
+      "count": 2,
+      "models": [
+        "DW Eco-X Bamboo/Birch 14x5.5",
+        "DW Eco-X Bamboo/Birch 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_dw-historical-discontinued_dw-eco-x-bamboo-birch-14x5-5_14x5-5_ply_bamboo_lacquer-natural-varies_triple-flanged_afc92df0",
+          "label": "DW / PDP — DW Historical / Discontinued — DW Eco-X Bamboo/Birch 14x5.5 — 14x5.5",
+          "modelName": "DW Eco-X Bamboo/Birch 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Bamboo\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Bamboo/Birch family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "dw-pdp_dw-historical-discontinued_dw-eco-x-bamboo-birch-14x6-5_14x6-5_ply_bamboo_lacquer-natural-varies_triple-flanged_6a8057b4",
+          "label": "DW / PDP — DW Historical / Discontinued — DW Eco-X Bamboo/Birch 14x6.5 — 14x6.5",
+          "modelName": "DW Eco-X Bamboo/Birch 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Bamboo\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Bamboo/Birch family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "DW Historical / Discontinued",
+      "shellMaterial": "Cherry",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "DW/Craviotto Solid Cherry 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_dw-historical-discontinued_dw-craviotto-solid-cherry-14x6-5_14x6-5_solid-shell_cherry_lacquer-natural-varies_trip_3d7e1442",
+          "label": "DW / PDP — DW Historical / Discontinued — DW/Craviotto Solid Cherry 14x6.5 — 14x6.5",
+          "modelName": "DW/Craviotto Solid Cherry 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Craviotto-associated solid cherry\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "PDP Concept Series",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.pacificdrums.com/products/pdsn5514bwcr-concept-black-wax-snare-5-5x14/",
+      "sourceConfidence": "High",
+      "count": 1,
+      "models": [
+        "Concept Black Wax Maple 14x5.5"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-14x5-5_14x5-5_ply_maple_black-wax-hand-applied-wax-based-sealer_triple_9b008a0c",
+          "label": "DW / PDP — PDP Concept Series — Concept Black Wax Maple 14x5.5 — 14x5.5",
+          "modelName": "Concept Black Wax Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.pacificdrums.com/products/pdsn5514bwcr-concept-black-wax-snare-5-5x14/",
+          "sourceConfidence": "High"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Specialty / Metal",
+      "shellMaterial": "Aluminum",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "DW Aluminum 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_collector-s-specialty-metal_dw-aluminum-14x6-5_14x6-5_metal_aluminum_varies_true-hoop-triple-flanged_609a0827",
+          "label": "DW / PDP — Collector's Specialty / Metal — DW Aluminum 14x6.5 — 14x6.5",
+          "modelName": "DW Aluminum 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Aluminum shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Specialty / Metal",
+      "shellMaterial": "Bronze",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "DW Bronze 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_collector-s-specialty-metal_dw-bronze-14x6-5_14x6-5_metal_bronze_varies_true-hoop-triple-flanged_9fb017b1",
+          "label": "DW / PDP — Collector's Specialty / Metal — DW Bronze 14x6.5 — 14x6.5",
+          "modelName": "DW Bronze 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Bronze shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Specialty / Metal",
+      "shellMaterial": "Copper",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "DW Copper 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_collector-s-specialty-metal_dw-copper-14x6-5_14x6-5_metal_copper_varies_true-hoop-triple-flanged_4b211db1",
+          "label": "DW / PDP — Collector's Specialty / Metal — DW Copper 14x6.5 — 14x6.5",
+          "modelName": "DW Copper 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Copper\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Copper shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Design Series",
+      "shellMaterial": "Brass",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Design Series Black Nickel over Brass 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_design-series_design-series-black-nickel-over-brass-14x6-5_14x6-5_metal_brass_black-nickel-over-brass_true-hoop-t_ecf624f0",
+          "label": "DW / PDP — Design Series — Design Series Black Nickel over Brass 14x6.5 — 14x6.5",
+          "modelName": "Design Series Black Nickel over Brass 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Design Series",
+      "shellMaterial": "Aluminum",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Design Series Brushed Aluminum 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_design-series_design-series-brushed-aluminum-14x6-5_14x6-5_metal_aluminum_brushed-aluminum_true-hoop-triple-flang_823f1ea9",
+          "label": "DW / PDP — Design Series — Design Series Brushed Aluminum 14x6.5 — 14x6.5",
+          "modelName": "Design Series Brushed Aluminum 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Design Series",
+      "shellMaterial": "Steel",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Design Series Steel 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_design-series_design-series-steel-14x6-5_14x6-5_metal_steel_steel_true-hoop-triple-flanged_5d6bf97f",
+          "label": "DW / PDP — Design Series — Design Series Steel 14x6.5 — 14x6.5",
+          "modelName": "Design Series Steel 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "PDP Concept Acrylic",
+      "shellMaterial": "Acrylic",
+      "primarySourceUrl": "https://www.musicradar.com/drums/pdp-concept-acrylic-kit-and-snare",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Concept Acrylic 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_pdp-concept-acrylic_concept-acrylic-14x6-5_14x6-5_acrylic_acrylic_clear-colored-acrylic_acrylic-hoops_ab2304e9",
+          "label": "DW / PDP — PDP Concept Acrylic — Concept Acrylic 14x6.5 — 14x6.5",
+          "modelName": "Concept Acrylic 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Acrylic\",\"shellMaterialPrimary\":\"Acrylic\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Acrylic\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.musicradar.com/drums/pdp-concept-acrylic-kit-and-snare",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Specialty / Metal",
+      "shellMaterial": "Concrete Composite",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "DW Concrete 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_collector-s-specialty-metal_dw-concrete-14x6-5_14x6-5_composite_concrete-composite_varies_true-hoop-triple-flange_eed680e3",
+          "label": "DW / PDP — Collector's Specialty / Metal — DW Concrete 14x6.5 — 14x6.5",
+          "modelName": "DW Concrete 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Composite\",\"shellMaterialPrimary\":\"Concrete Composite\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Concrete composite shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Specialty / Metal",
+      "shellMaterial": "Titanium",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "DW Titanium 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_collector-s-specialty-metal_dw-titanium-14x6-5_14x6-5_metal_titanium_varies_true-hoop-triple-flanged_5c73d450",
+          "label": "DW / PDP — Collector's Specialty / Metal — DW Titanium 14x6.5 — 14x6.5",
+          "modelName": "DW Titanium 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Titanium\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Titanium shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "DW Historical / Discontinued",
+      "shellMaterial": "Carbon Fiber",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "DW Carbon Fiber 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_dw-historical-discontinued_dw-carbon-fiber-14x6-5_14x6-5_composite_carbon-fiber_lacquer-natural-varies_triple-fla_152a2abd",
+          "label": "DW / PDP — DW Historical / Discontinued — DW Carbon Fiber 14x6.5 — 14x6.5",
+          "modelName": "DW Carbon Fiber 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Composite\",\"shellMaterialPrimary\":\"Carbon Fiber\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Composite shell family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "PDP Limited",
+      "shellMaterial": "Bubinga",
+      "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "PDP Concept Limited Bubinga 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_pdp-limited_pdp-concept-limited-bubinga-14x6-5_14x6-5_ply_bubinga_triple-flanged_b0f83cc0",
+          "label": "DW / PDP — PDP Limited — PDP Concept Limited Bubinga 14x6.5 — 14x6.5",
+          "modelName": "PDP Concept Limited Bubinga 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Bubinga\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "PDP Limited",
+      "shellMaterial": "Walnut",
+      "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "PDP Concept Limited Walnut 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_pdp-limited_pdp-concept-limited-walnut-14x6-5_14x6-5_ply_walnut_walnut_triple-flanged_5691be79",
+          "label": "DW / PDP — PDP Limited — PDP Concept Limited Walnut 14x6.5 — 14x6.5",
+          "modelName": "PDP Concept Limited Walnut 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"Walnut\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "PDP Signature",
+      "shellMaterial": "Steel",
+      "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Chad Smith Signature 14x5"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_pdp-signature_chad-smith-signature-14x5_14x5_metal_steel_triple-flanged_0d314dee",
+          "label": "DW / PDP — PDP Signature — Chad Smith Signature 14x5 — 14x5",
+          "modelName": "Chad Smith Signature 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "PDP Signature",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Eric Hernandez Signature Concept Maple 14x4"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_pdp-signature_eric-hernandez-signature-concept-maple-14x4_14x4_ply_maple_triple-flanged_e301abd5",
+          "label": "DW / PDP — PDP Signature — Eric Hernandez Signature Concept Maple 14x4 — 14x4",
+          "modelName": "Eric Hernandez Signature Concept Maple 14x4",
+          "diameter": "14",
+          "depth": "4",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+          "sourceConfidence": "Low"
+        }
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Research source-confirmed DW / PDP shell thickness AND bearing edge by line/material/configuration. No Firestore writes."
+}
