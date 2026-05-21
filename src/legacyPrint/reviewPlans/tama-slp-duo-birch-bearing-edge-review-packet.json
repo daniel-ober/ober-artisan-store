@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-05-21T07:44:42.308Z",
+  "sourceReviewGroupsFile": "src/legacyPrint/reviewPlans/non-metal-bearing-edge-enrichment-review-groups-post-audit-fix.json",
+  "status": "TAMA_SLP_DUO_BIRCH_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 1,
+    "groupCount": 1,
+    "sourceUrls": [
+      "https://www.tama.com/usa/products/search/snare_drums/list/"
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Tama",
+      "lineSeries": "S.L.P.",
+      "shellMaterial": "Birch",
+      "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "S.L.P. Duo Birch LBH1410L 14x10"
+      ],
+      "recordIds": [
+        "tama_s-l-p_s-l-p-duo-birch-lbh1410l-14x10_14x10_ply_birch_lacquer_triple-flange-sound-arc-style_lbh1410l_38db7013"
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Confirm exact Tama S.L.P. Duo Birch bearing-edge geometry before creating any promotion plan."
+}
