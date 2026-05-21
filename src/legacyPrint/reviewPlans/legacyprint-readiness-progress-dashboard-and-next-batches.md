@@ -1,12 +1,14 @@
 # LegacyPrint Readiness Progress Dashboard
 
-Generated: 2026-05-21T09:44:36.405Z
+Generated: 2026-05-21T09:45:09.079Z
 
 ## Completed Writes
 
 - Metal-edge fallback writes: 124
 - Production-status writes: 27
 - Exact source-backed stock-head writes: 3
+- Ludwig head-only exact writes: 8
+- Total controlled writes: 162
 
 ## Current Snapshot
 
