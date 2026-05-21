@@ -123,12 +123,12 @@
       "lineSeriesIncludes": [
         "Sensitone Heritage Alloy"
       ],
-      "fallbackType": "line-level-default-needs-source-confirmation",
+      "fallbackType": "line-level-default-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
-      "sourceConfidence": "needsVerification",
-      "notes": "Confirm Pearl stock head model before approval."
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "Pearl Sensitone Heritage Alloy group contains 6 candidates across aluminum alloy, brass alloy, and steel alloy records. The Pearl Sensitone source confirms the model family, but current evidence does not confirm exact stock batter and reso/snare-side head models consistently across all records. Keep DRAFT until exact stock heads are source-confirmed. Split by alloy/material only if stock heads vary across aluminum, brass, and steel variants."
     },
     {
       "ruleKey": "pearl-free-floating-stock-heads-draft",
