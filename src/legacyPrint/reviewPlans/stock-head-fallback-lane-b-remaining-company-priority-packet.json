@@ -1,6 +1,7 @@
 {
   "status": "STOCK_HEAD_FALLBACK_LANE_B_REMAINING_COMPANY_PRIORITY_PACKET_NO_FIRESTORE_WRITES",
-  "createdAt": "2026-05-21T08:48:18.959Z",
+  "generatedAt": "2026-05-21T08:49:08.775Z",
+  "sourceFile": "src/legacyPrint/reviewPlans/stock-head-fallback-review-lanes-usable-urls-only.json",
   "reviewScope": "Lane B stock-head fallback company/OEM pattern review, excluding Ludwig and Pearl because those decisions are already complete.",
   "noFirestoreWrites": true,
   "excludesAlreadyReviewedCompanies": [
@@ -24,9 +25,497 @@
     ]
   },
   "summary": {
-    "candidateCount": 0,
-    "companyCount": 0,
+    "sourceLaneBCandidateCount": 103,
+    "excludedAlreadyReviewedCandidateCount": 65,
+    "remainingCandidateCount": 38,
+    "companyCount": 5,
     "noFirestoreWrites": true
   },
-  "companyPriority": []
+  "companyPriority": [
+    {
+      "companyName": "Mapex",
+      "candidateCount": 21,
+      "lineGroupCount": 3,
+      "candidatesWithUsableUrl": 0,
+      "candidatesWithoutUsableUrl": 21,
+      "recommendedReviewDecision": "NEEDS_COMPANY_OR_OEM_PATTERN_RESEARCH",
+      "noFirestoreWrites": true,
+      "lineGroups": [
+        {
+          "lineSeries": "Black Panther Archive / Catalog Era",
+          "candidateCount": 18,
+          "candidatesWithUsableUrl": 0,
+          "candidatesWithoutUsableUrl": 18,
+          "sampleModels": [
+            {
+              "id": "mapex_black-panther-archive-catalog-era_brass-master-10x5-5_10x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_c4c9f2e4",
+              "modelName": "Brass Master 10x5.5",
+              "diameter": "10",
+              "depth": "5.5",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            },
+            {
+              "id": "mapex_black-panther-archive-catalog-era_brass-master-12x5-5_12x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_4fd36b7d",
+              "modelName": "Brass Master 12x5.5",
+              "diameter": "12",
+              "depth": "5.5",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            },
+            {
+              "id": "mapex_black-panther-archive-catalog-era_brass-master-13x3-5_13x3-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_55f8500b",
+              "modelName": "Brass Master 13x3.5",
+              "diameter": "13",
+              "depth": "3.5",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            },
+            {
+              "id": "mapex_black-panther-archive-catalog-era_brass-master-13x6_13x6_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_2_25be76a9",
+              "modelName": "Brass Master 13x6",
+              "diameter": "13",
+              "depth": "6",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            },
+            {
+              "id": "mapex_black-panther-archive-catalog-era_brass-master-14x3-5_14x3-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_68805fbb",
+              "modelName": "Brass Master 14x3.5",
+              "diameter": "14",
+              "depth": "3.5",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            },
+            {
+              "id": "mapex_black-panther-archive-catalog-era_brass-master-14x5_14x5_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_d_6fcb5ac6",
+              "modelName": "Brass Master 14x5",
+              "diameter": "14",
+              "depth": "5",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            },
+            {
+              "id": "mapex_black-panther-archive-catalog-era_brass-master-14x5-5_14x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_287e4cd8",
+              "modelName": "Brass Master 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            },
+            {
+              "id": "mapex_black-panther-archive-catalog-era_brass-master-14x6_14x6_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_2_81bde09f",
+              "modelName": "Brass Master 14x6",
+              "diameter": "14",
+              "depth": "6",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            },
+            {
+              "id": "mapex_black-panther-archive-catalog-era_stainless-steel-12x5-5_12x5-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_fc270451",
+              "modelName": "Stainless Steel 12x5.5",
+              "diameter": "12",
+              "depth": "5.5",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            },
+            {
+              "id": "mapex_black-panther-archive-catalog-era_stainless-steel-13x3-5_13x3-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_1e0accdb",
+              "modelName": "Stainless Steel 13x3.5",
+              "diameter": "13",
+              "depth": "3.5",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            }
+          ]
+        },
+        {
+          "lineSeries": "Black Panther Archive / Unresolved Variant",
+          "candidateCount": 2,
+          "candidatesWithUsableUrl": 0,
+          "candidatesWithoutUsableUrl": 2,
+          "sampleModels": [
+            {
+              "id": "mapex_black-panther-archive-unresolved-variant_unresolved-brass-variant-5_14x5-5_metal_brass_1_2-3mm-powerhoops_bp-unr-0_19c52944",
+              "modelName": "Unresolved Brass Variant 5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            },
+            {
+              "id": "mapex_black-panther-archive-unresolved-variant_unresolved-steel-variant-4_12x5-5_metal_steel_1_2-3mm-powerhoops_bp-unr-0_040fa532",
+              "modelName": "Unresolved Steel Variant 4",
+              "diameter": "12",
+              "depth": "5.5",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            }
+          ]
+        },
+        {
+          "lineSeries": "Signature / Artist",
+          "candidateCount": 1,
+          "candidatesWithUsableUrl": 0,
+          "candidatesWithoutUsableUrl": 1,
+          "sampleModels": [
+            {
+              "id": "mapex_signature-artist_matt-halpern-wraith_14x6_metal_brass_1-2_black-plated_sonic-saver-hoops_bpnbr4600_0e4d26b8",
+              "modelName": "Matt Halpern Wraith",
+              "diameter": "14",
+              "depth": "6",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "candidateCount": 7,
+      "lineGroupCount": 3,
+      "candidatesWithUsableUrl": 0,
+      "candidatesWithoutUsableUrl": 7,
+      "recommendedReviewDecision": "NEEDS_COMPANY_OR_OEM_PATTERN_RESEARCH",
+      "noFirestoreWrites": true,
+      "lineGroups": [
+        {
+          "lineSeries": "Metalworks",
+          "candidateCount": 4,
+          "candidatesWithUsableUrl": 0,
+          "candidatesWithoutUsableUrl": 4,
+          "sampleModels": [
+            {
+              "id": "tama_metalworks_metalworks-10x5-5_10x5-5_metal_steel_black-steel_triple-flange-mighty-hoop_e6b67538",
+              "modelName": "METALWORKS 10x5.5",
+              "diameter": "10",
+              "depth": "5.5",
+              "shellConstruction": "metal",
+              "shellMaterial1": null,
+              "stockBatterHead": "unknown",
+              "stockResoHead": "unknown",
+              "sourceUrl": null
+            },
+            {
+              "id": "tama_metalworks_metalworks-13x4_13x4_metal_steel_black-steel_triple-flange-mighty-hoop_7d8773f3",
+              "modelName": "METALWORKS 13x4",
+              "diameter": "13",
+              "depth": "4",
+              "shellConstruction": "metal",
+              "shellMaterial1": null,
+              "stockBatterHead": "unknown",
+              "stockResoHead": "unknown",
+              "sourceUrl": null
+            },
+            {
+              "id": "tama_metalworks_metalworks-14x5-5_14x5-5_metal_steel_black-steel_triple-flange-mighty-hoop_f02c2ec2",
+              "modelName": "METALWORKS 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellConstruction": "metal",
+              "shellMaterial1": null,
+              "stockBatterHead": "unknown",
+              "stockResoHead": "unknown",
+              "sourceUrl": null
+            },
+            {
+              "id": "tama_metalworks_metalworks-14x6-5_14x6-5_metal_steel_black-steel_triple-flange-mighty-hoop_6714e26c",
+              "modelName": "METALWORKS 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellConstruction": "metal",
+              "shellMaterial1": null,
+              "stockBatterHead": "unknown",
+              "stockResoHead": "unknown",
+              "sourceUrl": null
+            }
+          ]
+        },
+        {
+          "lineSeries": "Mastercraft",
+          "candidateCount": 2,
+          "candidatesWithUsableUrl": 0,
+          "candidatesWithoutUsableUrl": 2,
+          "sampleModels": [
+            {
+              "id": "tama_mastercraft_mastercraft-bell-brass-1980s-14x6-5_14x6-5_metal_bell-brass_3_cast-bell-brass_die-cast-hoops_pl565n-bb1_98a03ef5",
+              "modelName": "Mastercraft Bell Brass 1980s 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellConstruction": "cast metal",
+              "shellMaterial1": null,
+              "stockBatterHead": "unknown",
+              "stockResoHead": "unknown",
+              "sourceUrl": null
+            },
+            {
+              "id": "tama_mastercraft_the-bell-brass-50th-anniversary-reissue-bb-156_14x6-5_metal_bell-brass_3_natural-brass-patina_die-cast-_0a8de4cc",
+              "modelName": "The Bell Brass 50th Anniversary Reissue BB-156",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellConstruction": "cast metal",
+              "shellMaterial1": null,
+              "stockBatterHead": "unknown",
+              "stockResoHead": "unknown",
+              "sourceUrl": null
+            }
+          ]
+        },
+        {
+          "lineSeries": "Imperialstar",
+          "candidateCount": 1,
+          "candidatesWithUsableUrl": 0,
+          "candidatesWithoutUsableUrl": 1,
+          "sampleModels": [
+            {
+              "id": "tama_imperialstar_imperialstar-chrome-steel-14x5-5_14x5-5_metal_steel_chrome_0e7e083b",
+              "modelName": "Imperialstar Chrome Steel 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellConstruction": "metal",
+              "shellMaterial1": null,
+              "stockBatterHead": "unknown",
+              "stockResoHead": "unknown",
+              "sourceUrl": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "candidateCount": 6,
+      "lineGroupCount": 4,
+      "candidatesWithUsableUrl": 0,
+      "candidatesWithoutUsableUrl": 6,
+      "recommendedReviewDecision": "NEEDS_COMPANY_OR_OEM_PATTERN_RESEARCH",
+      "noFirestoreWrites": true,
+      "lineGroups": [
+        {
+          "lineSeries": "Signature",
+          "candidateCount": 3,
+          "candidatesWithUsableUrl": 0,
+          "candidatesWithoutUsableUrl": 3,
+          "sampleModels": [
+            {
+              "id": "yamaha_signature_steve-gadd-recording-custom-brass-14x5-5_14x5-5_metal_brass_1-2_rolled-metal-edge_black-nickel-brass-va_d1832ca5",
+              "modelName": "Steve Gadd Recording Custom Brass 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            },
+            {
+              "id": "yamaha_signature_steve-gadd-recording-custom-brass-14x6-5_14x6-5_metal_brass_1-2_rolled-metal-edge_black-nickel-brass-va_b3eea7f5",
+              "modelName": "Steve Gadd Recording Custom Brass 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            },
+            {
+              "id": "yamaha_signature_steve-gadd-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_black-nickel-chrome-variants_triple-flan_99bc3401",
+              "modelName": "Steve Gadd Steel 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            }
+          ]
+        },
+        {
+          "lineSeries": "Stage Custom Advantage",
+          "candidateCount": 1,
+          "candidatesWithUsableUrl": 0,
+          "candidatesWithoutUsableUrl": 1,
+          "sampleModels": [
+            {
+              "id": "yamaha_stage-custom-advantage_stage-custom-advantage-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-f_63ce43ce",
+              "modelName": "Stage Custom Advantage Steel 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            }
+          ]
+        },
+        {
+          "lineSeries": "Stage Custom Birch",
+          "candidateCount": 1,
+          "candidatesWithUsableUrl": 0,
+          "candidatesWithoutUsableUrl": 1,
+          "sampleModels": [
+            {
+              "id": "yamaha_stage-custom-birch_stage-custom-birch-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-fla_9ad707ad",
+              "modelName": "Stage Custom Birch Steel Snare 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            }
+          ]
+        },
+        {
+          "lineSeries": "Stage Custom Standard",
+          "candidateCount": 1,
+          "candidatesWithUsableUrl": 0,
+          "candidatesWithoutUsableUrl": 1,
+          "sampleModels": [
+            {
+              "id": "yamaha_stage-custom-standard_stage-custom-standard-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-fla_b7a04751",
+              "modelName": "Stage Custom Standard Steel 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "companyName": "Gretsch",
+      "candidateCount": 2,
+      "lineGroupCount": 1,
+      "candidatesWithUsableUrl": 0,
+      "candidatesWithoutUsableUrl": 2,
+      "recommendedReviewDecision": "NEEDS_COMPANY_OR_OEM_PATTERN_RESEARCH",
+      "noFirestoreWrites": true,
+      "lineGroups": [
+        {
+          "lineSeries": "Brooklyn Metal",
+          "candidateCount": 2,
+          "candidatesWithUsableUrl": 0,
+          "candidatesWithoutUsableUrl": 2,
+          "sampleModels": [
+            {
+              "id": "gretsch_brooklyn-metal_brooklyn-chrome-over-steel_14x5-5_metal_steel_1-1_rolled-metal-edge_chrome-over-metal_gretsch-302_eb8daa4f",
+              "modelName": "Brooklyn Chrome-over-Steel",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            },
+            {
+              "id": "gretsch_brooklyn-metal_brooklyn-chrome-over-steel_14x6-5_metal_steel_1-1_rolled-metal-edge_chrome-over-metal_gretsch-302_1397c712",
+              "modelName": "Brooklyn Chrome-over-Steel",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "companyName": "SONOR",
+      "candidateCount": 2,
+      "lineGroupCount": 1,
+      "candidatesWithUsableUrl": 0,
+      "candidatesWithoutUsableUrl": 2,
+      "recommendedReviewDecision": "NEEDS_COMPANY_OR_OEM_PATTERN_RESEARCH",
+      "noFirestoreWrites": true,
+      "lineGroups": [
+        {
+          "lineSeries": "Signature Series",
+          "candidateCount": 2,
+          "candidatesWithUsableUrl": 0,
+          "candidatesWithoutUsableUrl": 2,
+          "sampleModels": [
+            {
+              "id": "sonor_signature-series_signature-hld-580-cast-bronze-14x6-5_14x6-5_metal_bronze_3_die-cast-hoops_hld-580_be9ddf14",
+              "modelName": "Signature HLD 580 Cast Bronze 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            },
+            {
+              "id": "sonor_signature-series_signature-hld-590-cast-bronze-14x8_14x8_metal_bronze_3_die-cast-hoops_hld-590_6444e211",
+              "modelName": "Signature HLD 590 Cast Bronze 14x8",
+              "diameter": "14",
+              "depth": "8",
+              "shellConstruction": "Metal",
+              "shellMaterial1": null,
+              "stockBatterHead": null,
+              "stockResoHead": null,
+              "sourceUrl": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review the highest-count remaining Lane B company first, looking for official manufacturer/OEM stock batter plus stock resonant/snare-side confirmation.",
+    "constraint": "Do not approve fallback rules or write Firestore metadata from third-party-only evidence."
+  }
 }
