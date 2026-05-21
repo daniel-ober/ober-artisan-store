@@ -624,7 +624,23 @@ const clamp01 = (value, fallback = 0.5) => {
 
 };
 
-const getVoiceValue = (voice, key) => clamp01(voice?.[key], 0.5);
+const getVoiceScore = (voice, key, fallback = 5) => {
+
+  const number = Number(voice?.[key]);
+
+  if (!Number.isFinite(number)) return fallback;
+
+  return number > 1 ? Math.max(0, Math.min(10, number)) : clamp01(number, 0.5) * 10;
+
+};
+
+const getVoiceValue = (voice, key) => {
+
+  const score = getVoiceScore(voice, key, 5);
+
+  return clamp01(score / 10, 0.5);
+
+};
 
 const getResultVoice = (result) =>
 
@@ -756,7 +772,7 @@ const getTopNodes = (voice, count = 3) =>
 
       ...node,
 
-      value: getVoiceValue(voice, node.key),
+      value: getVoiceScore(voice, node.key, 5),
 
     }))
 
@@ -764,27 +780,21 @@ const getTopNodes = (voice, count = 3) =>
 
     .slice(0, count);
 
-const normalizeEngineVoiceScoreForUi = value => {
+const normalizeEngineVoiceScoreForMap = value => {
 
   const number = Number(value);
 
-  if (!Number.isFinite(number)) return 0.5;
+  if (!Number.isFinite(number)) return 5;
 
-  if (number > 1) {
-
-    return clamp01((number - 1) / 9, 0.5);
-
-  }
-
-  return clamp01(number, 0.5);
+  return number > 1 ? Math.max(0, Math.min(10, number)) : clamp01(number, 0.5) * 10;
 
 };
 
-const normalizeEngineVoiceProfileForUi = profile => {
+const normalizeEngineVoiceProfileForMap = profile => {
 
   return VOICE_NODES.reduce((acc, node) => {
 
-    acc[node.key] = normalizeEngineVoiceScoreForUi(profile?.[node.key]);
+    acc[node.key] = normalizeEngineVoiceScoreForMap(profile?.[node.key]);
 
     return acc;
 
@@ -1299,17 +1309,17 @@ export function VoicePlayground({ firestore }) {
 
   const selectedReferenceVoice = useMemo(() => {
 
-    return normalizeEngineVoiceProfileForUi(
+    return normalizeEngineVoiceProfileForMap(
 
-      selectedReferenceEnginePacket?.voiceProfile ||
+    selectedReferenceEnginePacket?.voiceProfile ||
 
-        selectedReference?.voiceProfile ||
+      selectedReference?.voiceProfile ||
 
-        selectedReference?.legacyPrintVoice ||
+      selectedReference?.legacyPrintVoice ||
 
-        selectedReference?.voice ||
+      selectedReference?.voice ||
 
-        {}
+      {}
 
     );
 
@@ -1325,7 +1335,7 @@ export function VoicePlayground({ firestore }) {
 
     }
 
-    if (readMode === 'legacyprintIdentity') {
+    if (readMode === 'legacyprint') {
 
       return selectedReferenceEnginePacket.readouts.legacyPrintIdentity;
 
