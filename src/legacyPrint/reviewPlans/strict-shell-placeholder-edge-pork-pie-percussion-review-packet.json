@@ -1,0 +1,49 @@
+{
+  "status": "STRICT_SHELL_PLACEHOLDER_EDGE_PORK_PIE_PERCUSSION_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:02:39.031Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-valid-thickness-placeholder-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Pork Pie Percussion",
+  "reviewScope": "Pork Pie Percussion records with valid shell thickness but placeholder/unknown bearing edge blocking source-confirmed meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 1,
+    "lineGroupCount": 1,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed bearing edge geometry only.",
+    "Do not infer edge geometry from shell material, construction, line name, shell thickness, hoop type, or era alone.",
+    "If source confirms a shared line-level bearing edge spec, prepare a patch plan only after reviewed decisions are approved."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "USA Custom",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Medium": 1
+      },
+      "researchQuestion": "Can Pork Pie Percussion USA Custom snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Pork Pie Percussion page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "pork-pie-percussion_usa-custom_maple-max-7x14_14x7_ply_maple_9_custom-finish-varies_2-3mm-triple-flanged_2b58b150",
+          "label": "Pork Pie Percussion — USA Custom — Maple Max 7x14 — 14x7",
+          "modelName": "Maple Max 7x14",
+          "diameter": "14",
+          "depth": "7",
+          "shellMaterial": "Maple",
+          "shellThickness": "9",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 1095
+        }
+      ]
+    }
+  ]
+}
