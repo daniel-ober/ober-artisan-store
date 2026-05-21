@@ -1441,6 +1441,12 @@ export function VoicePlayground({ firestore }) {
 
                     <span>{result.modelDetail || id}</span>
 
+                    {result.explanation && (
+
+                      <p className="vp-result-why">{result.explanation}</p>
+
+                    )}
+
                     <div className="vp-result-actions">
 
                       <button type="button" onClick={() => handleAudition(result)}>

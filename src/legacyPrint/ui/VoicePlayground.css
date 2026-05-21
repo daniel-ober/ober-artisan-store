@@ -5039,3 +5039,36 @@
 
 }
 
+
+/* =========================================================
+
+   VOICE PLAYGROUND — MATCH EXPLANATION COPY
+
+   ========================================================= */
+
+.vp-result-why {
+
+  margin: 5px 0 0;
+
+  display: -webkit-box;
+
+  -webkit-line-clamp: 2;
+
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+
+  color: rgba(245, 239, 255, 0.5);
+
+  font-size: 10px;
+
+  line-height: 1.35;
+
+}
+
+.vp-result-card:hover .vp-result-why {
+
+  color: rgba(245, 239, 255, 0.7);
+
+}
+
