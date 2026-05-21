@@ -255,9 +255,29 @@ const scoreContrastCandidate = ({ targetPacket, candidatePacket, mode }) => {
 
   const constructionBonus = constructionContrast.changed ? 0.05 : 0;
 
+  /*
+
+    Contrast is intentionally scaled with more headroom than similarity.
+
+    We want "meaningfully different" to rank clearly without flattening
+
+    every strong contrast to 100%.
+
+  */
+
+  const rawContrast =
+
+    distance / 4.2 +
+
+    meaningfulNodeSpread / 28 +
+
+    materialBonus +
+
+    constructionBonus;
+
   const contrastScore = Number(
 
-    Math.min(1, distance / 2.6 + meaningfulNodeSpread / 18 + materialBonus + constructionBonus).toFixed(4)
+    Math.max(0, Math.min(0.985, rawContrast)).toFixed(4)
 
   );
 
