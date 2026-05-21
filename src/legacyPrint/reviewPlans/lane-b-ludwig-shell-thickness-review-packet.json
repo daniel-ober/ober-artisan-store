@@ -1,0 +1,468 @@
+{
+  "generatedAt": "2026-05-21T07:58:38.748Z",
+  "sourceReviewPacketFile": "src/legacyPrint/reviewPlans/lane-b-high-value-shell-thickness-review-packet.json",
+  "status": "LANE_B_LUDWIG_SHELL_THICKNESS_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "summary": {
+    "companyName": "Ludwig",
+    "candidateCount": 19,
+    "groupCount": 6,
+    "sourceUrls": [
+      "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html"
+    ],
+    "topGroups": [
+      {
+        "lineSeries": "1960 Ludwig",
+        "shellMaterial": "Maple",
+        "count": 8,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html"
+      },
+      {
+        "lineSeries": "1980s Ludwig",
+        "shellMaterial": "Maple",
+        "count": 4,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html"
+      },
+      {
+        "lineSeries": "1980s Ludwig",
+        "shellMaterial": "Bronze",
+        "count": 3,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html"
+      },
+      {
+        "lineSeries": "1960 Ludwig",
+        "shellMaterial": "Mahogany",
+        "count": 2,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html"
+      },
+      {
+        "lineSeries": "1960 Ludwig",
+        "shellMaterial": "Brass",
+        "count": 1,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html"
+      },
+      {
+        "lineSeries": "1980s Ludwig",
+        "shellMaterial": "Steel",
+        "count": 1,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1960 Ludwig",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+      "sourceConfidence": "Medium",
+      "count": 8,
+      "models": [
+        "Auditorium 6.5x14",
+        "DownBeat 4x14",
+        "Jazz Combo 5x14",
+        "Las Vegas 5x14",
+        "Porto Pak 3x13",
+        "School Festival 5.5x14",
+        "Super Classic Snare 5.5x14",
+        "Symphonic Snare 6.5x14"
+      ],
+      "records": [
+        {
+          "id": "ludwig_1960-ludwig_auditorium-6-5x14_14x6-5_ply_maple-poplar_lacquer-pearl_triple-flanged_67866f31",
+          "label": "Ludwig — 1960 Ludwig — Auditorium 6.5x14 — 14x6.5",
+          "modelName": "Auditorium 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"3-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "ludwig_1960-ludwig_downbeat-4x14_14x4_ply_maple-poplar_lacquer-pearl_triple-flanged_dd90647b",
+          "label": "Ludwig — 1960 Ludwig — DownBeat 4x14 — 14x4",
+          "modelName": "DownBeat 4x14",
+          "diameter": "14",
+          "depth": "4",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "ludwig_1960-ludwig_jazz-combo-5x14_14x5_ply_maple-poplar_lacquer-pearl_triple-flanged_5ed15c1c",
+          "label": "Ludwig — 1960 Ludwig — Jazz Combo 5x14 — 14x5",
+          "modelName": "Jazz Combo 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "ludwig_1960-ludwig_las-vegas-5x14_14x5_ply_maple-poplar_lacquer-pearl_triple-flanged_f13dd39e",
+          "label": "Ludwig — 1960 Ludwig — Las Vegas 5x14 — 14x5",
+          "modelName": "Las Vegas 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "ludwig_1960-ludwig_porto-pak-3x13_13x3_ply_maple-poplar_lacquer-pearl_triple-flanged_c13c5e0d",
+          "label": "Ludwig — 1960 Ludwig — Porto Pak 3x13 — 13x3",
+          "modelName": "Porto Pak 3x13",
+          "diameter": "13",
+          "depth": "3",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "ludwig_1960-ludwig_school-festival-5-5x14_14x5-5_ply_maple-poplar_lacquer-pearl_triple-flanged_6511b6b9",
+          "label": "Ludwig — 1960 Ludwig — School Festival 5.5x14 — 14x5.5",
+          "modelName": "School Festival 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"3-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "ludwig_1960-ludwig_super-classic-snare-5-5x14_14x5-5_ply_maple-poplar_lacquer-or-pearl-wrap_triple-flanged_cb20063a",
+          "label": "Ludwig — 1960 Ludwig — Super Classic Snare 5.5x14 — 14x5.5",
+          "modelName": "Super Classic Snare 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"3-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "ludwig_1960-ludwig_symphonic-snare-6-5x14_14x6-5_ply_maple-poplar_lacquer-pearl_concert-hoop_837e481d",
+          "label": "Ludwig — 1960 Ludwig — Symphonic Snare 6.5x14 — 14x6.5",
+          "modelName": "Symphonic Snare 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1980s Ludwig",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+      "sourceConfidence": "Medium",
+      "count": 4,
+      "models": [
+        "Coliseum 8x14",
+        "Rock/Concert 6.5x14",
+        "S/L Snare Drum 5.5x14",
+        "Slotted Coliseum 8x14"
+      ],
+      "records": [
+        {
+          "id": "ludwig_1980s-ludwig_coliseum-8x14_14x8_ply_maple_lacquer-wrap_triple-flanged_44ab7d65",
+          "label": "Ludwig — 1980s Ludwig — Coliseum 8x14 — 14x8",
+          "modelName": "Coliseum 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "Modern Ludwig wood bearing edge; exact profile needs confirmation",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "ludwig_1980s-ludwig_rock-concert-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_d30d06e3",
+          "label": "Ludwig — 1980s Ludwig — Rock/Concert 6.5x14 — 14x6.5",
+          "modelName": "Rock/Concert 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "Modern Ludwig wood bearing edge; exact profile needs confirmation",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "ludwig_1980s-ludwig_s-l-snare-drum-5-5x14_14x5-5_ply_maple-poplar_lacquer-wrap_triple-flanged_d6f09d4a",
+          "label": "Ludwig — 1980s Ludwig — S/L Snare Drum 5.5x14 — 14x5.5",
+          "modelName": "S/L Snare Drum 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "Ludwig wood bearing edge; exact profile needs confirmation",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "ludwig_1980s-ludwig_slotted-coliseum-8x14_14x8_ply_maple_lacquer-wrap_triple-flanged_5f12b875",
+          "label": "Ludwig — 1980s Ludwig — Slotted Coliseum 8x14 — 14x8",
+          "modelName": "Slotted Coliseum 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "Modern Ludwig wood bearing edge; exact profile needs confirmation",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1980s Ludwig",
+      "shellMaterial": "Bronze",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+      "sourceConfidence": "Medium",
+      "count": 3,
+      "models": [
+        "Hammered Bronze 5x14",
+        "Hammered Bronze 6.5x14",
+        "Smooth Bronze 5x14"
+      ],
+      "records": [
+        {
+          "id": "ludwig_1980s-ludwig_hammered-bronze-5x14_14x5_metal_bronze_hammered-bronze_triple-flanged_7732000e",
+          "label": "Ludwig — 1980s Ludwig — Hammered Bronze 5x14 — 14x5",
+          "modelName": "Hammered Bronze 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "Formed metal bearing edge",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "ludwig_1980s-ludwig_hammered-bronze-6-5x14_14x6-5_metal_bronze_hammered-bronze_triple-flanged_00bb458c",
+          "label": "Ludwig — 1980s Ludwig — Hammered Bronze 6.5x14 — 14x6.5",
+          "modelName": "Hammered Bronze 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "Formed metal bearing edge",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "ludwig_1980s-ludwig_smooth-bronze-5x14_14x5_metal_bronze_smooth-bronze_triple-flanged_cc1d672c",
+          "label": "Ludwig — 1980s Ludwig — Smooth Bronze 5x14 — 14x5",
+          "modelName": "Smooth Bronze 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "Formed metal bearing edge",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1960 Ludwig",
+      "shellMaterial": "Mahogany",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+      "sourceConfidence": "Medium",
+      "count": 2,
+      "models": [
+        "Jazz Festival 5.5x14",
+        "Pioneer 5.5x14"
+      ],
+      "records": [
+        {
+          "id": "ludwig_1960-ludwig_jazz-festival-5-5x14_14x5-5_ply_mahogany-poplar_lacquer-or-pearl-wrap_triple-flanged_db65937d",
+          "label": "Ludwig — 1960 Ludwig — Jazz Festival 5.5x14 — 14x5.5",
+          "modelName": "Jazz Festival 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"3-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "ludwig_1960-ludwig_pioneer-5-5x14_14x5-5_ply_mahogany-poplar_lacquer-or-pearl-wrap_triple-flanged_d987b16f",
+          "label": "Ludwig — 1960 Ludwig — Pioneer 5.5x14 — 14x5.5",
+          "modelName": "Pioneer 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"3-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1960 Ludwig",
+      "shellMaterial": "Brass",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Super Ludwig Metal 5x14"
+      ],
+      "records": [
+        {
+          "id": "ludwig_1960-ludwig_super-ludwig-metal-5x14_14x5_metal_brass_chrome-over-metal_triple-flanged_5aef5292",
+          "label": "Ludwig — 1960 Ludwig — Super Ludwig Metal 5x14 — 14x5",
+          "modelName": "Super Ludwig Metal 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "Formed metal bearing edge",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1980s Ludwig",
+      "shellMaterial": "Steel",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Hammered Chrome 5x14"
+      ],
+      "records": [
+        {
+          "id": "ludwig_1980s-ludwig_hammered-chrome-5x14_14x5_metal_steel_hammered-chrome_triple-flanged_a0325acc",
+          "label": "Ludwig — 1980s Ludwig — Hammered Chrome 5x14 — 14x5",
+          "modelName": "Hammered Chrome 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "Formed metal bearing edge",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Research source-confirmed Ludwig shell thickness by era/line/material. Do not create Firestore update plan until thickness values are explicitly confirmed or a controlled vintage Ludwig shell-thickness fallback policy is approved."
+}
