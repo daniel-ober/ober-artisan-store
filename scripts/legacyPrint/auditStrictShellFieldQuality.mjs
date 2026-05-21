@@ -426,6 +426,46 @@ function sourceUrlsFrom(doc, sources) {
 
 }
 
+function selectBestBearingEdge(...values) {
+
+  const candidates = values.filter(isPresent);
+
+  if (candidates.length === 0) return null;
+
+  const sourceConfirmed = candidates.find((value) => {
+
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+
+    return toLowerString(value.evidenceLevel) === 'sourceconfirmed';
+
+  });
+
+  if (sourceConfirmed) return sourceConfirmed;
+
+  const meaningfulObject = candidates.find((value) => {
+
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+
+    return objectHasMeaningfulLeafValue(value);
+
+  });
+
+  if (meaningfulObject) return meaningfulObject;
+
+  const meaningfulString = candidates.find((value) => {
+
+    if (typeof value !== 'string') return false;
+
+    return leafValueLooksMeaningfulEdge(value);
+
+  });
+
+  if (meaningfulString) return meaningfulString;
+
+  return candidates[0] || null;
+
+}
+
 function getCanonicalFields(doc) {
 
   const shell = doc.shell || {};
@@ -536,7 +576,13 @@ function getCanonicalFields(doc) {
 
     ),
 
-    bearingEdge: firstNonEmpty(
+    bearingEdge: selectBestBearingEdge(
+
+      doc.bearingEdge,
+
+      doc.edgeProfile,
+
+      doc['BEARING EDGE'],
 
       shell.bearingEdge,
 
@@ -546,13 +592,7 @@ function getCanonicalFields(doc) {
 
       shell.edgeProfile,
 
-      shell.bearingEdgeProfile,
-
-      doc.bearingEdge,
-
-      doc.edgeProfile,
-
-      doc['BEARING EDGE']
+      shell.bearingEdgeProfile
 
     ),
 
