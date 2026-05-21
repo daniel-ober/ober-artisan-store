@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-05-21T07:47:30.704Z",
+  "sourceReviewPacketFile": "src/legacyPrint/reviewPlans/mapex-signature-artist-chris-adler-original-bearing-edge-review-packet.json",
+  "status": "MAPEX_SIGNATURE_ARTIST_CHRIS_ADLER_ORIGINAL_BEARING_EDGE_SOURCE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "reviewedCandidateCount": 1,
+    "officialSourceConfirmedCandidateCount": 0,
+    "skippedCandidateCount": 1,
+    "groupCount": 1
+  },
+  "officialSourceConfirmedGroups": [],
+  "blockedGroups": [
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Signature / Artist",
+      "shellMaterial": "Walnut",
+      "primarySourceUrl": "https://www.musicradar.com/news/drums/mapex-debuts-new-black-panther-snares-190052",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Chris Adler Original 12x5.5"
+      ],
+      "recordIds": [
+        "mapex_signature-artist_chris-adler-original-12x5-5_12x5-5_ply_walnut_5-1_signature-graphic_2-3mm-powerhoops_bpad2550_402d5de6"
+      ],
+      "skipReason": "No exact official Mapex Chris Adler Original bearing-edge geometry confirmation captured in this pass."
+    }
+  ],
+  "reviewInstruction": "Review-only. Do not create a promotion/apply plan until exact official Mapex source language confirms bearing-edge geometry for Chris Adler Original snare drums."
+}

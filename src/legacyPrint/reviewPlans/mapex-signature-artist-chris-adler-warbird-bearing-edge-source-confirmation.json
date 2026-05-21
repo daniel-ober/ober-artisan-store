@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-05-21T07:47:30.704Z",
+  "sourceReviewPacketFile": "src/legacyPrint/reviewPlans/mapex-signature-artist-chris-adler-warbird-bearing-edge-review-packet.json",
+  "status": "MAPEX_SIGNATURE_ARTIST_CHRIS_ADLER_WARBIRD_BEARING_EDGE_SOURCE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "reviewedCandidateCount": 1,
+    "officialSourceConfirmedCandidateCount": 0,
+    "skippedCandidateCount": 1,
+    "groupCount": 1
+  },
+  "officialSourceConfirmedGroups": [],
+  "blockedGroups": [
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Signature / Artist",
+      "shellMaterial": "Maple / Walnut",
+      "primarySourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Chris Adler Warbird"
+      ],
+      "recordIds": [
+        "mapex_signature-artist_chris-adler-warbird_12x5-5_ply_maple-walnut_5-1_graphic-finish_2-3mm-powerhoops_bpdlmw2550lwh_7b0c9c9a"
+      ],
+      "skipReason": "No exact official Mapex Chris Adler Warbird bearing-edge geometry confirmation captured in this pass."
+    }
+  ],
+  "reviewInstruction": "Review-only. Do not create a promotion/apply plan until exact official Mapex source language confirms bearing-edge geometry for Chris Adler Warbird snare drums."
+}
