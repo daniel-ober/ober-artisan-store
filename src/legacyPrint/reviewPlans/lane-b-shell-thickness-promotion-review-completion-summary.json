@@ -1,0 +1,32 @@
+{
+  "generatedAt": "2026-05-21T08:22:25.895Z",
+  "sourceFiles": [
+    "src/legacyPrint/reviewPlans/lane-b-meaningful-edge-missing-thickness-review-queue.json",
+    "src/legacyPrint/reviewPlans/lane-b-shell-thickness-promotion-opportunity-queue.json",
+    "src/legacyPrint/reviewPlans/lane-b-worldmax-shell-thickness-source-review.json",
+    "src/legacyPrint/reviewPlans/lane-b-brady-shell-thickness-source-review.json",
+    "src/legacyPrint/reviewPlans/lane-b-craviotto-shell-thickness-source-review.json",
+    "src/legacyPrint/reviewPlans/lane-b-slingerland-shell-thickness-source-review.json",
+    "src/legacyPrint/reviewPlans/lane-b-ludwig-shell-thickness-source-review.json",
+    "src/legacyPrint/reviewPlans/lane-b-gretsch-shell-thickness-source-review.json",
+    "src/legacyPrint/reviewPlans/lane-b-remaining-shell-thickness-source-review.json"
+  ],
+  "status": "LANE_B_SHELL_THICKNESS_PROMOTION_REVIEW_COMPLETE_NO_FIRESTORE_WRITES",
+  "summary": {
+    "lane": "Lane B",
+    "name": "HAS_EDGE_BUT_THICKNESS_MISSING",
+    "laneBCandidateCount": 330,
+    "laneBGroupCount": 150,
+    "reviewedCandidateCount": 330,
+    "reviewedGroupCount": 150,
+    "sourceConfirmedThicknessCandidateCount": 0,
+    "sourceConfirmedThicknessGroupCount": 0,
+    "blockedCandidateCount": 330,
+    "blockedGroupCount": 150,
+    "candidateCountMatches": true,
+    "groupCountMatches": true,
+    "noFirestoreWrites": true,
+    "conclusion": "Lane B shell-thickness promotion review is complete. No source-confirmed numeric shell-thickness promotions were found; Lane B remains blocked where shell thickness is missing or invalid."
+  },
+  "nextRecommendedStep": "Move to Lane C promotion opportunity review: records missing both numeric shell thickness and meaningful/source-confirmed bearing edge."
+}
