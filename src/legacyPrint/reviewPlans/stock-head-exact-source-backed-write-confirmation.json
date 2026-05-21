@@ -1,0 +1,49 @@
+{
+  "status": "STOCK_HEAD_EXACT_SOURCE_BACKED_WRITE_CONFIRMATION",
+  "generatedAt": "2026-05-21T09:38:48.836Z",
+  "sourcePatchPlanFile": "src/legacyPrint/reviewPlans/stock-head-exact-source-backed-patch-plan.json",
+  "collectionName": "snareReferenceDrums",
+  "firestoreWritesPerformed": true,
+  "approval": "stock-head-exact-3",
+  "summary": {
+    "intendedWriteCount": 3,
+    "actualWriteCount": 3,
+    "batchCount": 1,
+    "updateType": "STOCK_HEAD_EXACT_SOURCE_BACKED_FALLBACK_PATCH"
+  },
+  "writeLog": [
+    {
+      "id": "mapex_bp-design-lab_equinox_14x5_ply_maple_6_unknown-classic-style-edge_single-flanged-hoops_bpml4500c-fb_5624c195",
+      "label": "Mapex — BP Design Lab — Equinox — 14x5",
+      "companyName": "Mapex",
+      "lineSeries": "BP Design Lab",
+      "modelName": "Equinox",
+      "stockBatterHead": "Remo Clear Ambassador",
+      "stockResoHead": "Remo Ambassador Snare Side",
+      "stockReadinessTier": "MEANINGFUL_STOCK_PASS_WITH_HEAD_FALLBACK",
+      "stockHeadFallbackApplied": true
+    },
+    {
+      "id": "tama_mastercraft_mastercraft-bell-brass-1980s-14x6-5_14x6-5_metal_bell-brass_3_cast-bell-brass_die-cast-hoops_pl565n-bb1_98a03ef5",
+      "label": "Tama — Mastercraft — Mastercraft Bell Brass 1980s 14x6.5 — 14x6.5",
+      "companyName": "Tama",
+      "lineSeries": "Mastercraft",
+      "modelName": "Mastercraft Bell Brass 1980s 14x6.5",
+      "stockBatterHead": "Remo Coated Ambassador",
+      "stockResoHead": "Remo Ambassador Snare Side",
+      "stockReadinessTier": "MEANINGFUL_STOCK_PASS_WITH_HEAD_FALLBACK",
+      "stockHeadFallbackApplied": true
+    },
+    {
+      "id": "tama_mastercraft_the-bell-brass-50th-anniversary-reissue-bb-156_14x6-5_metal_bell-brass_3_natural-brass-patina_die-cast-_0a8de4cc",
+      "label": "Tama — Mastercraft — The Bell Brass 50th Anniversary Reissue BB-156 — 14x6.5",
+      "companyName": "Tama",
+      "lineSeries": "Mastercraft",
+      "modelName": "The Bell Brass 50th Anniversary Reissue BB-156",
+      "stockBatterHead": "Remo Coated Ambassador",
+      "stockResoHead": "Remo Ambassador Snare Side",
+      "stockReadinessTier": "MEANINGFUL_STOCK_PASS_WITH_HEAD_FALLBACK",
+      "stockHeadFallbackApplied": true
+    }
+  ]
+}
