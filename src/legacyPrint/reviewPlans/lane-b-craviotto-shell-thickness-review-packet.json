@@ -1,0 +1,1189 @@
+{
+  "generatedAt": "2026-05-21T07:57:54.951Z",
+  "sourceReviewPacketFile": "src/legacyPrint/reviewPlans/lane-b-high-value-shell-thickness-review-packet.json",
+  "status": "LANE_B_CRAVIOTTO_SHELL_THICKNESS_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "summary": {
+    "companyName": "Craviotto",
+    "candidateCount": 45,
+    "groupCount": 20,
+    "sourceUrls": [
+      "https://www.craviottodrums.com/",
+      "https://www.ebay.com/itm/276886050902"
+    ],
+    "topGroups": [
+      {
+        "lineSeries": "Custom Shop Solid Shell",
+        "shellMaterial": "Cherry",
+        "count": 6,
+        "primarySourceUrl": "https://www.craviottodrums.com/"
+      },
+      {
+        "lineSeries": "Custom Shop Solid Shell",
+        "shellMaterial": "Mahogany",
+        "count": 6,
+        "primarySourceUrl": "https://www.craviottodrums.com/"
+      },
+      {
+        "lineSeries": "Custom Shop Solid Shell",
+        "shellMaterial": "Maple",
+        "count": 6,
+        "primarySourceUrl": "https://www.craviottodrums.com/"
+      },
+      {
+        "lineSeries": "Custom Shop Solid Shell",
+        "shellMaterial": "Walnut",
+        "count": 6,
+        "primarySourceUrl": "https://www.craviottodrums.com/"
+      },
+      {
+        "lineSeries": "Custom Shop Solid Shell",
+        "shellMaterial": "Ash",
+        "count": 2,
+        "primarySourceUrl": "https://www.craviottodrums.com/"
+      },
+      {
+        "lineSeries": "Custom Shop Solid Shell",
+        "shellMaterial": "Birch",
+        "count": 2,
+        "primarySourceUrl": "https://www.craviottodrums.com/"
+      },
+      {
+        "lineSeries": "Custom Shop Solid Shell",
+        "shellMaterial": "Poplar",
+        "count": 2,
+        "primarySourceUrl": "https://www.craviottodrums.com/"
+      },
+      {
+        "lineSeries": "Custom Shop Stacked Solid",
+        "shellMaterial": "Cherry",
+        "count": 2,
+        "primarySourceUrl": "https://www.craviottodrums.com/"
+      },
+      {
+        "lineSeries": "DW / Craviotto Era",
+        "shellMaterial": "Maple",
+        "count": 2,
+        "primarySourceUrl": "https://www.ebay.com/itm/276886050902"
+      },
+      {
+        "lineSeries": "Limited Edition",
+        "shellMaterial": "Ash",
+        "count": 1,
+        "primarySourceUrl": "https://www.craviottodrums.com/"
+      },
+      {
+        "lineSeries": "Limited Edition",
+        "shellMaterial": "Maple",
+        "count": 1,
+        "primarySourceUrl": "https://www.craviottodrums.com/"
+      },
+      {
+        "lineSeries": "Limited Edition",
+        "shellMaterial": "Cherry",
+        "count": 1,
+        "primarySourceUrl": "https://www.craviottodrums.com/"
+      },
+      {
+        "lineSeries": "Limited Edition",
+        "shellMaterial": "Mahogany",
+        "count": 1,
+        "primarySourceUrl": "https://www.craviottodrums.com/"
+      },
+      {
+        "lineSeries": "Private Reserve",
+        "shellMaterial": "Walnut",
+        "count": 1,
+        "primarySourceUrl": "https://www.craviottodrums.com/"
+      },
+      {
+        "lineSeries": "Private Reserve",
+        "shellMaterial": "Sycamore",
+        "count": 1,
+        "primarySourceUrl": "https://www.craviottodrums.com/"
+      },
+      {
+        "lineSeries": "Custom Shop Stacked Solid",
+        "shellMaterial": "Ash",
+        "count": 1,
+        "primarySourceUrl": "https://www.craviottodrums.com/"
+      },
+      {
+        "lineSeries": "Custom Shop Stacked Solid",
+        "shellMaterial": "Mahogany",
+        "count": 1,
+        "primarySourceUrl": "https://www.craviottodrums.com/"
+      },
+      {
+        "lineSeries": "Custom Shop Stacked Solid",
+        "shellMaterial": "Maple",
+        "count": 1,
+        "primarySourceUrl": "https://www.craviottodrums.com/"
+      },
+      {
+        "lineSeries": "Custom Shop Stacked Solid",
+        "shellMaterial": "Sycamore",
+        "count": 1,
+        "primarySourceUrl": "https://www.craviottodrums.com/"
+      },
+      {
+        "lineSeries": "Custom Shop Stacked Solid",
+        "shellMaterial": "Walnut",
+        "count": 1,
+        "primarySourceUrl": "https://www.craviottodrums.com/"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Solid Shell",
+      "shellMaterial": "Cherry",
+      "primarySourceUrl": "https://www.craviottodrums.com/",
+      "sourceConfidence": "Medium",
+      "count": 6,
+      "models": [
+        "Custom Shop Cherry Solid Shell 5.5x13",
+        "Custom Shop Cherry Solid Shell 5.5x14",
+        "Custom Shop Cherry Solid Shell 5x12",
+        "Custom Shop Cherry Solid Shell 6.5x14",
+        "Custom Shop Cherry Solid Shell 7x14",
+        "Custom Shop Cherry Solid Shell 8x14"
+      ],
+      "records": [
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-5-5x13_13x5-5_steam-bent_cherry_45-bearing-edges_satin-_e214d01a",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Cherry Solid Shell 5.5x13 — 13x5.5",
+          "modelName": "Custom Shop Cherry Solid Shell 5.5x13",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-5-5x14_14x5-5_steam-bent_cherry_45-bearing-edges_satin-_9488cfa0",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Cherry Solid Shell 5.5x14 — 14x5.5",
+          "modelName": "Custom Shop Cherry Solid Shell 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-5x12_12x5_steam-bent_cherry_45-bearing-edges_satin-oil-_a4e4c673",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Cherry Solid Shell 5x12 — 12x5",
+          "modelName": "Custom Shop Cherry Solid Shell 5x12",
+          "diameter": "12",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-6-5x14_14x6-5_steam-bent_cherry_45-bearing-edges_satin-_bed9f21c",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Cherry Solid Shell 6.5x14 — 14x6.5",
+          "modelName": "Custom Shop Cherry Solid Shell 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-7x14_14x7_steam-bent_cherry_45-bearing-edges_satin-oil-_d6db57ea",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Cherry Solid Shell 7x14 — 14x7",
+          "modelName": "Custom Shop Cherry Solid Shell 7x14",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-8x14_14x8_steam-bent_cherry_45-bearing-edges_satin-oil-_00c24701",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Cherry Solid Shell 8x14 — 14x8",
+          "modelName": "Custom Shop Cherry Solid Shell 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Solid Shell",
+      "shellMaterial": "Mahogany",
+      "primarySourceUrl": "https://www.craviottodrums.com/",
+      "sourceConfidence": "Medium",
+      "count": 6,
+      "models": [
+        "Custom Shop Mahogany Solid Shell 5.5x13",
+        "Custom Shop Mahogany Solid Shell 5.5x14",
+        "Custom Shop Mahogany Solid Shell 5x12",
+        "Custom Shop Mahogany Solid Shell 6.5x14",
+        "Custom Shop Mahogany Solid Shell 7x14",
+        "Custom Shop Mahogany Solid Shell 8x14"
+      ],
+      "records": [
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-mahogany-solid-shell-5-5x13_13x5-5_steam-bent_mahogany_45-bearing-edges_sa_a4ed5427",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Mahogany Solid Shell 5.5x13 — 13x5.5",
+          "modelName": "Custom Shop Mahogany Solid Shell 5.5x13",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-mahogany-solid-shell-5-5x14_14x5-5_steam-bent_mahogany_45-bearing-edges_sa_b3aea877",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Mahogany Solid Shell 5.5x14 — 14x5.5",
+          "modelName": "Custom Shop Mahogany Solid Shell 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-mahogany-solid-shell-5x12_12x5_steam-bent_mahogany_45-bearing-edges_satin-_047b1ecb",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Mahogany Solid Shell 5x12 — 12x5",
+          "modelName": "Custom Shop Mahogany Solid Shell 5x12",
+          "diameter": "12",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-mahogany-solid-shell-6-5x14_14x6-5_steam-bent_mahogany_45-bearing-edges_sa_fca69913",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Mahogany Solid Shell 6.5x14 — 14x6.5",
+          "modelName": "Custom Shop Mahogany Solid Shell 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-mahogany-solid-shell-7x14_14x7_steam-bent_mahogany_45-bearing-edges_satin-_0b462145",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Mahogany Solid Shell 7x14 — 14x7",
+          "modelName": "Custom Shop Mahogany Solid Shell 7x14",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-mahogany-solid-shell-8x14_14x8_steam-bent_mahogany_45-bearing-edges_satin-_42d2a3ce",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Mahogany Solid Shell 8x14 — 14x8",
+          "modelName": "Custom Shop Mahogany Solid Shell 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Solid Shell",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.craviottodrums.com/",
+      "sourceConfidence": "Medium",
+      "count": 6,
+      "models": [
+        "Custom Shop Maple Solid Shell 5.5x13",
+        "Custom Shop Maple Solid Shell 5.5x14",
+        "Custom Shop Maple Solid Shell 5x12",
+        "Custom Shop Maple Solid Shell 6.5x14",
+        "Custom Shop Maple Solid Shell 7x14",
+        "Custom Shop Maple Solid Shell 8x14"
+      ],
+      "records": [
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-maple-solid-shell-5-5x13_13x5-5_steam-bent_maple_45-bearing-edges_satin-oi_4c49c5f2",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Maple Solid Shell 5.5x13 — 13x5.5",
+          "modelName": "Custom Shop Maple Solid Shell 5.5x13",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-maple-solid-shell-5-5x14_14x5-5_steam-bent_maple_45-bearing-edges_satin-oi_e6ac048b",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Maple Solid Shell 5.5x14 — 14x5.5",
+          "modelName": "Custom Shop Maple Solid Shell 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-maple-solid-shell-5x12_12x5_steam-bent_maple_45-bearing-edges_satin-oil-la_196306b4",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Maple Solid Shell 5x12 — 12x5",
+          "modelName": "Custom Shop Maple Solid Shell 5x12",
+          "diameter": "12",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-maple-solid-shell-6-5x14_14x6-5_steam-bent_maple_45-bearing-edges_satin-oi_64598153",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Maple Solid Shell 6.5x14 — 14x6.5",
+          "modelName": "Custom Shop Maple Solid Shell 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-maple-solid-shell-7x14_14x7_steam-bent_maple_45-bearing-edges_satin-oil-la_895302ac",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Maple Solid Shell 7x14 — 14x7",
+          "modelName": "Custom Shop Maple Solid Shell 7x14",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-maple-solid-shell-8x14_14x8_steam-bent_maple_45-bearing-edges_satin-oil-la_d6af6462",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Maple Solid Shell 8x14 — 14x8",
+          "modelName": "Custom Shop Maple Solid Shell 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Solid Shell",
+      "shellMaterial": "Walnut",
+      "primarySourceUrl": "https://www.craviottodrums.com/",
+      "sourceConfidence": "Medium",
+      "count": 6,
+      "models": [
+        "Custom Shop Walnut Solid Shell 5.5x13",
+        "Custom Shop Walnut Solid Shell 5.5x14",
+        "Custom Shop Walnut Solid Shell 5x12",
+        "Custom Shop Walnut Solid Shell 6.5x14",
+        "Custom Shop Walnut Solid Shell 7x14",
+        "Custom Shop Walnut Solid Shell 8x14"
+      ],
+      "records": [
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-walnut-solid-shell-5-5x13_13x5-5_steam-bent_walnut_45-bearing-edges_satin-_a708ee0a",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Walnut Solid Shell 5.5x13 — 13x5.5",
+          "modelName": "Custom Shop Walnut Solid Shell 5.5x13",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-walnut-solid-shell-5-5x14_14x5-5_steam-bent_walnut_45-bearing-edges_satin-_bf102941",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Walnut Solid Shell 5.5x14 — 14x5.5",
+          "modelName": "Custom Shop Walnut Solid Shell 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-walnut-solid-shell-5x12_12x5_steam-bent_walnut_45-bearing-edges_satin-oil-_e5cbb0fa",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Walnut Solid Shell 5x12 — 12x5",
+          "modelName": "Custom Shop Walnut Solid Shell 5x12",
+          "diameter": "12",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-walnut-solid-shell-6-5x14_14x6-5_steam-bent_walnut_45-bearing-edges_satin-_40b089f6",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Walnut Solid Shell 6.5x14 — 14x6.5",
+          "modelName": "Custom Shop Walnut Solid Shell 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-walnut-solid-shell-7x14_14x7_steam-bent_walnut_45-bearing-edges_satin-oil-_92e77b5e",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Walnut Solid Shell 7x14 — 14x7",
+          "modelName": "Custom Shop Walnut Solid Shell 7x14",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-walnut-solid-shell-8x14_14x8_steam-bent_walnut_45-bearing-edges_satin-oil-_cba3228b",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Walnut Solid Shell 8x14 — 14x8",
+          "modelName": "Custom Shop Walnut Solid Shell 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Solid Shell",
+      "shellMaterial": "Ash",
+      "primarySourceUrl": "https://www.craviottodrums.com/",
+      "sourceConfidence": "Medium",
+      "count": 2,
+      "models": [
+        "Custom Shop Ash Solid Shell 5.5x14",
+        "Custom Shop Ash Solid Shell 6.5x14"
+      ],
+      "records": [
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-ash-solid-shell-5-5x14_14x5-5_steam-bent_ash_45-bearing-edges_satin-oil-la_f1d11cf6",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Ash Solid Shell 5.5x14 — 14x5.5",
+          "modelName": "Custom Shop Ash Solid Shell 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Ash\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-ash-solid-shell-6-5x14_14x6-5_steam-bent_ash_45-bearing-edges_satin-oil-la_b447c46a",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Ash Solid Shell 6.5x14 — 14x6.5",
+          "modelName": "Custom Shop Ash Solid Shell 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Ash\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Solid Shell",
+      "shellMaterial": "Birch",
+      "primarySourceUrl": "https://www.craviottodrums.com/",
+      "sourceConfidence": "Medium",
+      "count": 2,
+      "models": [
+        "Custom Shop Birch Solid Shell 5.5x14",
+        "Custom Shop Birch Solid Shell 6.5x14"
+      ],
+      "records": [
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-birch-solid-shell-5-5x14_14x5-5_steam-bent_birch_45-bearing-edges_satin-oi_7baa6ec9",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Birch Solid Shell 5.5x14 — 14x5.5",
+          "modelName": "Custom Shop Birch Solid Shell 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-birch-solid-shell-6-5x14_14x6-5_steam-bent_birch_45-bearing-edges_satin-oi_db7b6f8b",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Birch Solid Shell 6.5x14 — 14x6.5",
+          "modelName": "Custom Shop Birch Solid Shell 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Solid Shell",
+      "shellMaterial": "Poplar",
+      "primarySourceUrl": "https://www.craviottodrums.com/",
+      "sourceConfidence": "Medium",
+      "count": 2,
+      "models": [
+        "Custom Shop Poplar Solid Shell 5.5x14",
+        "Custom Shop Poplar Solid Shell 6.5x14"
+      ],
+      "records": [
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-poplar-solid-shell-5-5x14_14x5-5_steam-bent_poplar_45-bearing-edges_satin-_f405440f",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Poplar Solid Shell 5.5x14 — 14x5.5",
+          "modelName": "Custom Shop Poplar Solid Shell 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "craviotto_custom-shop-solid-shell_custom-shop-poplar-solid-shell-6-5x14_14x6-5_steam-bent_poplar_45-bearing-edges_satin-_8c35ff3c",
+          "label": "Craviotto — Custom Shop Solid Shell — Custom Shop Poplar Solid Shell 6.5x14 — 14x6.5",
+          "modelName": "Custom Shop Poplar Solid Shell 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Stacked Solid",
+      "shellMaterial": "Cherry",
+      "primarySourceUrl": "https://www.craviottodrums.com/",
+      "sourceConfidence": "Low",
+      "count": 2,
+      "models": [
+        "Stacked Solid Cherry/Mahogany 6.5x14",
+        "Stacked Solid Cherry/Walnut 6.5x14"
+      ],
+      "records": [
+        {
+          "id": "craviotto_custom-shop-stacked-solid_stacked-solid-cherry-mahogany-6-5x14_14x6-5_steam-bent_cherry_mahogany_45-bearing-ed_006914d9",
+          "label": "Craviotto — Custom Shop Stacked Solid — Stacked Solid Cherry/Mahogany 6.5x14 — 14x6.5",
+          "modelName": "Stacked Solid Cherry/Mahogany 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"Mahogany\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stacked solid Cherry/Mahogany\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "craviotto_custom-shop-stacked-solid_stacked-solid-cherry-walnut-6-5x14_14x6-5_steam-bent_cherry_walnut_45-bearing-edges__c29fd114",
+          "label": "Craviotto — Custom Shop Stacked Solid — Stacked Solid Cherry/Walnut 6.5x14 — 14x6.5",
+          "modelName": "Stacked Solid Cherry/Walnut 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"Walnut\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stacked solid Cherry/Walnut\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "DW / Craviotto Era",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.ebay.com/itm/276886050902",
+      "sourceConfidence": "Low",
+      "count": 2,
+      "models": [
+        "DW Craviotto Solid Maple 5.5x14",
+        "DW Craviotto Solid Maple 6.5x14"
+      ],
+      "records": [
+        {
+          "id": "craviotto_dw-craviotto-era_dw-craviotto-solid-maple-5-5x14_14x5-5_steam-bent_maple_45-bearing-edges_satin-oil-lacquer-op_0a38d6b4",
+          "label": "Craviotto — DW / Craviotto Era — DW Craviotto Solid Maple 5.5x14 — 14x5.5",
+          "modelName": "DW Craviotto Solid Maple 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid maple shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.ebay.com/itm/276886050902",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "craviotto_dw-craviotto-era_dw-craviotto-solid-maple-6-5x14_14x6-5_steam-bent_maple_45-bearing-edges_satin-oil-lacquer-op_602e146c",
+          "label": "Craviotto — DW / Craviotto Era — DW Craviotto Solid Maple 6.5x14 — 14x6.5",
+          "modelName": "DW Craviotto Solid Maple 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid maple shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.ebay.com/itm/276886050902",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Limited Edition",
+      "shellMaterial": "Ash",
+      "primarySourceUrl": "https://www.craviottodrums.com/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Diamond Tube Lug Ash 5.5x14"
+      ],
+      "records": [
+        {
+          "id": "craviotto_limited-edition_diamond-tube-lug-ash-5-5x14_14x5-5_steam-bent_ash_45-bearing-edges_satin-oil-lacquer-options_t_b5be3c99",
+          "label": "Craviotto — Limited Edition — Diamond Tube Lug Ash 5.5x14 — 14x5.5",
+          "modelName": "Diamond Tube Lug Ash 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Ash\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Limited Edition",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.craviottodrums.com/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Diamond Tube Lug Birdseye Maple 5.5x14"
+      ],
+      "records": [
+        {
+          "id": "craviotto_limited-edition_diamond-tube-lug-birdseye-maple-5-5x14_14x5-5_steam-bent_maple_maple_45-bearing-edges_satin-oi_11a8ee68",
+          "label": "Craviotto — Limited Edition — Diamond Tube Lug Birdseye Maple 5.5x14 — 14x5.5",
+          "modelName": "Diamond Tube Lug Birdseye Maple 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Maple\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Limited Edition",
+      "shellMaterial": "Cherry",
+      "primarySourceUrl": "https://www.craviottodrums.com/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Diamond Tube Lug Black Cherry 5.5x14"
+      ],
+      "records": [
+        {
+          "id": "craviotto_limited-edition_diamond-tube-lug-black-cherry-5-5x14_14x5-5_steam-bent_cherry_45-bearing-edges_satin-oil-lacqu_96e56440",
+          "label": "Craviotto — Limited Edition — Diamond Tube Lug Black Cherry 5.5x14 — 14x5.5",
+          "modelName": "Diamond Tube Lug Black Cherry 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Limited Edition",
+      "shellMaterial": "Mahogany",
+      "primarySourceUrl": "https://www.craviottodrums.com/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Diamond Tube Lug Mahogany 5.5x14"
+      ],
+      "records": [
+        {
+          "id": "craviotto_limited-edition_diamond-tube-lug-mahogany-5-5x14_14x5-5_steam-bent_mahogany_45-bearing-edges_satin-oil-lacquer_b1d3fcd1",
+          "label": "Craviotto — Limited Edition — Diamond Tube Lug Mahogany 5.5x14 — 14x5.5",
+          "modelName": "Diamond Tube Lug Mahogany 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Private Reserve",
+      "shellMaterial": "Walnut",
+      "primarySourceUrl": "https://www.craviottodrums.com/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Private Reserve Mappa Burl/Walnut 6.5x14"
+      ],
+      "records": [
+        {
+          "id": "craviotto_private-reserve_private-reserve-mappa-burl-walnut-6-5x14_14x6-5_steam-bent_walnut_mappa-burl-veneer_45-bearing_9011056d",
+          "label": "Craviotto — Private Reserve — Private Reserve Mappa Burl/Walnut 6.5x14 — 14x6.5",
+          "modelName": "Private Reserve Mappa Burl/Walnut 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"Mappa Burl veneer\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Private Reserve",
+      "shellMaterial": "Sycamore",
+      "primarySourceUrl": "https://www.craviottodrums.com/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Private Reserve Sycamore/Mahogany 6.5x14"
+      ],
+      "records": [
+        {
+          "id": "craviotto_private-reserve_private-reserve-sycamore-mahogany-6-5x14_14x6-5_steam-bent_sycamore_mahogany_45-bearing-edges__e8c2552c",
+          "label": "Craviotto — Private Reserve — Private Reserve Sycamore/Mahogany 6.5x14 — 14x6.5",
+          "modelName": "Private Reserve Sycamore/Mahogany 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Sycamore\",\"shellMaterialSecondary\":\"Mahogany\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Stacked Solid",
+      "shellMaterial": "Ash",
+      "primarySourceUrl": "https://www.craviottodrums.com/",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Stacked Solid Ash/Maple 6.5x14"
+      ],
+      "records": [
+        {
+          "id": "craviotto_custom-shop-stacked-solid_stacked-solid-ash-maple-6-5x14_14x6-5_steam-bent_ash_maple_45-bearing-edges_satin-oi_7f9daee0",
+          "label": "Craviotto — Custom Shop Stacked Solid — Stacked Solid Ash/Maple 6.5x14 — 14x6.5",
+          "modelName": "Stacked Solid Ash/Maple 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Ash\",\"shellMaterialSecondary\":\"Maple\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stacked solid Ash/Maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Stacked Solid",
+      "shellMaterial": "Mahogany",
+      "primarySourceUrl": "https://www.craviottodrums.com/",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Stacked Solid Mahogany/Maple 6.5x14"
+      ],
+      "records": [
+        {
+          "id": "craviotto_custom-shop-stacked-solid_stacked-solid-mahogany-maple-6-5x14_14x6-5_steam-bent_mahogany_maple_45-bearing-edge_2f2dc60e",
+          "label": "Craviotto — Custom Shop Stacked Solid — Stacked Solid Mahogany/Maple 6.5x14 — 14x6.5",
+          "modelName": "Stacked Solid Mahogany/Maple 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Maple\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stacked solid Mahogany/Maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Stacked Solid",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.craviottodrums.com/",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Stacked Solid Maple/Walnut 6.5x14"
+      ],
+      "records": [
+        {
+          "id": "craviotto_custom-shop-stacked-solid_stacked-solid-maple-walnut-6-5x14_14x6-5_steam-bent_maple_walnut_45-bearing-edges_sa_f2bce3c9",
+          "label": "Craviotto — Custom Shop Stacked Solid — Stacked Solid Maple/Walnut 6.5x14 — 14x6.5",
+          "modelName": "Stacked Solid Maple/Walnut 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Walnut\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stacked solid Maple/Walnut\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Stacked Solid",
+      "shellMaterial": "Sycamore",
+      "primarySourceUrl": "https://www.craviottodrums.com/",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Stacked Solid Sycamore/Mahogany 6.5x14"
+      ],
+      "records": [
+        {
+          "id": "craviotto_custom-shop-stacked-solid_stacked-solid-sycamore-mahogany-6-5x14_14x6-5_steam-bent_sycamore_mahogany_45-bearin_d23a87e4",
+          "label": "Craviotto — Custom Shop Stacked Solid — Stacked Solid Sycamore/Mahogany 6.5x14 — 14x6.5",
+          "modelName": "Stacked Solid Sycamore/Mahogany 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Sycamore\",\"shellMaterialSecondary\":\"Mahogany\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stacked solid Sycamore/Mahogany\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Stacked Solid",
+      "shellMaterial": "Walnut",
+      "primarySourceUrl": "https://www.craviottodrums.com/",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Stacked Solid Walnut/Ash/Walnut 6.5x14"
+      ],
+      "records": [
+        {
+          "id": "craviotto_custom-shop-stacked-solid_stacked-solid-walnut-ash-walnut-6-5x14_14x6-5_steam-bent_walnut_ash_walnut_45-bearin_f47f02c6",
+          "label": "Craviotto — Custom Shop Stacked Solid — Stacked Solid Walnut/Ash/Walnut 6.5x14 — 14x6.5",
+          "modelName": "Stacked Solid Walnut/Ash/Walnut 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"Ash\",\"shellMaterialTertiary\":\"Walnut\",\"plyCount\":null,\"layupDescription\":\"Stacked solid Walnut/Ash/Walnut\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Research source-confirmed Craviotto shell thickness by solid-shell material/configuration. Do not create Firestore update plan until thickness values are explicitly confirmed or a controlled Craviotto shell-thickness fallback policy is approved."
+}
