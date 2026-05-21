@@ -1,0 +1,212 @@
+{
+  "generatedAt": "2026-05-21T07:28:09.444Z",
+  "sourceConfirmationFile": "src/legacyPrint/reviewPlans/ludwig-wood-bearing-edge-source-confirmation.json",
+  "status": "LUDWIG_WOOD_BEARING_EDGE_PROMOTION_PLAN_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "promotionCandidateCount": 16,
+    "promotionGroupCount": 4,
+    "skippedCandidateCount": 5,
+    "skippedGroupCount": 5
+  },
+  "promotionRows": [
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Classic Maple",
+      "shellMaterial": "Maple",
+      "count": 4,
+      "models": [
+        "Classic Maple 5.5x14",
+        "Classic Maple 5x14",
+        "Classic Maple 6.5x14",
+        "Classic Maple 8x14"
+      ],
+      "confirmedBearingEdge": {
+        "batterSideProfile": "45-degree bearing edge",
+        "snareSideProfile": "45-degree bearing edge",
+        "roundover": "lightly sanded / smooth even surface",
+        "evidenceLevel": "sourceConfirmed",
+        "confidence": "high",
+        "notes": "Ludwig Classic Maple snare specs confirm 45 Degree Bearing Edge. Ludwig Classic Maple family page further describes the bearing edge as cut to a 45-degree angle within 1/16 inch from the outside edge."
+      },
+      "promotion": {
+        "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+        "bearingEdgeNeedsVerification": false,
+        "engineAssumptions": {
+          "bearingEdgeSourceConfirmed": true,
+          "bearingEdgeSourceConfirmationKey": "ludwig-classic-maple-official-source-confirmed",
+          "bearingEdgeSourceConfirmationReason": "Ludwig Classic Maple snare specs confirm 45 Degree Bearing Edge. Ludwig Classic Maple family page further describes the bearing edge as cut to a 45-degree angle within 1/16 inch from the outside edge."
+        }
+      }
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Classic Oak",
+      "shellMaterial": "Oak",
+      "count": 4,
+      "models": [
+        "Classic Oak 5.5x14",
+        "Classic Oak 5x14",
+        "Classic Oak 6.5x14",
+        "Classic Oak 8x14"
+      ],
+      "confirmedBearingEdge": {
+        "batterSideProfile": "dual 45-degree bearing edge",
+        "snareSideProfile": "dual 45-degree bearing edge",
+        "roundover": "unknown",
+        "evidenceLevel": "sourceConfirmed",
+        "confidence": "high",
+        "notes": "Ludwig Classic Oak source confirms dual 45-degree bearing edge for added focus, attack, and tuning control."
+      },
+      "promotion": {
+        "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+        "bearingEdgeNeedsVerification": false,
+        "engineAssumptions": {
+          "bearingEdgeSourceConfirmed": true,
+          "bearingEdgeSourceConfirmationKey": "ludwig-classic-oak-official-source-confirmed",
+          "bearingEdgeSourceConfirmationReason": "Ludwig Classic Oak source confirms dual 45-degree bearing edge for added focus, attack, and tuning control."
+        }
+      }
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Legacy Mahogany",
+      "shellMaterial": "Mahogany",
+      "count": 4,
+      "models": [
+        "Legacy Mahogany 5.5x14",
+        "Legacy Mahogany 5x14",
+        "Legacy Mahogany 6.5x14",
+        "Legacy Mahogany 8x14"
+      ],
+      "confirmedBearingEdge": {
+        "batterSideProfile": "30-degree inner cut with 1/4-inch radius round over",
+        "snareSideProfile": "30-degree inner cut with 1/4-inch radius round over",
+        "roundover": "1/4-inch radius round over",
+        "evidenceLevel": "sourceConfirmed",
+        "confidence": "high",
+        "notes": "Ludwig Legacy Mahogany source confirms 30 degree inner cut with a 1/4 inch radius round over."
+      },
+      "promotion": {
+        "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+        "bearingEdgeNeedsVerification": false,
+        "engineAssumptions": {
+          "bearingEdgeSourceConfirmed": true,
+          "bearingEdgeSourceConfirmationKey": "ludwig-legacy-mahogany-official-source-confirmed",
+          "bearingEdgeSourceConfirmationReason": "Ludwig Legacy Mahogany source confirms 30 degree inner cut with a 1/4 inch radius round over."
+        }
+      }
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Legacy Maple",
+      "shellMaterial": "Maple",
+      "count": 4,
+      "models": [
+        "Legacy Maple 5.5x14",
+        "Legacy Maple 5x14",
+        "Legacy Maple 6.5x14",
+        "Legacy Maple 8x14"
+      ],
+      "confirmedBearingEdge": {
+        "batterSideProfile": "30-degree inner cut with 1/4-inch radius round over",
+        "snareSideProfile": "30-degree inner cut with 1/4-inch radius round over",
+        "roundover": "1/4-inch radius round over",
+        "evidenceLevel": "sourceConfirmed",
+        "confidence": "high",
+        "notes": "Ludwig Legacy Maple source confirms 30 degree inner cut with a 1/4 inch radius round over."
+      },
+      "promotion": {
+        "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+        "bearingEdgeNeedsVerification": false,
+        "engineAssumptions": {
+          "bearingEdgeSourceConfirmed": true,
+          "bearingEdgeSourceConfirmationKey": "ludwig-legacy-maple-official-source-confirmed",
+          "bearingEdgeSourceConfirmationReason": "Ludwig Legacy Maple source confirms 30 degree inner cut with a 1/4 inch radius round over."
+        }
+      }
+    }
+  ],
+  "skippedGroups": [
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Universal Wood",
+      "shellMaterial": "Beech",
+      "count": 1,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums"
+      ],
+      "models": [
+        "Universal Beech 6.5x14"
+      ],
+      "skipReason": "No exact model/family bearing-edge source confirmation captured in this pass."
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Universal Wood",
+      "shellMaterial": "Cherry",
+      "count": 1,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums"
+      ],
+      "models": [
+        "Universal Cherry 6.5x14"
+      ],
+      "skipReason": "No exact model/family bearing-edge source confirmation captured in this pass."
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Universal Wood",
+      "shellMaterial": "Mahogany",
+      "count": 1,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums"
+      ],
+      "models": [
+        "Universal Mahogany 6.5x14"
+      ],
+      "skipReason": "No exact model/family bearing-edge source confirmation captured in this pass."
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Universal Wood",
+      "shellMaterial": "Walnut",
+      "count": 1,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums"
+      ],
+      "models": [
+        "Universal Walnut 6.5x14"
+      ],
+      "skipReason": "No exact model/family bearing-edge source confirmation captured in this pass."
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Jazz Fest Series",
+      "shellMaterial": "Mahogany / Poplar",
+      "count": 1,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums"
+      ],
+      "models": [
+        "Jazz Fest Series 5.5x14"
+      ],
+      "skipReason": "No exact model/family bearing-edge source confirmation captured in this pass."
+    }
+  ],
+  "reviewInstruction": "Review-only promotion plan. Do not apply until an apply script performs doc-level matching and dry-run verification against Firestore."
+}
