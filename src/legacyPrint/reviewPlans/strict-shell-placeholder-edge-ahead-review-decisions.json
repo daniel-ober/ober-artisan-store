@@ -1,0 +1,52 @@
+{
+  "status": "STRICT_SHELL_PLACEHOLDER_EDGE_AHEAD_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:01:15.563Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-placeholder-edge-ahead-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "AHEAD",
+  "summary": {
+    "candidateCount": 33,
+    "lineGroupCount": 1,
+    "approvedLineGroupCount": 0,
+    "blockedLineGroupCount": 1,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "AHEAD placeholder-edge records remain blocked pending official/catalog bearing-edge source review."
+  },
+  "decisions": [
+    {
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "candidateCount": 33,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official AHEAD page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material, shell construction, line name, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 10,
+      "sampleRecordIds": [
+        "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-chrome-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-_c9c366c7",
+        "ahead_ahead-snares_black-chrome-on-bell-brass-14x6-with-black-trick-throw-off_14x6_solid-shell_bell-brass_3_minimal-shal_977be28f",
+        "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_27b6e2fb",
+        "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_1c02f79e",
+        "ahead_ahead-snares_bright-polished-3mm-bell-brass-13x6_13x6_solid-shell_bell-brass_3_polished-bell-brass_sh138-s-hoop-co_c8242771",
+        "ahead_ahead-snares_bright-polished-3mm-bell-brass-piccolo-14x4_14x4_solid-shell_bell-brass_3_polished-bell-brass_sh1410-_afc06b76",
+        "ahead_ahead-snares_bright-polished-bell-brass-piccolo-snare-drum-14x4_14x4_solid-shell_bell-brass_3_minimal-shallow-snar_1f582253",
+        "ahead_ahead-snares_bright-polished-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_p_995d2ac8",
+        "ahead_ahead-snares_bright-polished-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_polished-bell-brass_sh1410-s_421e6cf0",
+        "ahead_ahead-snares_polished-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_polished_d1466c71"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No AHEAD bearing-edge promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell material, shell construction, line name, shell thickness, hoop type, or era as bearing-edge confirmation.",
+    "Do not promote placeholder/unknown bearing edges to source-confirmed meaningful edge without reviewed source evidence."
+  ]
+}

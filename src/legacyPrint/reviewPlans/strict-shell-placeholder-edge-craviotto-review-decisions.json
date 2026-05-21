@@ -1,0 +1,44 @@
+{
+  "status": "STRICT_SHELL_PLACEHOLDER_EDGE_CRAVIOTTO_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:01:15.564Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-placeholder-edge-craviotto-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Craviotto",
+  "summary": {
+    "candidateCount": 2,
+    "lineGroupCount": 1,
+    "approvedLineGroupCount": 0,
+    "blockedLineGroupCount": 1,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Craviotto placeholder-edge records remain blocked pending official/catalog bearing-edge source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Diamond Series / AK Collaboration",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Craviotto page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material, shell construction, line name, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "craviotto_diamond-series-ak-collaboration_diamond-series-brass-5-5x14_14x5-5_solid-shell_brass_0-7_metal-bearing-edge-un_e55f06b6",
+        "craviotto_diamond-series-ak-collaboration_diamond-series-brass-6-5x14_14x6-5_solid-shell_brass_0-7_metal-bearing-edge-un_4fe1510c"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Craviotto bearing-edge promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell material, shell construction, line name, shell thickness, hoop type, or era as bearing-edge confirmation.",
+    "Do not promote placeholder/unknown bearing edges to source-confirmed meaningful edge without reviewed source evidence."
+  ]
+}

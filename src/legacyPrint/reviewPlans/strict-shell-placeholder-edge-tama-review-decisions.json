@@ -1,0 +1,63 @@
+{
+  "status": "STRICT_SHELL_PLACEHOLDER_EDGE_TAMA_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:01:15.564Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-placeholder-edge-tama-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Tama",
+  "summary": {
+    "candidateCount": 3,
+    "lineGroupCount": 2,
+    "approvedLineGroupCount": 0,
+    "blockedLineGroupCount": 2,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Tama placeholder-edge records remain blocked pending official/catalog bearing-edge source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Tama",
+      "lineSeries": "STAR Reserve",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Tama page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material, shell construction, line name, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "tama_star-reserve_star-reserve-g-mahogany-14x6-5_14x6-5_ply_mahogany_lacquer_a6294219",
+        "tama_star-reserve_star-reserve-hand-hammered-brass-14x5-5_14x5-5_metal_brass_hammered-brass_fc93df68"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "S.L.P.",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Tama page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material, shell construction, line name, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "tama_s-l-p_s-l-p-duo-birch-lbh1410l-14x10_14x10_ply_birch_lacquer_triple-flange-sound-arc-style_lbh1410l_38db7013"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Tama bearing-edge promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell material, shell construction, line name, shell thickness, hoop type, or era as bearing-edge confirmation.",
+    "Do not promote placeholder/unknown bearing edges to source-confirmed meaningful edge without reviewed source evidence."
+  ]
+}

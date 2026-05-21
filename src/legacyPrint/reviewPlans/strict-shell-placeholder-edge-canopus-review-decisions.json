@@ -1,0 +1,141 @@
+{
+  "status": "STRICT_SHELL_PLACEHOLDER_EDGE_CANOPUS_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:01:15.564Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-placeholder-edge-canopus-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Canopus",
+  "summary": {
+    "candidateCount": 9,
+    "lineGroupCount": 6,
+    "approvedLineGroupCount": 0,
+    "blockedLineGroupCount": 6,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Canopus placeholder-edge records remain blocked pending official/catalog bearing-edge source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Canopus",
+      "lineSeries": "Manganese Steel",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material, shell construction, line name, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "canopus_manganese-steel_manganese-steel-14x5-5_14x5-5_metal_steel_1-2_pearl-nickel-electroplating-with-clear-coat_steel-_4ab0877d",
+        "canopus_manganese-steel_manganese-steel-14x6-5_14x6-5_metal_steel_1-2_pearl-nickel-electroplating-with-clear-coat_steel-_00029973"
+      ]
+    },
+    {
+      "companyName": "Canopus",
+      "lineSeries": "MO",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material, shell construction, line name, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "canopus_mo_mo-snare-14x5-5_14x5-5_ply_maple_8_a67de129",
+        "canopus_mo_mo-snare-14x6-5_14x6-5_ply_maple_8_202689c8"
+      ]
+    },
+    {
+      "companyName": "Canopus",
+      "lineSeries": "Session Superior",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material, shell construction, line name, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "canopus_session-superior_session-superior-maple-14x5-5_14x5-5_ply_maple_8_acrylic-uv-lacquer_steel-2mm-8h_sm-1455_0c997611",
+        "canopus_session-superior_session-superior-maple-14x6-5_14x6-5_ply_maple_8_acrylic-uv-lacquer_steel-2mm-8h_sm-1465_dde28ac7"
+      ]
+    },
+    {
+      "companyName": "Canopus",
+      "lineSeries": "Aluminum Alloy",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material, shell construction, line name, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "canopus_aluminum-alloy_aluminum-alloy-14x6_14x6_metal_aluminum_1_matte-black-coat_steel-1-6mm-10h_aa-1460_3fc0bd87"
+      ]
+    },
+    {
+      "companyName": "Canopus",
+      "lineSeries": "Type-R",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material, shell construction, line name, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "canopus_type-r_type-r-3mm-brass-magnum-14x6-5_14x6-5_metal_brass_3_55dc05bf"
+      ]
+    },
+    {
+      "companyName": "Canopus",
+      "lineSeries": "Zelkova GINRAN",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material, shell construction, line name, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "canopus_zelkova-ginran_zelkova-ginran_14x6-5_solid-shell_zelkova_14_die-cast-8_02ef799a"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Canopus bearing-edge promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell material, shell construction, line name, shell thickness, hoop type, or era as bearing-edge confirmation.",
+    "Do not promote placeholder/unknown bearing edges to source-confirmed meaningful edge without reviewed source evidence."
+  ]
+}
