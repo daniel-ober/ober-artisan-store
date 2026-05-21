@@ -1,0 +1,92 @@
+{
+  "status": "TAMA_SLP_STUDIO_MAPLE_LMP1465F_CONTROLLED_WRITE_CONFIRMATION",
+  "collectionName": "snareReferenceDrums",
+  "appliedAt": "2026-05-21T13:29:29.251Z",
+  "script": "scripts/legacyPrint/applyTamaSlpStudioMapleControlledWrite.cjs",
+  "expectedDocId": "tama_s-l-p_s-l-p-studio-maple-lmp1465f-14x6-5_14x6-5_ply_maple_lacquer_wood-hoops_lmp1465f_6cb7788e",
+  "actualWriteCount": 1,
+  "skipped": [],
+  "selector": {
+    "companyName": "Tama",
+    "modelName": "S.L.P. Studio Maple LMP1465F 14x6.5"
+  },
+  "appliedFields": [
+    "coreFieldEnrichmentBatch",
+    "coreFieldEnrichmentNeedsReview",
+    "coreFieldEnrichmentStatus",
+    "finishType",
+    "hoopType",
+    "lugCount",
+    "lugType",
+    "plyCount",
+    "reinforcementRings",
+    "shellLayup",
+    "shellMaterial1",
+    "shellMaterial2",
+    "shellMaterial3",
+    "shellThicknessMm",
+    "stockSnareWires"
+  ],
+  "proposedDiffBeforeWrite": {
+    "shellLayup": {
+      "before": null,
+      "after": "6-ply all-maple"
+    },
+    "shellMaterial2": {
+      "before": "Maple wood hoops",
+      "after": "none"
+    },
+    "shellMaterial3": {
+      "before": "Unknown",
+      "after": "none"
+    },
+    "reinforcementRings": {
+      "before": true,
+      "after": "Sound Focus Rings"
+    },
+    "hoopType": {
+      "before": "Maple wood hoop",
+      "after": "100% maple wood hoops coated with urethane"
+    },
+    "stockSnareWires": {
+      "before": "20-strand Hi-Carbon Steel snare wires",
+      "after": "20-strand Starclassic Carbon Steel Snappy snares"
+    },
+    "finishType": {
+      "before": "Lacquer",
+      "after": "Sienna lacquer / urethane-coated finish"
+    },
+    "coreFieldEnrichmentStatus": {
+      "before": null,
+      "after": "source_backed_partial_core_enrichment"
+    },
+    "coreFieldEnrichmentBatch": {
+      "before": null,
+      "after": "tama_slp_studio_maple_lmp1465f_source_enrichment"
+    },
+    "coreFieldEnrichmentNeedsReview": {
+      "before": null,
+      "after": true
+    }
+  },
+  "afterCoreFields": {
+    "companyName": "Tama",
+    "modelName": "S.L.P. Studio Maple LMP1465F 14x6.5",
+    "plyCount": 6,
+    "shellLayup": "6-ply all-maple",
+    "shellMaterial1": "Maple",
+    "shellMaterial2": "none",
+    "shellMaterial3": "none",
+    "shellThicknessMm": 5,
+    "reinforcementRings": "Sound Focus Rings",
+    "hoopType": "100% maple wood hoops coated with urethane",
+    "stockSnareWires": "20-strand Starclassic Carbon Steel Snappy snares",
+    "finishType": "Sienna lacquer / urethane-coated finish",
+    "bearingEdgeDetail": "",
+    "shellTreatment": "",
+    "coreFieldEnrichmentStatus": "source_backed_partial_core_enrichment",
+    "coreFieldEnrichmentBatch": "tama_slp_studio_maple_lmp1465f_source_enrichment",
+    "coreFieldEnrichmentNeedsReview": true
+  },
+  "nextStep": "Rerun the scoped Maple 14x6.5 post-enrichment comparison and confirm the Tama S.L.P. Studio Maple record now exposes shell layup, corrected shell materials, Sound Focus Rings, wood hoops, finish, and stock wires without writing bearing edge detail."
+}
