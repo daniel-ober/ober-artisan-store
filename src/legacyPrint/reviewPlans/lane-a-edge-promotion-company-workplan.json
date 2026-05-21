@@ -1,0 +1,931 @@
+{
+  "generatedAt": "2026-05-21T08:19:31.095Z",
+  "sourceCandidateFile": "src/legacyPrint/reviewPlans/lane-a-official-high-confidence-edge-promotion-candidate-packet.json",
+  "status": "LANE_A_EDGE_PROMOTION_COMPANY_WORKPLAN_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 29,
+    "groupCount": 14,
+    "companyCount": 8,
+    "noFirestoreWrites": true,
+    "recommendedOrder": [
+      {
+        "companyName": "Pearl",
+        "candidateCount": 8,
+        "groupCount": 3
+      },
+      {
+        "companyName": "Yamaha",
+        "candidateCount": 8,
+        "groupCount": 2
+      },
+      {
+        "companyName": "Canopus",
+        "candidateCount": 5,
+        "groupCount": 3
+      },
+      {
+        "companyName": "DW / PDP",
+        "candidateCount": 3,
+        "groupCount": 1
+      },
+      {
+        "companyName": "Mapex",
+        "candidateCount": 2,
+        "groupCount": 2
+      },
+      {
+        "companyName": "Ludwig",
+        "candidateCount": 1,
+        "groupCount": 1
+      },
+      {
+        "companyName": "Pork Pie Percussion",
+        "candidateCount": 1,
+        "groupCount": 1
+      },
+      {
+        "companyName": "Tama",
+        "candidateCount": 1,
+        "groupCount": 1
+      }
+    ]
+  },
+  "companies": [
+    {
+      "companyName": "Pearl",
+      "candidateCount": 8,
+      "groupCount": 3,
+      "sourceUrls": [
+        "https://pearldrum.com/en/products/snares/modern-utility",
+        "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/Pearl2025GeneralCatalog%28PMI%29%20%281%29.pdf",
+        "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2010-price-list.pdf"
+      ],
+      "groups": [
+        {
+          "companyName": "Pearl",
+          "lineSeries": "Modern Utility",
+          "shellMaterial": "Maple",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium",
+          "count": 4,
+          "models": [
+            "Modern Utility Maple"
+          ],
+          "records": [
+            {
+              "id": "pearl_modern-utility_modern-utility-maple_13x7_ply_maple_5-4_triple-flanged-superhoop-style_3a6dee18",
+              "label": "Pearl — Modern Utility — Modern Utility Maple — 13x7",
+              "modelName": "Modern Utility Maple",
+              "diameter": "13",
+              "depth": "7",
+              "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "5.4",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium"
+            },
+            {
+              "id": "pearl_modern-utility_modern-utility-maple_14x5-5_ply_maple_5-4_triple-flanged-superhoop-style_8a8b4eb5",
+              "label": "Pearl — Modern Utility — Modern Utility Maple — 14x5.5",
+              "modelName": "Modern Utility Maple",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "5.4",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium"
+            },
+            {
+              "id": "pearl_modern-utility_modern-utility-maple_14x6-5_ply_maple_5-4_triple-flanged-superhoop-style_459e9ea5",
+              "label": "Pearl — Modern Utility — Modern Utility Maple — 14x6.5",
+              "modelName": "Modern Utility Maple",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "5.4",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium"
+            },
+            {
+              "id": "pearl_modern-utility_modern-utility-maple_14x8_ply_maple_5-4_triple-flanged-superhoop-style_ed273ddc",
+              "label": "Pearl — Modern Utility — Modern Utility Maple — 14x8",
+              "modelName": "Modern Utility Maple",
+              "diameter": "14",
+              "depth": "8",
+              "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "5.4",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium"
+            }
+          ],
+          "promotionLane": "LANE_A_VALID_THICKNESS_UNKNOWN_EDGE",
+          "promotionTarget": "source-confirmed bearing edge",
+          "promotionRule": "Only promote if bearing edge geometry/profile is explicitly source-confirmed. Existing shell thickness is already valid."
+        },
+        {
+          "companyName": "Pearl",
+          "lineSeries": "Decade Maple",
+          "shellMaterial": "Maple",
+          "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/Pearl2025GeneralCatalog%28PMI%29%20%281%29.pdf",
+          "sourceConfidence": "Medium",
+          "count": 2,
+          "models": [
+            "Decade Maple Maple Snare"
+          ],
+          "records": [
+            {
+              "id": "pearl_decade-maple_decade-maple-maple-snare_14x5-5_ply_maple_5-4_triple-flanged_93606d23",
+              "label": "Pearl — Decade Maple — Decade Maple Maple Snare — 14x5.5",
+              "modelName": "Decade Maple Maple Snare",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "5.4",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/Pearl2025GeneralCatalog%28PMI%29%20%281%29.pdf",
+              "sourceConfidence": "Medium"
+            },
+            {
+              "id": "pearl_decade-maple_decade-maple-maple-snare_14x6-5_ply_maple_5-4_triple-flanged_c40247fa",
+              "label": "Pearl — Decade Maple — Decade Maple Maple Snare — 14x6.5",
+              "modelName": "Decade Maple Maple Snare",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "5.4",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/Pearl2025GeneralCatalog%28PMI%29%20%281%29.pdf",
+              "sourceConfidence": "Medium"
+            }
+          ],
+          "promotionLane": "LANE_A_VALID_THICKNESS_UNKNOWN_EDGE",
+          "promotionTarget": "source-confirmed bearing edge",
+          "promotionRule": "Only promote if bearing edge geometry/profile is explicitly source-confirmed. Existing shell thickness is already valid."
+        },
+        {
+          "companyName": "Pearl",
+          "lineSeries": "Masters Maple Complete",
+          "shellMaterial": "Maple",
+          "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2010-price-list.pdf",
+          "sourceConfidence": "Medium",
+          "count": 2,
+          "models": [
+            "Masters Maple Complete Maple Snare"
+          ],
+          "records": [
+            {
+              "id": "pearl_masters-maple-complete_masters-maple-complete-maple-snare_14x5-5_ply_maple_5-4_mastercast-die-cast_b6c83fa7",
+              "label": "Pearl — Masters Maple Complete — Masters Maple Complete Maple Snare — 14x5.5",
+              "modelName": "Masters Maple Complete Maple Snare",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "5.4",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2010-price-list.pdf",
+              "sourceConfidence": "Medium"
+            },
+            {
+              "id": "pearl_masters-maple-complete_masters-maple-complete-maple-snare_14x6-5_ply_maple_5-4_mastercast-die-cast_cd61ffe8",
+              "label": "Pearl — Masters Maple Complete — Masters Maple Complete Maple Snare — 14x6.5",
+              "modelName": "Masters Maple Complete Maple Snare",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "5.4",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2010-price-list.pdf",
+              "sourceConfidence": "Medium"
+            }
+          ],
+          "promotionLane": "LANE_A_VALID_THICKNESS_UNKNOWN_EDGE",
+          "promotionTarget": "source-confirmed bearing edge",
+          "promotionRule": "Only promote if bearing edge geometry/profile is explicitly source-confirmed. Existing shell thickness is already valid."
+        }
+      ],
+      "promotionWorkplanStatus": "READY_FOR_SOURCE_REVIEW",
+      "requiredEvidence": [
+        "source-confirmed bearing edge geometry/profile",
+        "source URL",
+        "source confidence",
+        "record IDs affected by the group"
+      ],
+      "promotionRule": "Do not promote unless bearing edge geometry/profile is explicitly confirmed by source."
+    },
+    {
+      "companyName": "Yamaha",
+      "candidateCount": 8,
+      "groupCount": 2,
+      "sourceUrls": [
+        "https://faq.yamaha.com/usa/s/article/U0007660"
+      ],
+      "groups": [
+        {
+          "companyName": "Yamaha",
+          "lineSeries": "Metal Snare",
+          "shellMaterial": "Brass",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "count": 4,
+          "models": [
+            "Yamaha Brass Metal Snare 14x3.5",
+            "Yamaha Brass Metal Snare 14x4",
+            "Yamaha Brass Metal Snare 14x5.5",
+            "Yamaha Brass Metal Snare 14x6.5"
+          ],
+          "records": [
+            {
+              "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x3-5_14x3-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__f2668ed4",
+              "label": "Yamaha — Metal Snare — Yamaha Brass Metal Snare 14x3.5 — 14x3.5",
+              "modelName": "Yamaha Brass Metal Snare 14x3.5",
+              "diameter": "14",
+              "depth": "3.5",
+              "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1.2,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "1.2",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "Rolled metal edge",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+              "sourceConfidence": "Low"
+            },
+            {
+              "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x4_14x4_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish_trip_9749049f",
+              "label": "Yamaha — Metal Snare — Yamaha Brass Metal Snare 14x4 — 14x4",
+              "modelName": "Yamaha Brass Metal Snare 14x4",
+              "diameter": "14",
+              "depth": "4",
+              "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1.2,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "1.2",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "Rolled metal edge",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+              "sourceConfidence": "Low"
+            },
+            {
+              "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x5-5_14x5-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__b9ae1032",
+              "label": "Yamaha — Metal Snare — Yamaha Brass Metal Snare 14x5.5 — 14x5.5",
+              "modelName": "Yamaha Brass Metal Snare 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1.2,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "1.2",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "Rolled metal edge",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+              "sourceConfidence": "Low"
+            },
+            {
+              "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x6-5_14x6-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__7212d9c2",
+              "label": "Yamaha — Metal Snare — Yamaha Brass Metal Snare 14x6.5 — 14x6.5",
+              "modelName": "Yamaha Brass Metal Snare 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1.2,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "1.2",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "Rolled metal edge",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+              "sourceConfidence": "Low"
+            }
+          ],
+          "promotionLane": "LANE_A_VALID_THICKNESS_UNKNOWN_EDGE",
+          "promotionTarget": "source-confirmed bearing edge",
+          "promotionRule": "Only promote if bearing edge geometry/profile is explicitly source-confirmed. Existing shell thickness is already valid."
+        },
+        {
+          "companyName": "Yamaha",
+          "lineSeries": "Metal Snare",
+          "shellMaterial": "Steel",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "count": 4,
+          "models": [
+            "Yamaha Steel Metal Snare 14x3.5",
+            "Yamaha Steel Metal Snare 14x4",
+            "Yamaha Steel Metal Snare 14x5.5",
+            "Yamaha Steel Metal Snare 14x6.5"
+          ],
+          "records": [
+            {
+              "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x3-5_14x3-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_c5451b90",
+              "label": "Yamaha — Metal Snare — Yamaha Steel Metal Snare 14x3.5 — 14x3.5",
+              "modelName": "Yamaha Steel Metal Snare 14x3.5",
+              "diameter": "14",
+              "depth": "3.5",
+              "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "1",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "Rolled metal edge",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+              "sourceConfidence": "Low"
+            },
+            {
+              "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x4_14x4_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_triple_773278d1",
+              "label": "Yamaha — Metal Snare — Yamaha Steel Metal Snare 14x4 — 14x4",
+              "modelName": "Yamaha Steel Metal Snare 14x4",
+              "diameter": "14",
+              "depth": "4",
+              "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "1",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "Rolled metal edge",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+              "sourceConfidence": "Low"
+            },
+            {
+              "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_6c732eca",
+              "label": "Yamaha — Metal Snare — Yamaha Steel Metal Snare 14x5.5 — 14x5.5",
+              "modelName": "Yamaha Steel Metal Snare 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "1",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "Rolled metal edge",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+              "sourceConfidence": "Low"
+            },
+            {
+              "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x6-5_14x6-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_f855177e",
+              "label": "Yamaha — Metal Snare — Yamaha Steel Metal Snare 14x6.5 — 14x6.5",
+              "modelName": "Yamaha Steel Metal Snare 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "1",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "Rolled metal edge",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+              "sourceConfidence": "Low"
+            }
+          ],
+          "promotionLane": "LANE_A_VALID_THICKNESS_UNKNOWN_EDGE",
+          "promotionTarget": "source-confirmed bearing edge",
+          "promotionRule": "Only promote if bearing edge geometry/profile is explicitly source-confirmed. Existing shell thickness is already valid."
+        }
+      ],
+      "promotionWorkplanStatus": "READY_FOR_SOURCE_REVIEW",
+      "requiredEvidence": [
+        "source-confirmed bearing edge geometry/profile",
+        "source URL",
+        "source confidence",
+        "record IDs affected by the group"
+      ],
+      "promotionRule": "Do not promote unless bearing edge geometry/profile is explicitly confirmed by source."
+    },
+    {
+      "companyName": "Canopus",
+      "candidateCount": 5,
+      "groupCount": 3,
+      "sourceUrls": [
+        "https://canopusdrums.com/en/product/session-superior-snaredrum/",
+        "https://canopusdrums.com/en/products/drum-products/snare-drum/"
+      ],
+      "groups": [
+        {
+          "companyName": "Canopus",
+          "lineSeries": "Session Superior",
+          "shellMaterial": "Maple",
+          "primarySourceUrl": "https://canopusdrums.com/en/product/session-superior-snaredrum/",
+          "sourceConfidence": "High",
+          "count": 2,
+          "models": [
+            "Session Superior Maple 14x5.5",
+            "Session Superior Maple 14x6.5"
+          ],
+          "records": [
+            {
+              "id": "canopus_session-superior_session-superior-maple-14x5-5_14x5-5_ply_maple_8_acrylic-uv-lacquer_steel-2mm-8h_sm-1455_0c997611",
+              "label": "Canopus — Session Superior — Session Superior Maple 14x5.5 — 14x5.5",
+              "modelName": "Session Superior Maple 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply Asian Maple\",\"shellThicknessMm\":8,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "8",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://canopusdrums.com/en/product/session-superior-snaredrum/",
+              "sourceConfidence": "High"
+            },
+            {
+              "id": "canopus_session-superior_session-superior-maple-14x6-5_14x6-5_ply_maple_8_acrylic-uv-lacquer_steel-2mm-8h_sm-1465_dde28ac7",
+              "label": "Canopus — Session Superior — Session Superior Maple 14x6.5 — 14x6.5",
+              "modelName": "Session Superior Maple 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply Asian Maple\",\"shellThicknessMm\":8,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "8",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://canopusdrums.com/en/product/session-superior-snaredrum/",
+              "sourceConfidence": "High"
+            }
+          ],
+          "promotionLane": "LANE_A_VALID_THICKNESS_UNKNOWN_EDGE",
+          "promotionTarget": "source-confirmed bearing edge",
+          "promotionRule": "Only promote if bearing edge geometry/profile is explicitly source-confirmed. Existing shell thickness is already valid."
+        },
+        {
+          "companyName": "Canopus",
+          "lineSeries": "MO",
+          "shellMaterial": "Maple",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "count": 2,
+          "models": [
+            "MO Snare 14x5.5",
+            "MO Snare 14x6.5"
+          ],
+          "records": [
+            {
+              "id": "canopus_mo_mo-snare-14x5-5_14x5-5_ply_maple_8_a67de129",
+              "label": "Canopus — MO — MO Snare 14x5.5 — 14x5.5",
+              "modelName": "MO Snare 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"12-ply Maple\",\"shellThicknessMm\":8,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "8",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+              "sourceConfidence": "Medium"
+            },
+            {
+              "id": "canopus_mo_mo-snare-14x6-5_14x6-5_ply_maple_8_202689c8",
+              "label": "Canopus — MO — MO Snare 14x6.5 — 14x6.5",
+              "modelName": "MO Snare 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"12-ply Maple\",\"shellThicknessMm\":8,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "8",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+              "sourceConfidence": "Medium"
+            }
+          ],
+          "promotionLane": "LANE_A_VALID_THICKNESS_UNKNOWN_EDGE",
+          "promotionTarget": "source-confirmed bearing edge",
+          "promotionRule": "Only promote if bearing edge geometry/profile is explicitly source-confirmed. Existing shell thickness is already valid."
+        },
+        {
+          "companyName": "Canopus",
+          "lineSeries": "Zelkova GINRAN",
+          "shellMaterial": "Zelkova",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "count": 1,
+          "models": [
+            "Zelkova GINRAN"
+          ],
+          "records": [
+            {
+              "id": "canopus_zelkova-ginran_zelkova-ginran_14x6-5_solid-shell_zelkova_14_die-cast-8_02ef799a",
+              "label": "Canopus — Zelkova GINRAN — Zelkova GINRAN — 14x6.5",
+              "modelName": "Zelkova GINRAN",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Zelkova\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"One-piece hollowed\",\"shellThicknessMm\":14,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "14",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+              "sourceConfidence": "Medium"
+            }
+          ],
+          "promotionLane": "LANE_A_VALID_THICKNESS_UNKNOWN_EDGE",
+          "promotionTarget": "source-confirmed bearing edge",
+          "promotionRule": "Only promote if bearing edge geometry/profile is explicitly source-confirmed. Existing shell thickness is already valid."
+        }
+      ],
+      "promotionWorkplanStatus": "READY_FOR_SOURCE_REVIEW",
+      "requiredEvidence": [
+        "source-confirmed bearing edge geometry/profile",
+        "source URL",
+        "source confidence",
+        "record IDs affected by the group"
+      ],
+      "promotionRule": "Do not promote unless bearing edge geometry/profile is explicitly confirmed by source."
+    },
+    {
+      "companyName": "DW / PDP",
+      "candidateCount": 3,
+      "groupCount": 1,
+      "sourceUrls": [
+        "https://www.dwdrums.com/drums/design-series/"
+      ],
+      "groups": [
+        {
+          "companyName": "DW / PDP",
+          "lineSeries": "Design Series",
+          "shellMaterial": "Maple",
+          "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/",
+          "sourceConfidence": "High",
+          "count": 3,
+          "models": [
+            "Design Series Maple 14x5.5",
+            "Design Series Maple 14x6.5",
+            "Design Series Maple 14x8"
+          ],
+          "records": [
+            {
+              "id": "dw-pdp_design-series_design-series-maple-14x5-5_14x5-5_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flang_d1952e59",
+              "label": "DW / PDP — Design Series — Design Series Maple 14x5.5 — 14x5.5",
+              "modelName": "Design Series Maple 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply HVLT / 1/32 inch plies\",\"shellThicknessMm\":7.9,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "7.9",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "60-degree snare edge",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/",
+              "sourceConfidence": "High"
+            },
+            {
+              "id": "dw-pdp_design-series_design-series-maple-14x6-5_14x6-5_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flang_0c459b55",
+              "label": "DW / PDP — Design Series — Design Series Maple 14x6.5 — 14x6.5",
+              "modelName": "Design Series Maple 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply HVLT / 1/32 inch plies\",\"shellThicknessMm\":7.9,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "7.9",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "60-degree snare edge",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/",
+              "sourceConfidence": "High"
+            },
+            {
+              "id": "dw-pdp_design-series_design-series-maple-14x8_14x8_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flanged_41f1bca1",
+              "label": "DW / PDP — Design Series — Design Series Maple 14x8 — 14x8",
+              "modelName": "Design Series Maple 14x8",
+              "diameter": "14",
+              "depth": "8",
+              "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply HVLT / 1/32 inch plies\",\"shellThicknessMm\":7.9,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "7.9",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "60-degree snare edge",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/",
+              "sourceConfidence": "High"
+            }
+          ],
+          "promotionLane": "LANE_A_VALID_THICKNESS_UNKNOWN_EDGE",
+          "promotionTarget": "source-confirmed bearing edge",
+          "promotionRule": "Only promote if bearing edge geometry/profile is explicitly source-confirmed. Existing shell thickness is already valid."
+        }
+      ],
+      "promotionWorkplanStatus": "READY_FOR_SOURCE_REVIEW",
+      "requiredEvidence": [
+        "source-confirmed bearing edge geometry/profile",
+        "source URL",
+        "source confidence",
+        "record IDs affected by the group"
+      ],
+      "promotionRule": "Do not promote unless bearing edge geometry/profile is explicitly confirmed by source."
+    },
+    {
+      "companyName": "Mapex",
+      "candidateCount": 2,
+      "groupCount": 2,
+      "sourceUrls": [
+        "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox",
+        "https://mapexdrums.com/mapex-international/products/drums/snare-drums"
+      ],
+      "groups": [
+        {
+          "companyName": "Mapex",
+          "lineSeries": "BP Design Lab",
+          "shellMaterial": "Maple",
+          "primarySourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox",
+          "sourceConfidence": "High",
+          "count": 1,
+          "models": [
+            "Equinox"
+          ],
+          "records": [
+            {
+              "id": "mapex_bp-design-lab_equinox_14x5_ply_maple_6_unknown-classic-style-edge_single-flanged-hoops_bpml4500c-fb_5624c195",
+              "label": "Mapex — BP Design Lab — Equinox — 14x5",
+              "modelName": "Equinox",
+              "diameter": "14",
+              "depth": "5",
+              "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":6,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "6",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "Unknown / classic-style edge",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox",
+              "sourceConfidence": "High"
+            }
+          ],
+          "promotionLane": "LANE_A_VALID_THICKNESS_UNKNOWN_EDGE",
+          "promotionTarget": "source-confirmed bearing edge",
+          "promotionRule": "Only promote if bearing edge geometry/profile is explicitly source-confirmed. Existing shell thickness is already valid."
+        },
+        {
+          "companyName": "Mapex",
+          "lineSeries": "Signature / Artist",
+          "shellMaterial": "Maple / Walnut",
+          "primarySourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums",
+          "sourceConfidence": "Medium",
+          "count": 1,
+          "models": [
+            "Chris Adler Warbird"
+          ],
+          "records": [
+            {
+              "id": "mapex_signature-artist_chris-adler-warbird_12x5-5_ply_maple-walnut_5-1_graphic-finish_2-3mm-powerhoops_bpdlmw2550lwh_7b0c9c9a",
+              "label": "Mapex — Signature / Artist — Chris Adler Warbird — 12x5.5",
+              "modelName": "Chris Adler Warbird",
+              "diameter": "12",
+              "depth": "5.5",
+              "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "5.1",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums",
+              "sourceConfidence": "Medium"
+            }
+          ],
+          "promotionLane": "LANE_A_VALID_THICKNESS_UNKNOWN_EDGE",
+          "promotionTarget": "source-confirmed bearing edge",
+          "promotionRule": "Only promote if bearing edge geometry/profile is explicitly source-confirmed. Existing shell thickness is already valid."
+        }
+      ],
+      "promotionWorkplanStatus": "READY_FOR_SOURCE_REVIEW",
+      "requiredEvidence": [
+        "source-confirmed bearing edge geometry/profile",
+        "source URL",
+        "source confidence",
+        "record IDs affected by the group"
+      ],
+      "promotionRule": "Do not promote unless bearing edge geometry/profile is explicitly confirmed by source."
+    },
+    {
+      "companyName": "Ludwig",
+      "candidateCount": 1,
+      "groupCount": 1,
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums"
+      ],
+      "groups": [
+        {
+          "companyName": "Ludwig",
+          "lineSeries": "Jazz Fest Series",
+          "shellMaterial": "Mahogany / Poplar",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "sourceConfidence": "Medium",
+          "count": 1,
+          "models": [
+            "Jazz Fest Series 5.5x14"
+          ],
+          "records": [
+            {
+              "id": "ludwig_jazz-fest-series_jazz-fest-series-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwi_7eeb3f23",
+              "label": "Ludwig — Jazz Fest Series — Jazz Fest Series 5.5x14 — 14x5.5",
+              "modelName": "Jazz Fest Series 5.5x14",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"3-ply Legacy Mahogany shell\",\"shellThicknessMm\":6,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "6",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "Ludwig USA bearing edge / not specified",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+              "sourceConfidence": "Medium"
+            }
+          ],
+          "promotionLane": "LANE_A_VALID_THICKNESS_UNKNOWN_EDGE",
+          "promotionTarget": "source-confirmed bearing edge",
+          "promotionRule": "Only promote if bearing edge geometry/profile is explicitly source-confirmed. Existing shell thickness is already valid."
+        }
+      ],
+      "promotionWorkplanStatus": "READY_FOR_SOURCE_REVIEW",
+      "requiredEvidence": [
+        "source-confirmed bearing edge geometry/profile",
+        "source URL",
+        "source confidence",
+        "record IDs affected by the group"
+      ],
+      "promotionRule": "Do not promote unless bearing edge geometry/profile is explicitly confirmed by source."
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "candidateCount": 1,
+      "groupCount": 1,
+      "sourceUrls": [
+        "https://porkpiedrums.com/products/"
+      ],
+      "groups": [
+        {
+          "companyName": "Pork Pie Percussion",
+          "lineSeries": "USA Custom",
+          "shellMaterial": "Maple",
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Medium",
+          "count": 1,
+          "models": [
+            "Maple Max 7x14"
+          ],
+          "records": [
+            {
+              "id": "pork-pie-percussion_usa-custom_maple-max-7x14_14x7_ply_maple_9_custom-finish-varies_2-3mm-triple-flanged_2b58b150",
+              "label": "Pork Pie Percussion — USA Custom — Maple Max 7x14 — 14x7",
+              "modelName": "Maple Max 7x14",
+              "diameter": "14",
+              "depth": "7",
+              "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple Max shell\",\"shellThicknessMm\":9,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "9",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://porkpiedrums.com/products/",
+              "sourceConfidence": "Medium"
+            }
+          ],
+          "promotionLane": "LANE_A_VALID_THICKNESS_UNKNOWN_EDGE",
+          "promotionTarget": "source-confirmed bearing edge",
+          "promotionRule": "Only promote if bearing edge geometry/profile is explicitly source-confirmed. Existing shell thickness is already valid."
+        }
+      ],
+      "promotionWorkplanStatus": "READY_FOR_SOURCE_REVIEW",
+      "requiredEvidence": [
+        "source-confirmed bearing edge geometry/profile",
+        "source URL",
+        "source confidence",
+        "record IDs affected by the group"
+      ],
+      "promotionRule": "Do not promote unless bearing edge geometry/profile is explicitly confirmed by source."
+    },
+    {
+      "companyName": "Tama",
+      "candidateCount": 1,
+      "groupCount": 1,
+      "sourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ],
+      "groups": [
+        {
+          "companyName": "Tama",
+          "lineSeries": "S.L.P.",
+          "shellMaterial": "Birch",
+          "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "sourceConfidence": "Medium",
+          "count": 1,
+          "models": [
+            "S.L.P. Duo Birch LBH1410L 14x10"
+          ],
+          "records": [
+            {
+              "id": "tama_s-l-p_s-l-p-duo-birch-lbh1410l-14x10_14x10_ply_birch_lacquer_triple-flange-sound-arc-style_lbh1410l_38db7013",
+              "label": "Tama — S.L.P. — S.L.P. Duo Birch LBH1410L 14x10 — 14x10",
+              "modelName": "S.L.P. Duo Birch LBH1410L 14x10",
+              "diameter": "14",
+              "depth": "10",
+              "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+              "shellThickness": "7",
+              "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+              "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"notes\":\"unknown\",\"confidence\":\"Low\"}",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "missingForCoreShell": [
+                "meaningful bearing edge shape/detail"
+              ],
+              "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+              "sourceConfidence": "Medium"
+            }
+          ],
+          "promotionLane": "LANE_A_VALID_THICKNESS_UNKNOWN_EDGE",
+          "promotionTarget": "source-confirmed bearing edge",
+          "promotionRule": "Only promote if bearing edge geometry/profile is explicitly source-confirmed. Existing shell thickness is already valid."
+        }
+      ],
+      "promotionWorkplanStatus": "READY_FOR_SOURCE_REVIEW",
+      "requiredEvidence": [
+        "source-confirmed bearing edge geometry/profile",
+        "source URL",
+        "source confidence",
+        "record IDs affected by the group"
+      ],
+      "promotionRule": "Do not promote unless bearing edge geometry/profile is explicitly confirmed by source."
+    }
+  ],
+  "reviewInstruction": "Research company-by-company. Create a promotion plan only where bearing edge geometry/profile is explicitly source-confirmed. No Firestore writes."
+}
