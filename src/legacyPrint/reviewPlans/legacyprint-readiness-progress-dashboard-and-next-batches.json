@@ -1,11 +1,11 @@
 {
   "status": "LEGACYPRINT_READINESS_PROGRESS_DASHBOARD_AND_NEXT_BATCHES_NO_FIRESTORE_WRITES",
-  "generatedAt": "2026-05-21T09:40:42.807Z",
+  "generatedAt": "2026-05-21T09:44:36.405Z",
   "collectionName": "snareReferenceDrums",
   "noFirestoreWrites": true,
   "latestAudits": {
     "strictShellAudit": "tmp/legacyPrint-audits/strict-shell-field-quality-2026-05-21T09-23-47-685Z.json",
-    "strictPassableAudit": "tmp/legacyPrint-audits/strict-passable-readiness-2026-05-21T09-38-48-914Z.json"
+    "strictPassableAudit": "tmp/legacyPrint-audits/strict-passable-readiness-2026-05-21T09-44-05-928Z.json"
   },
   "summary": {
     "totalRecordsScanned": 1551,
@@ -16,22 +16,22 @@
     },
     "fallbackTierAuditCheck": {
       "passableCoreShellWithMetalEdgeFallback": 187,
-      "passableStockWithMetalEdgeFallback": 26,
+      "passableStockWithMetalEdgeFallback": 34,
       "rowsWithAuditableMetalEdgeFallbackWarning": 187
     },
     "strictShellSummary": null,
     "coreUsableCount": 466,
-    "nearlyPassableStockCount": 425,
+    "nearlyPassableStockCount": 417,
     "nearlyPassableMissingCombos": {
       "stock batter head + stock reso head + production status": 317,
-      "stock batter head + stock reso head": 104,
+      "stock batter head + stock reso head": 96,
       "production status": 1,
       "stock reso head": 1,
       "stock reso head + production status": 2
     },
     "nearlyPassableByCompany": {
       "AHEAD": 33,
-      "Ludwig": 53,
+      "Ludwig": 45,
       "Pork Pie Percussion": 2,
       "Tama": 60,
       "Yamaha": 20,
@@ -47,7 +47,7 @@
       "WorldMax": 10
     },
     "remainingFastLaneProductionOnlyCount": 1,
-    "remainingHeadOnlyCount": 105,
+    "remainingHeadOnlyCount": 97,
     "remainingHeadAndProductionCount": 319,
     "manualReviewCandidateCount": 51,
     "manualReviewGroupCount": 6,
@@ -170,10 +170,10 @@
     {
       "rank": 3,
       "lane": "Head-only records with no production blocker",
-      "targetCount": 105,
+      "targetCount": 97,
       "byCompany": {
-        "Ludwig": 47,
-        "Tama": 58
+        "Tama": 58,
+        "Ludwig": 39
       }
     },
     {

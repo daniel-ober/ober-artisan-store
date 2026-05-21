@@ -1,6 +1,6 @@
 # LegacyPrint Readiness Progress Dashboard
 
-Generated: 2026-05-21T09:40:42.807Z
+Generated: 2026-05-21T09:44:36.405Z
 
 ## Completed Writes
 
@@ -12,7 +12,7 @@ Generated: 2026-05-21T09:40:42.807Z
 
 - Total records scanned: 1551
 - Core usable rows: 466
-- Nearly passable stock rows: 425
+- Nearly passable stock rows: 417
 - Manual review stock-head candidates: 51
 
 ## Next Batch Recommendations
@@ -31,7 +31,7 @@ Target count: 1
 
 ### 3. Head-only records with no production blocker
 
-Target count: 105
+Target count: 97
 
 
 
