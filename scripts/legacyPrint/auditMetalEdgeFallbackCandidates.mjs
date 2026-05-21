@@ -556,7 +556,13 @@ function getSourceUrl(data) {
 
     'primarySource.url',
 
-    'sources.primary.url'
+    'sources.primarySourceUrl',
+
+    'sources.primary.url',
+
+    'sources.sourceUrl',
+
+    'sources.url'
 
   ]));
 
@@ -571,6 +577,10 @@ function getSourceConfidence(data) {
     'source.confidence',
 
     'primarySource.confidence',
+
+    'sources.sourceConfidence',
+
+    'sources.confidence',
 
     'sources.primary.confidence'
 
