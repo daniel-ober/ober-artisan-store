@@ -1,0 +1,31 @@
+{
+  "generatedAt": "2026-05-21T07:36:39.645Z",
+  "sourceReviewGroupsFile": "src/legacyPrint/reviewPlans/non-metal-bearing-edge-enrichment-review-groups-post-audit-fix.json",
+  "status": "CANOPUS_MO_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 2,
+    "groupCount": 1,
+    "sourceUrls": [
+      "https://canopusdrums.com/en/products/drum-products/snare-drum/"
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Canopus",
+      "lineSeries": "MO",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+      "sourceConfidence": "Medium",
+      "count": 2,
+      "models": [
+        "MO Snare 14x5.5",
+        "MO Snare 14x6.5"
+      ],
+      "recordIds": [
+        "canopus_mo_mo-snare-14x5-5_14x5-5_ply_maple_8_a67de129",
+        "canopus_mo_mo-snare-14x6-5_14x6-5_ply_maple_8_202689c8"
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Confirm exact Canopus MO Maple bearing-edge geometry before creating any promotion plan."
+}
