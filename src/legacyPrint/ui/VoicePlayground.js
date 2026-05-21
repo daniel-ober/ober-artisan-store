@@ -268,9 +268,9 @@ const REFERENCE_OPTIONS = [
 
     key: 'heritage',
 
-    label: 'Ober Heritage',
+    label: 'Ludwig Acrolite',
 
-    detail: '14x6 Torch / Stave Maple',
+    detail: '14x5 Aluminum Reference',
 
     voice: {
 
@@ -298,7 +298,7 @@ const REFERENCE_OPTIONS = [
 
     label: 'Ludwig Black Beauty',
 
-    detail: '14x6.5 Brass',
+    detail: '14x5 Brass Reference',
 
     voice: {
 
@@ -324,9 +324,9 @@ const REFERENCE_OPTIONS = [
 
     key: 'brooklyn',
 
-    label: 'Gretsch Brooklyn',
+    label: 'DW True-Cast Bronze',
 
-    detail: '14x6.5 Metal',
+    detail: '14x4 Bell Bronze Reference',
 
     voice: {
 
@@ -882,6 +882,18 @@ function ReferencePanel({ selectedReferenceId, setSelectedReferenceId }) {
 
 export function VoicePlayground({ firestore }) {
 
+  const [workflowMode, setWorkflowMode] = useState('reference');
+
+  const [readMode, setReadMode] = useState('firstListen');
+
+  const [compareA, setCompareA] = useState(null);
+
+  const [compareB, setCompareB] = useState(null);
+
+  const [morphAmount, setMorphAmount] = useState(0.5);
+
+  const [selectedReferenceId, setSelectedReferenceId] = useState('heritage');
+
   const {
 
     query,
@@ -902,19 +914,7 @@ export function VoicePlayground({ firestore }) {
 
     setAsAnchor
 
-  } = useVoicePlayground(firestore);
-
-  const [workflowMode, setWorkflowMode] = useState('reference');
-
-  const [readMode, setReadMode] = useState('firstListen');
-
-  const [compareA, setCompareA] = useState(null);
-
-  const [compareB, setCompareB] = useState(null);
-
-  const [morphAmount, setMorphAmount] = useState(0.5);
-
-  const [selectedReferenceId, setSelectedReferenceId] = useState('heritage');
+  } = useVoicePlayground(firestore, selectedReferenceId);
 
   const selectedMode =
 

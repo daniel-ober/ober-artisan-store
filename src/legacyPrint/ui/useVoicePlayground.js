@@ -39,11 +39,61 @@ const DEFAULT_VOICE = {
 
 };
 
-const getPreviewExamplePacket = previewPacket => {
+const REFERENCE_TO_PREVIEW_MATCH = {
 
-  const example = previewPacket?.examples?.[0];
+  heritage: 'acrolite',
 
-  return example?.packet || example?.result?.packet || null;
+  'black-beauty': 'black-beauty',
+
+  brooklyn: 'true-cast',
+
+};
+
+const normalizeReferenceSearchTerm = selectedReferenceId =>
+
+  REFERENCE_TO_PREVIEW_MATCH[selectedReferenceId] || selectedReferenceId || 'acrolite';
+
+const getPreviewExamplePacket = (previewPacket, selectedReferenceId) => {
+
+  const examples = previewPacket?.examples || [];
+
+  const searchTerm = normalizeReferenceSearchTerm(selectedReferenceId);
+
+  const found =
+
+    examples.find(example => {
+
+      const packet = example.packet || example.result?.packet;
+
+      const drum = packet?.target?.drum || {};
+
+      const haystack = [
+
+        example.key,
+
+        example.snareReferenceId,
+
+        drum.id,
+
+        drum.company,
+
+        drum.model,
+
+        drum.size
+
+      ]
+
+        .filter(Boolean)
+
+        .join(' ')
+
+        .toLowerCase();
+
+      return haystack.includes(searchTerm.toLowerCase());
+
+    }) || examples[0];
+
+  return found?.packet || found?.result?.packet || null;
 
 };
 
@@ -105,9 +155,9 @@ const discoveryMatchToVoiceResult = (match, section) => ({
 
 });
 
-const buildLocalDiscoveryViewModel = () => {
+const buildLocalDiscoveryViewModel = selectedReferenceId => {
 
-  const packet = getPreviewExamplePacket(discoveryPreviewPacket);
+  const packet = getPreviewExamplePacket(discoveryPreviewPacket, selectedReferenceId);
 
   if (!packet) {
 
@@ -165,7 +215,7 @@ const getDefaultDiscoveryResults = discoveryViewModel => {
 
 };
 
-export function useVoicePlayground(firestore) {
+export function useVoicePlayground(firestore, selectedReferenceId = 'heritage') {
 
   const [query, setQuery] = useState('');
 
@@ -181,7 +231,13 @@ export function useVoicePlayground(firestore) {
 
   const [compareB, setCompareB] = useState(null);
 
-  const discoveryViewModel = useMemo(() => buildLocalDiscoveryViewModel(), []);
+  const discoveryViewModel = useMemo(
+
+    () => buildLocalDiscoveryViewModel(selectedReferenceId),
+
+    [selectedReferenceId]
+
+  );
 
   const discoveryResults = useMemo(
 
