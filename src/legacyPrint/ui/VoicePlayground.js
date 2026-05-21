@@ -1072,7 +1072,7 @@ function ReferencePanel({
 
           <p>
 
-            Selected: {selectedReference.label} — {selectedReference.detail}
+            Selected: {selectedReference.modelName || selectedReference.label} • {selectedReference.shellMaterial || 'Material unknown'} • {selectedReference.diameter && selectedReference.depth ? `${selectedReference.diameter}x${selectedReference.depth}` : 'Size unknown'}
 
           </p>
 
