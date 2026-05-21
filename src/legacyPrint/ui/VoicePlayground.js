@@ -2121,7 +2121,7 @@ export function VoicePlayground({ firestore }) {
 
   const handleShapeNodeDrag = (key, nextValue) => {
 
-    updateVoice(key, nextValue);
+    updateVoice(key, nextValue, { runSearchOnUpdate: false });
 
   };
 
@@ -2227,7 +2227,29 @@ export function VoicePlayground({ firestore }) {
 
           {workflowMode === 'build' && <BuildPanel />}
 
-          {workflowMode === 'shape' && <ShapePanel voice={voice} updateVoice={updateVoice} />}
+          {workflowMode === 'shape' && (
+
+            <>
+
+              <BuildPanel />
+
+              <div className="vp-shape-map-hint">
+
+                <strong>Shape by touch</strong>
+
+                <p>
+
+                  Drag along any spoke in the map to shape that node directly.
+
+                  The outer icons brighten as the voice gets stronger.
+
+                </p>
+
+              </div>
+
+            </>
+
+          )}
 
           {workflowMode === 'reference' && (
 

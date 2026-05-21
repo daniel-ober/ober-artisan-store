@@ -389,19 +389,29 @@ export function useVoicePlayground(firestore, selectedReferenceId = 'heritage') 
 
    */
 
-  const updateVoice = (key, value) => {
+  const updateVoice = (key, value, options = {}) => {
 
-    const updated = {
+    const { runSearchOnUpdate = true } = options;
 
-      ...voice,
+    setVoice((currentVoice) => {
 
-      [key]: value,
+      const updated = {
 
-    };
+        ...currentVoice,
 
-    setVoice(updated);
+        [key]: value,
 
-    runSearch(updated);
+      };
+
+      if (runSearchOnUpdate) {
+
+        runSearch(updated);
+
+      }
+
+      return updated;
+
+    });
 
   };
 
