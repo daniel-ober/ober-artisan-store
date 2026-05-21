@@ -1,0 +1,140 @@
+{
+  "sourceFile": "tmp/legacyPrint-audits/metal-edge-fallback-policy-validation-2026-05-21T08-25-46-423Z.json",
+  "status": "METAL_EDGE_FALLBACK_VALIDATION_ISSUE_SUMMARY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "fallbackRecordCount": 176,
+    "validFallbackRecordCount": 0,
+    "invalidFallbackRecordCount": 176,
+    "allFallbackRecordsValid": false,
+    "noFirestoreWrites": true
+  },
+  "issueCounts": [
+    {
+      "issue": "bearingEdgeQualityTier is not PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+      "count": 176
+    },
+    {
+      "issue": "record does not appear to be a metal shell",
+      "count": 170
+    },
+    {
+      "issue": "missing primarySourceUrl",
+      "count": 147
+    },
+    {
+      "issue": "bearingEdge is not marked as metalShellFallback/fallback/needsVerification",
+      "count": 73
+    },
+    {
+      "issue": "missing valid numeric shell thickness",
+      "count": 5
+    }
+  ],
+  "byCompany": [
+    {
+      "companyName": "Ludwig",
+      "invalidRecordCount": 48,
+      "issueCounts": {
+        "record does not appear to be a metal shell": 48,
+        "missing primarySourceUrl": 32,
+        "bearingEdgeQualityTier is not PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE": 48,
+        "bearingEdge is not marked as metalShellFallback/fallback/needsVerification": 43
+      }
+    },
+    {
+      "companyName": "AHEAD",
+      "invalidRecordCount": 33,
+      "issueCounts": {
+        "record does not appear to be a metal shell": 33,
+        "missing primarySourceUrl": 33,
+        "bearingEdgeQualityTier is not PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE": 33
+      }
+    },
+    {
+      "companyName": "Pearl",
+      "invalidRecordCount": 33,
+      "issueCounts": {
+        "record does not appear to be a metal shell": 33,
+        "missing primarySourceUrl": 33,
+        "bearingEdgeQualityTier is not PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE": 33
+      }
+    },
+    {
+      "companyName": "Mapex",
+      "invalidRecordCount": 21,
+      "issueCounts": {
+        "record does not appear to be a metal shell": 21,
+        "missing primarySourceUrl": 21,
+        "bearingEdgeQualityTier is not PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE": 21
+      }
+    },
+    {
+      "companyName": "Tama",
+      "invalidRecordCount": 21,
+      "issueCounts": {
+        "bearingEdge is not marked as metalShellFallback/fallback/needsVerification": 20,
+        "record does not appear to be a metal shell": 15,
+        "bearingEdgeQualityTier is not PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE": 21,
+        "missing primarySourceUrl": 8,
+        "missing valid numeric shell thickness": 5
+      }
+    },
+    {
+      "companyName": "Yamaha",
+      "invalidRecordCount": 6,
+      "issueCounts": {
+        "bearingEdge is not marked as metalShellFallback/fallback/needsVerification": 6,
+        "record does not appear to be a metal shell": 6,
+        "missing primarySourceUrl": 6,
+        "bearingEdgeQualityTier is not PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE": 6
+      }
+    },
+    {
+      "companyName": "Canopus",
+      "invalidRecordCount": 4,
+      "issueCounts": {
+        "record does not appear to be a metal shell": 4,
+        "missing primarySourceUrl": 4,
+        "bearingEdgeQualityTier is not PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE": 4
+      }
+    },
+    {
+      "companyName": "DW / PDP",
+      "invalidRecordCount": 4,
+      "issueCounts": {
+        "record does not appear to be a metal shell": 4,
+        "missing primarySourceUrl": 4,
+        "bearingEdgeQualityTier is not PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE": 4
+      }
+    },
+    {
+      "companyName": "Craviotto",
+      "invalidRecordCount": 2,
+      "issueCounts": {
+        "bearingEdge is not marked as metalShellFallback/fallback/needsVerification": 2,
+        "record does not appear to be a metal shell": 2,
+        "missing primarySourceUrl": 2,
+        "bearingEdgeQualityTier is not PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE": 2
+      }
+    },
+    {
+      "companyName": "Gretsch",
+      "invalidRecordCount": 2,
+      "issueCounts": {
+        "bearingEdge is not marked as metalShellFallback/fallback/needsVerification": 2,
+        "record does not appear to be a metal shell": 2,
+        "missing primarySourceUrl": 2,
+        "bearingEdgeQualityTier is not PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE": 2
+      }
+    },
+    {
+      "companyName": "SONOR",
+      "invalidRecordCount": 2,
+      "issueCounts": {
+        "record does not appear to be a metal shell": 2,
+        "missing primarySourceUrl": 2,
+        "bearingEdgeQualityTier is not PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE": 2
+      }
+    }
+  ]
+}
