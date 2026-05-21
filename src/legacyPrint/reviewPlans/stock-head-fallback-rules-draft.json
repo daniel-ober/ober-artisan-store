@@ -1,91 +1,1021 @@
 {
+
   "ruleSetName": "OBER_LEGACYPRINT_STOCK_HEAD_FALLBACK_RULES_DRAFT",
+
   "mode": "DRAFT_NO_FIRESTORE_WRITES",
-  "generatedAt": "2026-05-21T06:44:53.008Z",
+
+  "generatedAt": "2026-05-21T06:49:00.000Z",
+
   "purpose": "Source-backed company/line-level stock head fallback rules for snareReferenceDrums stock readiness.",
+
   "ruleRequirements": [
+
     "Only stock batter/reso heads may use this fallback.",
+
     "No shell, hoop, throw-off, lug, snare wire, bearing edge, or production status fields may be inferred by this rule set.",
+
     "Each rule must have a source URL and source confidence.",
+
     "Each rule must state whether it is exact model stock data, company-level default, distributor/OEM relationship, or conservative generic placeholder.",
+
     "Rules with status=DRAFT are not applyable."
+
   ],
+
   "allowedWriteFieldsWhenApproved": [
+
     "stockBatterHead",
+
     "stockResoHead",
+
     "engineAssumptions",
+
     "notesOnMissingData",
+
     "stockHeadNeedsVerification"
+
   ],
+
   "rules": [
+
     {
+
       "ruleKey": "sonor-kompressor-stock-heads-draft",
+
       "status": "DRAFT",
+
       "companyName": "SONOR",
+
       "lineSeriesIncludes": [
+
         "Kompressor"
+
       ],
+
       "fallbackType": "line-level-default-needs-source-confirmation",
+
       "stockBatterHead": "",
+
       "stockResoHead": "",
+
       "sourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+
       "sourceConfidence": "needsVerification",
+
       "notes": "Candidate group is large. Confirm published stock head brand/model before approval."
+
     },
+
     {
+
+      "ruleKey": "sonor-sq2-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "SONOR",
+
+      "lineSeriesIncludes": [
+
+        "SQ2 Drum System"
+
+      ],
+
+      "fallbackType": "line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Largest unmatched group. SQ2 is configurable, so confirm whether SONOR publishes a consistent stock snare batter/reso head default before approval."
+
+    },
+
+    {
+
+      "ruleKey": "sonor-prolite-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "SONOR",
+
+      "lineSeriesIncludes": [
+
+        "ProLite"
+
+      ],
+
+      "fallbackType": "line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://www.sonor.com/drums/instruments/prolite-series",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Confirm published stock batter/reso head models for ProLite snares before approval."
+
+    },
+
+    {
+
+      "ruleKey": "sonor-vintage-series-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "SONOR",
+
+      "lineSeriesIncludes": [
+
+        "Vintage Series"
+
+      ],
+
+      "fallbackType": "line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://www.sonor.com/drums/instruments/vintage-series",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Confirm published stock batter/reso head models for SONOR Vintage Series snares before approval."
+
+    },
+
+    {
+
+      "ruleKey": "sonor-signature-series-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "SONOR",
+
+      "lineSeriesIncludes": [
+
+        "Signature Series"
+
+      ],
+
+      "fallbackType": "historic-line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://www.sonormuseum.com/",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Historic SONOR Signature Series records need source-backed stock head confirmation before approval."
+
+    },
+
+    {
+
+      "ruleKey": "sonor-aq2-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "SONOR",
+
+      "lineSeriesIncludes": [
+
+        "AQ2"
+
+      ],
+
+      "fallbackType": "line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://www.sonormuseum.com/",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Confirm published stock batter/reso head models for AQ2 snares before approval."
+
+    },
+
+    {
+
       "ruleKey": "ahead-snares-stock-heads-draft",
+
       "status": "DRAFT",
+
       "companyName": "AHEAD",
+
       "lineSeriesIncludes": [
+
         "Ahead Snares"
+
       ],
+
       "fallbackType": "line-level-default-needs-source-confirmation",
+
       "stockBatterHead": "",
+
       "stockResoHead": "",
+
       "sourceUrl": "https://bigbangdist.com/",
+
       "sourceConfidence": "needsVerification",
+
       "notes": "AHEAD listings often mention Remo heads in technical tables; exact batter/reso models must be confirmed before approval."
+
     },
+
     {
+
       "ruleKey": "pearl-sensitone-stock-heads-draft",
+
       "status": "DRAFT",
+
       "companyName": "Pearl",
+
       "lineSeriesIncludes": [
+
         "Sensitone Heritage Alloy"
+
       ],
+
       "fallbackType": "line-level-default-needs-source-confirmation",
+
       "stockBatterHead": "",
+
       "stockResoHead": "",
+
       "sourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
+
       "sourceConfidence": "needsVerification",
+
       "notes": "Confirm Pearl stock head model before approval."
+
     },
+
     {
-      "ruleKey": "mapex-stock-heads-draft",
+
+      "ruleKey": "pearl-free-floating-stock-heads-draft",
+
       "status": "DRAFT",
-      "companyName": "Mapex",
-      "lineSeriesIncludes": [],
-      "fallbackType": "company-or-line-level-default-needs-source-confirmation",
-      "stockBatterHead": "",
-      "stockResoHead": "",
-      "sourceUrl": "",
-      "sourceConfidence": "needsVerification",
-      "notes": "Mapex has 30 candidates. Split by line before approval."
-    },
-    {
-      "ruleKey": "canopus-stock-heads-draft",
-      "status": "DRAFT",
-      "companyName": "Canopus",
+
+      "companyName": "Pearl",
+
       "lineSeriesIncludes": [
-        "The Maple",
-        "Zelkova"
+
+        "Free Floating"
+
       ],
+
       "fallbackType": "line-level-default-needs-source-confirmation",
+
       "stockBatterHead": "",
+
       "stockResoHead": "",
-      "sourceUrl": "https://canopusdrums.com/en/",
+
+      "sourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+
       "sourceConfidence": "needsVerification",
+
+      "notes": "Large unmatched Pearl group. Confirm whether these Free Floating records share the same published stock batter/reso head setup before approval."
+
+    },
+
+    {
+
+      "ruleKey": "pearl-modern-utility-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Pearl",
+
+      "lineSeriesIncludes": [
+
+        "Modern Utility"
+
+      ],
+
+      "fallbackType": "line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Confirm Pearl Modern Utility stock batter/reso head models before approval."
+
+    },
+
+    {
+
+      "ruleKey": "pearl-reference-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Pearl",
+
+      "lineSeriesIncludes": [
+
+        "Reference"
+
+      ],
+
+      "fallbackType": "historic-line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Historic Pearl Reference records need source-backed stock head confirmation before approval."
+
+    },
+
+    {
+
+      "ruleKey": "pearl-ultracast-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Pearl",
+
+      "lineSeriesIncludes": [
+
+        "Ultracast"
+
+      ],
+
+      "fallbackType": "historic-line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Historic Pearl Ultracast records need stock batter/reso head confirmation before approval."
+
+    },
+
+    {
+
+      "ruleKey": "pearl-signature-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Pearl",
+
+      "lineSeriesIncludes": [
+
+        "Signature"
+
+      ],
+
+      "fallbackType": "model-or-signature-line-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2010-price-list.pdf",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Signature model stock heads may vary by artist/model. Confirm exact stock batter/reso head before approval."
+
+    },
+
+    {
+
+      "ruleKey": "mapex-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Mapex",
+
+      "lineSeriesIncludes": [],
+
+      "fallbackType": "company-or-line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Mapex has 30 candidates. Split by line before approval."
+
+    },
+
+    {
+
+      "ruleKey": "canopus-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Canopus",
+
+      "lineSeriesIncludes": [
+
+        "The Maple",
+
+        "Zelkova"
+
+      ],
+
+      "fallbackType": "line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://canopusdrums.com/en/",
+
+      "sourceConfidence": "needsVerification",
+
       "notes": "Canopus source already supports snare wire models in records. Confirm stock batter/reso head models before approval."
+
+    },
+
+    {
+
+      "ruleKey": "canopus-aluminum-alloy-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Canopus",
+
+      "lineSeriesIncludes": [
+
+        "Aluminum Alloy"
+
+      ],
+
+      "fallbackType": "line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://canopusdrums.com/en/product/aluminum-alloy-snaredrum/",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Confirm stock batter/reso head models for Canopus Aluminum Alloy snares before approval."
+
+    },
+
+    {
+
+      "ruleKey": "canopus-manganese-steel-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Canopus",
+
+      "lineSeriesIncludes": [
+
+        "Manganese Steel"
+
+      ],
+
+      "fallbackType": "line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://canopusdrums.com/en/product/manganese-steel-snaredrum/",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Confirm stock batter/reso head models for Canopus Manganese Steel snares before approval."
+
+    },
+
+    {
+
+      "ruleKey": "canopus-type-r-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Canopus",
+
+      "lineSeriesIncludes": [
+
+        "Type-R"
+
+      ],
+
+      "fallbackType": "line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Confirm stock batter/reso head models for Canopus Type-R snares before approval."
+
+    },
+
+    {
+
+      "ruleKey": "tama-signature-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Tama",
+
+      "lineSeriesIncludes": [
+
+        "Signature"
+
+      ],
+
+      "fallbackType": "signature-model-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://www.tama.com/usa/products/snare_drums/",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Signature model stock heads may vary by artist/model. Confirm exact model-level stock batter/reso head before approval."
+
+    },
+
+    {
+
+      "ruleKey": "tama-starclassic-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Tama",
+
+      "lineSeriesIncludes": [
+
+        "Starclassic"
+
+      ],
+
+      "fallbackType": "line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://www.tama.com/eu/products/snare_drums/starclassic_performer_wb_snare.html",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Confirm Tama Starclassic stock batter/reso head models before approval."
+
+    },
+
+    {
+
+      "ruleKey": "tama-star-reserve-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Tama",
+
+      "lineSeriesIncludes": [
+
+        "STAR Reserve"
+
+      ],
+
+      "fallbackType": "line-or-model-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://equipboard.com/c/snare-drums/tama",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Current source is not strong enough for approval. Replace with Tama or catalog source before approving."
+
+    },
+
+    {
+
+      "ruleKey": "yamaha-tour-custom-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Yamaha",
+
+      "lineSeriesIncludes": [
+
+        "Tour Custom"
+
+      ],
+
+      "fallbackType": "line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://usa.yamaha.com/products/musical_instruments/drums/ac_drums/snare_drums/tour-custom/specs.html",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Confirm Yamaha Tour Custom stock batter/reso head models before approval."
+
+    },
+
+    {
+
+      "ruleKey": "yamaha-absolute-hybrid-maple-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Yamaha",
+
+      "lineSeriesIncludes": [
+
+        "Absolute Hybrid Maple"
+
+      ],
+
+      "fallbackType": "line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://memphisdrumshop.com/products/yamaha-14x6-absolute-hybrid-maple-snare-drum-vintage-natural-ams1460vn",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Dealer source needs confirmation against Yamaha source before approval."
+
+    },
+
+    {
+
+      "ruleKey": "ludwig-1963-1970s-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Ludwig",
+
+      "lineSeriesIncludes": [
+
+        "1963-1970s Ludwig"
+
+      ],
+
+      "fallbackType": "historic-era-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Historic Ludwig era records need era-specific stock head confirmation before approval."
+
+    },
+
+    {
+
+      "ruleKey": "ludwig-1977-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Ludwig",
+
+      "lineSeriesIncludes": [
+
+        "1977 Ludwig"
+
+      ],
+
+      "fallbackType": "historic-era-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Historic Ludwig 1977 records need era-specific stock head confirmation before approval."
+
+    },
+
+    {
+
+      "ruleKey": "ludwig-artist-signature-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Ludwig",
+
+      "lineSeriesIncludes": [
+
+        "Artist / Signature"
+
+      ],
+
+      "fallbackType": "signature-model-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Signature model stock heads may vary. Confirm exact stock batter/reso head before approval."
+
+    },
+
+    {
+
+      "ruleKey": "premier-artist-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Premier",
+
+      "lineSeriesIncludes": [
+
+        "Artist"
+
+      ],
+
+      "fallbackType": "line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://www.premier-percussion.com/product/artist-snare-drums/",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Confirm Premier Artist stock batter/reso head models before approval."
+
+    },
+
+    {
+
+      "ruleKey": "premier-genista-classic-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Premier",
+
+      "lineSeriesIncludes": [
+
+        "Genista Classic"
+
+      ],
+
+      "fallbackType": "line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://www.premier-percussion.com/product/genista-classic-snares/",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Confirm Premier Genista Classic stock batter/reso head models before approval."
+
+    },
+
+    {
+
+      "ruleKey": "premier-centenary-limited-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Premier",
+
+      "lineSeriesIncludes": [
+
+        "Centenary / Limited"
+
+      ],
+
+      "fallbackType": "limited-model-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://en.wikipedia.org/wiki/Premier_Percussion",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Current source is not strong enough for approval. Replace with official Premier or reliable catalog source before approving."
+
+    },
+
+    {
+
+      "ruleKey": "worldmax-black-dawg-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "WorldMax",
+
+      "lineSeriesIncludes": [
+
+        "Black Dawg Series"
+
+      ],
+
+      "fallbackType": "line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://worldmaxusa.com/product-category/snare-drum-black-dawg-series/",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "WorldMax Black Dawg records have multiple dealer/manufacturer URLs. Confirm consistent stock batter/reso head models before approval."
+
+    },
+
+    {
+
+      "ruleKey": "gretsch-brooklyn-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Gretsch",
+
+      "lineSeriesIncludes": [
+
+        "Brooklyn"
+
+      ],
+
+      "fallbackType": "line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://gretschdrums.com/drums/brooklyn",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Confirm Gretsch Brooklyn stock batter/reso head models before approval."
+
+    },
+
+    {
+
+      "ruleKey": "gretsch-signature-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Gretsch",
+
+      "lineSeriesIncludes": [
+
+        "Signature"
+
+      ],
+
+      "fallbackType": "signature-model-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://www.guitarcenter.com/Gretsch-Drums/Brooklyn-Standard-Snare-Drum-14-x-55-in-Satin-Black-Metallic-1500000305607.gc",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Dealer source needs confirmation against Gretsch official source before approval."
+
+    },
+
+    {
+
+      "ruleKey": "dw-pdp-true-cast-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "DW / PDP",
+
+      "lineSeriesIncludes": [
+
+        "DW MFG / True-Cast"
+
+      ],
+
+      "fallbackType": "line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://www.musicradar.com/drums/dw-mfg-true-cast-14x4-bell-bronze-snare",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Confirm DW True-Cast stock batter/reso head models from DW or reliable product documentation before approval."
+
+    },
+
+    {
+
+      "ruleKey": "candc-12th-and-vine-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "C&C Drums USA",
+
+      "lineSeriesIncludes": [
+
+        "12th & Vine"
+
+      ],
+
+      "fallbackType": "line-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://www.candcdrumsusa.com/12th-and-vine",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Confirm C&C 12th & Vine stock batter/reso head models before approval."
+
+    },
+
+    {
+
+      "ruleKey": "pork-pie-little-squealer-metal-stock-heads-draft",
+
+      "status": "DRAFT",
+
+      "companyName": "Pork Pie Percussion",
+
+      "lineSeriesIncludes": [
+
+        "Little Squealer / Metal"
+
+      ],
+
+      "fallbackType": "line-or-model-level-default-needs-source-confirmation",
+
+      "stockBatterHead": "",
+
+      "stockResoHead": "",
+
+      "sourceUrl": "https://porkpiedrums.com/prod/big-black-brass/",
+
+      "sourceConfidence": "needsVerification",
+
+      "notes": "Confirm Pork Pie stock batter/reso head models before approval."
+
     }
+
   ]
+
 }
