@@ -1,0 +1,125 @@
+
+{
+
+  "status": "TAMA_SLP_STUDIO_MAPLE_LMP1465F_PROPOSED_ENRICHMENT_PACKET_NO_WRITES",
+
+  "purpose": "Prepare source-backed enrichment proposal for Tama S.L.P. Studio Maple LMP1465F 14x6.5 before any controlled Firestore write plan.",
+
+  "writeSafety": {
+
+    "firestoreWrites": false,
+
+    "readyForWriteScript": false,
+
+    "requiresManualReview": true,
+
+    "allowedCollection": "snareReferenceDrums",
+
+    "allowedRecordCount": 1
+
+  },
+
+  "target": {
+
+    "id": "tama_s-l-p_s-l-p-studio-maple-lmp1465f-14x6-5_14x6-5_ply_maple_lacquer_wood-hoops_lmp1465f_6cb7788e",
+
+    "companyName": "Tama",
+
+    "modelName": "S.L.P. Studio Maple LMP1465F 14x6.5"
+
+  },
+
+  "proposedFields": {
+
+    "plyCount": 6,
+
+    "shellLayup": "6-ply all-maple",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "none",
+
+    "shellMaterial3": "none",
+
+    "shellThicknessMm": 5,
+
+    "reinforcementRings": "Sound Focus Rings",
+
+    "hoopType": "100% maple wood hoops coated with urethane",
+
+    "lugCount": 8,
+
+    "lugType": "Starclassic lug",
+
+    "stockSnareWires": "20-strand Starclassic Carbon Steel Snappy snares",
+
+    "finishType": "Sienna lacquer / urethane-coated finish",
+
+    "shellTreatment": "urethane-coated 100% maple wood hoops; Sound Focus Rings on shell",
+
+    "coreFieldEnrichmentStatus": "source_backed_partial_core_enrichment",
+
+    "coreFieldEnrichmentBatch": "tama_slp_studio_maple_lmp1465f_source_enrichment",
+
+    "coreFieldEnrichmentNeedsReview": true
+
+  },
+
+  "confidence": {
+
+    "plyCount": "high",
+
+    "shellLayup": "high",
+
+    "shellMaterial1": "high",
+
+    "shellThicknessMm": "high",
+
+    "reinforcementRings": "medium",
+
+    "hoopType": "high",
+
+    "lugCount": "medium",
+
+    "lugType": "high",
+
+    "stockSnareWires": "high",
+
+    "finishType": "medium",
+
+    "shellTreatment": "medium"
+
+  },
+
+  "sourceUrls": [
+
+    "https://www.tama.com/usa/products/snare_drums/slp_studio_maple_snare_drum.html",
+
+    "https://www.tama.com/eu/products/snare_drums/slp_studio_maple_snare_drum.html",
+
+    "https://www.woodbrass.com/en-gb/wood-snares-tama-lmp1465f-sen-slp-sound-lab-project-studio-maple-14-x-6-5-sienna-p167839.html",
+
+    "https://www.guitarcenter.com/TAMA/SLP-Studio-Maple-Snare-14-x-65-in-1358786585201.gc",
+
+    "https://drumcenternh.com/products/tama-slp-studio-maple-wood-hoop-snare-drum-14x6-5-sienna",
+
+    "https://timpano-percussion.com/products/tama-slp-studio-maple-snare-drum-14x6-5in"
+
+  ],
+
+  "notes": [
+
+    "Bearing edge detail remains unresolved from current sources; do not write bearingEdgeDetail yet.",
+
+    "Sound Focus Rings are source-supported by retailer/manufacturer-derived listings but should remain medium confidence unless confirmed directly from Tama page text.",
+
+    "Existing plyCount: 6 and shellThicknessMm: 5 are supported by multiple listings.",
+
+    "Stock head data is not required for shell passability and is intentionally omitted here."
+
+  ],
+
+  "nextStep": "Create a controlled one-record write plan only after manual review."
+
+}
+
