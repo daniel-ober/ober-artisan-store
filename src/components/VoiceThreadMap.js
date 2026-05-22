@@ -1,6 +1,5 @@
 import React, { useMemo, useRef, useState, useEffect } from 'react';
 
-import { Zap, Waves, Flame, Volume2, Feather } from 'lucide-react';
 
 import './VoiceThreadMap.css';
 
@@ -76,7 +75,7 @@ const buildThreadNodeRing = (radius = 34) => {
 
 const THREAD_NODE_POSITIONS = buildThreadNodeRing(34);
 
-const THREAD_NODE_ICON_POSITIONS = buildThreadNodeRing(46);
+const THREAD_NODE_ICON_POSITIONS = buildThreadNodeRing(41);
 
 const SVG_SIZE = 500;
 
@@ -548,94 +547,302 @@ const THREAD_NODE_ICON_TYPE_BY_KEY = {
   control: 'control',
 };
 
-const MetricIcon = ({ type, color = '#d6b277', size = 22 }) => {
-  const iconProps = {
-    size,
+const MetricIcon = ({ type, color = 'currentColor', size = 22 }) => {
 
-    strokeWidth: 2.15,
+  const strokeWidth = 1.8;
 
-    color,
+  const sharedProps = {
+
+    width: size,
+
+    height: size,
+
+    viewBox: '0 0 24 24',
+
+    fill: 'none',
+
+    xmlns: 'http://www.w3.org/2000/svg',
+
+    className: 'oa-node-glyph-svg',
+
+    style: {
+
+      color,
+
+      overflow: 'visible',
+
+    },
 
     'aria-hidden': true,
+
+  };
+
+  const strokeProps = {
+
+    stroke: 'currentColor',
+
+    strokeWidth,
+
+    strokeLinecap: 'round',
+
+    strokeLinejoin: 'round',
+
+    vectorEffect: 'non-scaling-stroke',
+
+  };
+
+  const fillProps = {
+
+    fill: 'currentColor',
+
   };
 
   switch (type) {
+
     case 'attack':
-      return <Zap {...iconProps} />;
 
-    case 'sustain':
-      return <Waves {...iconProps} />;
+      // ATTACK: sharp transient strike
 
-    case 'warmth':
-      return <Flame {...iconProps} />;
+      return (
 
-    case 'projection':
-      return <Volume2 {...iconProps} />;
+        <svg {...sharedProps}>
+
+          <path
+
+            {...fillProps}
+
+            d="M13.4 2.6 6.9 13.1h4.15L9.9 21.4l7.15-11.75h-4.35L13.4 2.6Z"
+
+          />
+
+        </svg>
+
+      );
 
     case 'brightness':
+
+      // BRIGHTNESS: crisp high-end glint
+
       return (
-        <svg
-          width={size}
-          height={size}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke={color}
-          strokeWidth="2.15"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <circle cx="12" cy="12" r="4" />
 
-          <path d="M12 2v2" />
+        <svg {...sharedProps}>
 
-          <path d="M12 20v2" />
+          <circle {...fillProps} cx="12" cy="12" r="1.45" />
 
-          <path d="m4.93 4.93 1.41 1.41" />
+          <path {...strokeProps} d="M12 3.8v4.2" />
 
-          <path d="m17.66 17.66 1.41 1.41" />
+          <path {...strokeProps} d="M12 16v4.2" />
 
-          <path d="M2 12h2" />
+          <path {...strokeProps} d="M3.8 12h4.2" />
 
-          <path d="M20 12h2" />
+          <path {...strokeProps} d="M16 12h4.2" />
 
-          <path d="m6.34 17.66-1.41 1.41" />
+          <path {...strokeProps} d="M6.2 6.2l3 3" opacity="0.62" />
 
-          <path d="m19.07 4.93-1.41 1.41" />
+          <path {...strokeProps} d="M14.8 14.8l3 3" opacity="0.62" />
+
+          <path {...strokeProps} d="M17.8 6.2l-3 3" opacity="0.62" />
+
+          <path {...strokeProps} d="M9.2 14.8l-3 3" opacity="0.62" />
+
         </svg>
+
+      );
+
+    case 'projection':
+
+      // PROJECTION: sound carrying outward
+
+      return (
+
+        <svg {...sharedProps}>
+
+          <circle {...fillProps} cx="4.6" cy="12" r="1.25" />
+
+          <path
+
+            {...strokeProps}
+
+            d="M9.1 8.2c1.95.75 3.45 2.05 4.5 3.8-1.05 1.75-2.55 3.05-4.5 3.8"
+
+            opacity="0.7"
+
+          />
+
+          <path
+
+            {...strokeProps}
+
+            d="M12.4 6.1c2.45 1.15 4.3 3.1 5.55 5.9-1.25 2.8-3.1 4.75-5.55 5.9"
+
+          />
+
+          <path
+
+            {...strokeProps}
+
+            d="M15.9 4.4c2.3 1.65 3.95 4.1 4.95 7.6-1 3.5-2.65 5.95-4.95 7.6"
+
+            opacity="0.52"
+
+          />
+
+        </svg>
+
+      );
+
+    case 'sustain':
+
+      // SUSTAIN: continuing waveform / ringing tail
+
+      return (
+
+        <svg {...sharedProps}>
+
+          <circle {...fillProps} cx="4.6" cy="12" r="1.05" />
+
+          <path
+
+            {...strokeProps}
+
+            d="M7.1 12c.75-3.8 1.5-3.8 2.25 0s1.5 3.8 2.25 0 1.5-3.8 2.25 0 1.5 3.8 2.25 0"
+
+          />
+
+          <path {...strokeProps} d="M17.8 12h1.25" opacity="0.58" />
+
+          <path {...strokeProps} d="M20.2 12h0.45" opacity="0.34" />
+
+        </svg>
+
+      );
+
+    case 'warmth':
+
+      // WARMTH: warm flame / low-mid body
+
+      return (
+
+        <svg {...sharedProps}>
+
+          <path
+
+            {...fillProps}
+
+            d="M12.15 3.2c.25 2.7-1.25 4.1-2.65 5.85-1.35 1.7-2.15 3.3-1.65 5.35.42 1.75 1.9 3 4.15 3 2.45 0 4.15-1.55 4.15-3.85 0-1.55-.68-2.85-1.85-4.1 2.65 1.35 4.35 3.65 4.35 6.4 0 3.3-2.65 5.35-6.65 5.35s-6.65-2.2-6.65-5.95c0-4.05 3.35-6.6 6.8-12.05Z"
+
+            opacity="0.9"
+
+          />
+
+          <path
+
+            {...strokeProps}
+
+            d="M10.1 15.2c.5.72 1.15 1.08 1.95 1.08 1.22 0 2.08-.82 2.08-2.02"
+
+            opacity="0.46"
+
+          />
+
+        </svg>
+
       );
 
     case 'sensitivity':
-      return <Feather {...iconProps} />;
+
+      // SENSITIVITY: feather-light response
+
+      return (
+
+        <svg {...sharedProps}>
+
+          <path
+
+            {...strokeProps}
+
+            d="M5.2 18.2c3.8-7.7 7.55-11.55 13.4-12.4"
+
+          />
+
+          <path
+
+            {...strokeProps}
+
+            d="M8.6 14.6c1.65.1 3.25.65 4.8 1.65"
+
+            opacity="0.54"
+
+          />
+
+          <path
+
+            {...strokeProps}
+
+            d="M10.8 11.4c1.55.05 3.05.48 4.5 1.3"
+
+            opacity="0.44"
+
+          />
+
+          <path
+
+            {...strokeProps}
+
+            d="M13.2 8.7c1.25.02 2.4.3 3.45.85"
+
+            opacity="0.34"
+
+          />
+
+          <circle {...fillProps} cx="5.35" cy="18" r="0.55" opacity="0.82" />
+
+        </svg>
+
+      );
 
     case 'control':
+
+      // CONTROL: crosshair focus / contained response
+
       return (
-        <svg
-          width={size}
-          height={size}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke={color}
-          strokeWidth="2.15"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <circle cx="12" cy="12" r="10" />
 
-          <line x1="22" x2="18" y1="12" y2="12" />
+        <svg {...sharedProps}>
 
-          <line x1="6" x2="2" y1="12" y2="12" />
+          <circle {...strokeProps} cx="12" cy="12" r="5.2" opacity="0.72" />
 
-          <line x1="12" x2="12" y1="6" y2="2" />
+          <circle {...strokeProps} cx="12" cy="12" r="2.45" />
 
-          <line x1="12" x2="12" y1="22" y2="18" />
+          <circle {...fillProps} cx="12" cy="12" r="0.85" />
+
+          <path {...strokeProps} d="M12 4.2v3.1" opacity="0.66" />
+
+          <path {...strokeProps} d="M12 16.7v3.1" opacity="0.66" />
+
+          <path {...strokeProps} d="M4.2 12h3.1" opacity="0.66" />
+
+          <path {...strokeProps} d="M16.7 12h3.1" opacity="0.66" />
+
         </svg>
+
       );
 
     default:
-      return <Zap {...iconProps} />;
+
+      return (
+
+        <svg {...sharedProps}>
+
+          <circle {...strokeProps} cx="12" cy="12" r="7.5" />
+
+          <circle {...fillProps} cx="12" cy="12" r="1.7" />
+
+        </svg>
+
+      );
+
   }
+
 };
 
 const getThreadKind = (thread = {}) => {
@@ -3612,18 +3819,10 @@ const VoiceThreadMap = ({
             {THREAD_NODE_ORDER.map((nodeKey) => {
               const point = THREAD_NODE_POSITIONS[nodeKey];
 
-              const baseIconPoint = THREAD_NODE_ICON_POSITIONS[nodeKey] || point;
-
-              const iconPoint =
-                resolvedReadVariant === 'firstTell'
-                  ? baseIconPoint
-                  : {
-                      ...baseIconPoint,
-
-                      x: baseIconPoint.x + 2.65,
-                    };
+              const iconPoint = THREAD_NODE_ICON_POSITIONS[nodeKey] || point;
 
               if (!point) return null;
+
 
               const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
 
@@ -3658,28 +3857,35 @@ const VoiceThreadMap = ({
                   <circle
                     cx={point.x * 5}
                     cy={point.y * 5}
-                    r={rank === 0 ? 5.4 : rank === 1 ? 4.4 : isActive ? 3.7 : 2.45}
+                    r={3.7}
                     className="heritage-voice-thread-anchor-dot"
                     fill={color}
-                    filter={rank <= 2 ? `url(#${mapId}-nodeGlow)` : undefined}
                   />
 
                   {!compact && (
-                    <foreignObject
-                      x={iconPoint.x * 5 - 25}
-                      y={iconPoint.y * 5 - 25}
-                      width="50"
-                      height="50"
-                      className="heritage-voice-thread-node-icon-wrap"
+
+                    <g
+
+                      className="lp-node-glyph-positioner"
+
+                      transform={`translate(${iconPoint.x * 5}, ${iconPoint.y * 5})`}
+
+                      style={{ color }}
+
                     >
-                      <div
-                        xmlns="http://www.w3.org/1999/xhtml"
-                        className="heritage-voice-thread-node-icon"
-                        style={{ color }}
-                      >
-                        <MetricIcon type={nodeKey} color={color} size={22} />
-                      </div>
-                    </foreignObject>
+
+                      <g transform="translate(-11 -11)">
+
+                        <g className="lp-node-glyph-core">
+
+                          <MetricIcon type={nodeKey} color={color} size={22} />
+
+                        </g>
+
+                      </g>
+
+                    </g>
+
                   )}
                 </g>
               );
