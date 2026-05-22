@@ -2226,3 +2226,1727 @@
 
 }
 
+
+/* =========================================================
+
+   PLAYER ANALYSIS VOICE CONTOUR — FIRST LISTEN STYLE MATCH
+
+   Voice Contour should share the same luminous, screen-blended
+
+   line language as the First Listen Triangle.
+
+   ========================================================= */
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-soft {
+
+  stroke-width: 14px !important;
+
+  opacity: 0.24 !important;
+
+  mix-blend-mode: screen !important;
+
+  filter:
+
+    drop-shadow(0 0 7px color-mix(in srgb, currentColor 38%, transparent))
+
+    drop-shadow(0 0 18px color-mix(in srgb, currentColor 22%, transparent))
+
+    drop-shadow(0 0 34px color-mix(in srgb, currentColor 12%, transparent)) !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-core {
+
+  stroke-width: 6px !important;
+
+  opacity: 1 !important;
+
+  mix-blend-mode: screen !important;
+
+  filter:
+
+    drop-shadow(0 0 4px rgba(255, 246, 218, 0.22))
+
+    drop-shadow(0 0 7px color-mix(in srgb, currentColor 38%, transparent))
+
+    drop-shadow(0 0 18px color-mix(in srgb, currentColor 22%, transparent)) !important;
+
+}
+
+/* =========================================================
+
+   PLAYER ANALYSIS — USE FIRST LISTEN CONTOUR LANGUAGE
+
+   The Player Analysis contour should use the same restraint as the
+
+   First Listen triangle: layered, colorful, readable — not blinding.
+
+   This lives here because VoiceThreadMap.css owns the active shape.
+
+   ========================================================= */
+
+.heritage-voice-thread-active-shape--read-player {
+
+  opacity: 1 !important;
+
+  filter: none !important;
+
+}
+
+/* Soft outside energy — visible, but not a white blast. */
+
+.heritage-voice-thread-active-shape--read-player .heritage-voice-thread-shape-halo {
+
+  opacity: 0.11 !important;
+
+  stroke-width: 5.5px !important;
+
+  filter: none !important;
+
+}
+
+/* Color glow layer — closer to First Listen, but calmer across 7 sides. */
+
+.heritage-voice-thread-active-shape--read-player .heritage-voice-thread-shape-glow {
+
+  opacity: 0.28 !important;
+
+  stroke-width: 3.2px !important;
+
+  filter: none !important;
+
+}
+
+/* Main contour line. This should be the readable player contour. */
+
+.heritage-voice-thread-active-shape--read-player .heritage-voice-thread-shape-core {
+
+  opacity: 0.72 !important;
+
+  stroke-width: 1.55px !important;
+
+  filter: none !important;
+
+}
+
+/* Tiny highlight only — no neon beam. */
+
+.heritage-voice-thread-active-shape--read-player .heritage-voice-thread-shape-hotline {
+
+  opacity: 0.055 !important;
+
+  stroke-width: 0.55px !important;
+
+  filter: none !important;
+
+}
+
+/* Keep the fixed frame/network quieter in Player Analysis. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-network {
+
+  opacity: 0.42 !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-outer-line,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-line--base {
+
+  opacity: 0.34 !important;
+
+  filter: none !important;
+
+}
+
+/* END PLAYER ANALYSIS — USE FIRST LISTEN CONTOUR LANGUAGE */
+
+/* =========================================================
+
+   PLAYER ANALYSIS — DIRECT POLYGON LINE MATCH
+
+   This targets the actual visible Player Analysis contour layer:
+
+   .heritage-player-read-polygon-soft
+
+   .heritage-player-read-polygon-core
+
+   Goal: same visual idea as First Listen triangle:
+
+   colorful, thin, readable, not hot/white/blinding.
+
+   ========================================================= */
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-soft {
+
+  opacity: 0.18 !important;
+
+  stroke-width: 4.5px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-core {
+
+  opacity: 0.74 !important;
+
+  stroke-width: 1.45px !important;
+
+  filter: none !important;
+
+}
+
+/* If active-shape is also rendering in player mode, keep it secondary
+
+   so it does not stack into a neon blob. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-active-shape {
+
+  opacity: 0.68 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-active-shape .heritage-voice-thread-shape-halo {
+
+  opacity: 0.06 !important;
+
+  stroke-width: 4px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-active-shape .heritage-voice-thread-shape-glow {
+
+  opacity: 0.12 !important;
+
+  stroke-width: 2.25px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-active-shape .heritage-voice-thread-shape-core {
+
+  opacity: 0.38 !important;
+
+  stroke-width: 1.15px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-active-shape .heritage-voice-thread-shape-hotline {
+
+  opacity: 0 !important;
+
+  filter: none !important;
+
+}
+
+/* Keep supporting frame lines quiet. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-outer-line,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-line--base {
+
+  opacity: 0.28 !important;
+
+  filter: none !important;
+
+}
+
+/* END PLAYER ANALYSIS — DIRECT POLYGON LINE MATCH */
+
+/* =========================================================
+
+   PLAYER ANALYSIS — COLORFUL CALM PLAYER CONTOUR
+
+   The visible Player Contour is the player polygon layer, not the
+
+   active-shape relationship stack. Keep the idea of First Listen:
+
+   colorful line edges, restrained glow, readable contour.
+
+   ========================================================= */
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-soft {
+
+  opacity: 0.11 !important;
+
+  stroke-width: 3.25px !important;
+
+  filter: none !important;
+
+  mix-blend-mode: screen;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-core {
+
+  opacity: 0.58 !important;
+
+  stroke-width: 1.25px !important;
+
+  filter: none !important;
+
+  mix-blend-mode: normal;
+
+}
+
+/* The active-shape stack is useful for morphing, but it must not visually
+
+   stack into a hot white polygon in Player Analysis. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-active-shape {
+
+  opacity: 0.42 !important;
+
+  filter: none !important;
+
+  mix-blend-mode: screen;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-active-shape .heritage-voice-thread-shape-halo {
+
+  opacity: 0.035 !important;
+
+  stroke-width: 3px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-active-shape .heritage-voice-thread-shape-glow {
+
+  opacity: 0.075 !important;
+
+  stroke-width: 1.8px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-active-shape .heritage-voice-thread-shape-core {
+
+  opacity: 0.18 !important;
+
+  stroke-width: 0.95px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-active-shape .heritage-voice-thread-shape-hotline {
+
+  opacity: 0 !important;
+
+  filter: none !important;
+
+}
+
+/* Quiet the fixed frame so the Player Contour has color separation. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-outer-line,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-line--base {
+
+  opacity: 0.22 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-grid-ring {
+
+  opacity: 0.12 !important;
+
+}
+
+/* END PLAYER ANALYSIS — COLORFUL CALM PLAYER CONTOUR */
+
+/* =========================================================
+
+   PLAYER ANALYSIS — CONTOUR CLEANUP / MORPH STATE
+
+   Player Analysis should read as a clean Player Contour:
+
+   no center haze, no white anchor glow, no stacked neon shape.
+
+   The active-shape layer only appears while morphing.
+
+   ========================================================= */
+
+/* Kill the distracting center fill/hue in Player Analysis. */
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-fill,
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-bg,
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-surface,
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-glow,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-complex-fill,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-complex-sheen {
+
+  opacity: 0 !important;
+
+  fill-opacity: 0 !important;
+
+  filter: none !important;
+
+}
+
+/* Actual visible Player Contour: colorful edges, restrained energy. */
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-soft {
+
+  opacity: 0.13 !important;
+
+  stroke-width: 2.8px !important;
+
+  fill: none !important;
+
+  fill-opacity: 0 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-core {
+
+  opacity: 0.54 !important;
+
+  stroke-width: 1.15px !important;
+
+  fill: none !important;
+
+  fill-opacity: 0 !important;
+
+  filter: none !important;
+
+}
+
+/* Settled Player Analysis should not show the active-shape stack.
+
+   It exists for morphing only. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-active-shape {
+
+  opacity: 0 !important;
+
+  filter: none !important;
+
+  pointer-events: none !important;
+
+}
+
+/* During First Listen -> Player Analysis, allow the active shape to be visible
+
+   just enough to sell the morph, without creating a hot center blob. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-active-shape--morphing {
+
+  opacity: 0.32 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-active-shape--morphing .heritage-voice-thread-shape-halo {
+
+  opacity: 0.035 !important;
+
+  stroke-width: 2.6px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-active-shape--morphing .heritage-voice-thread-shape-glow {
+
+  opacity: 0.075 !important;
+
+  stroke-width: 1.8px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-active-shape--morphing .heritage-voice-thread-shape-core {
+
+  opacity: 0.22 !important;
+
+  stroke-width: 1px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-active-shape--morphing .heritage-voice-thread-shape-hotline {
+
+  opacity: 0 !important;
+
+  filter: none !important;
+
+}
+
+/* Remove white glowing hue around frame anchors in Player Analysis. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
+
+  filter: none !important;
+
+  opacity: 0.72 !important;
+
+  fill-opacity: 0.82 !important;
+
+  stroke-opacity: 0.2 !important;
+
+}
+
+/* Also calm node icons/glyph wrappers if older CSS adds white glow. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon,
+
+.heritage-voice-thread-map--read-player .lp-node-glyph-core,
+
+.heritage-voice-thread-map--read-player .oa-node-glyph-svg {
+
+  filter: none !important;
+
+}
+
+/* Quiet fixed frame lines/value rings so the contour feels cleaner. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-outer-line,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-line--base {
+
+  opacity: 0.2 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-grid-ring {
+
+  opacity: 0.1 !important;
+
+}
+
+/* END PLAYER ANALYSIS — CONTOUR CLEANUP / MORPH STATE */
+
+/* =========================================================
+
+   PLAYER ANALYSIS — EXTRA CALM FINAL OVERRIDE
+
+   Removes remaining center haze/anchor glow and keeps the Player
+
+   Contour closer to the First Listen line language.
+
+   ========================================================= */
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-fill,
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-bg,
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-surface,
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-glow,
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-soft[fill],
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-core[fill] {
+
+  fill: none !important;
+
+  fill-opacity: 0 !important;
+
+  opacity: 0 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-soft {
+
+  opacity: 0.08 !important;
+
+  stroke-width: 2.15px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-core {
+
+  opacity: 0.46 !important;
+
+  stroke-width: 1.05px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot *,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node *,
+
+.heritage-voice-thread-map--read-player .lp-node-glyph-positioner,
+
+.heritage-voice-thread-map--read-player .lp-node-glyph-core,
+
+.heritage-voice-thread-map--read-player .oa-node-glyph-svg {
+
+  filter: none !important;
+
+  box-shadow: none !important;
+
+  text-shadow: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.58 !important;
+
+  fill-opacity: 0.74 !important;
+
+  stroke-opacity: 0.12 !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-outer-line,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-line--base {
+
+  opacity: 0.16 !important;
+
+  filter: none !important;
+
+}
+
+/* END PLAYER ANALYSIS — EXTRA CALM FINAL OVERRIDE */
+
+/* =========================================================
+
+   PLAYER ANALYSIS — FORWARD MORPH CLEANUP
+
+   During First Listen -> Player Analysis, only the animated active
+
+   Voice Contour should be visible. The final Player Contour polygon
+
+   waits until morphing is finished.
+
+   ========================================================= */
+
+/* Hide final player polygon while morphing so it does not fight the transition. */
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--morphing .heritage-player-read-polygon-layer {
+
+  opacity: 0 !important;
+
+  transition: opacity 120ms ease !important;
+
+}
+
+/* Let the morph contour carry the transition, but keep it calm. */
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--morphing .heritage-voice-thread-active-shape {
+
+  opacity: 0.72 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--morphing .heritage-voice-thread-shape-halo {
+
+  opacity: 0.055 !important;
+
+  stroke-width: 4px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--morphing .heritage-voice-thread-shape-glow {
+
+  opacity: 0.16 !important;
+
+  stroke-width: 2.4px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--morphing .heritage-voice-thread-shape-core {
+
+  opacity: 0.54 !important;
+
+  stroke-width: 1.3px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--morphing .heritage-voice-thread-shape-hotline {
+
+  opacity: 0.05 !important;
+
+  stroke-width: 0.55px !important;
+
+  filter: none !important;
+
+}
+
+/* Once settled, final Player Contour fades back in cleanly. */
+
+.heritage-voice-thread-map--read-player:not(.heritage-voice-thread-map--morphing) .heritage-player-read-polygon-layer {
+
+  opacity: 1 !important;
+
+  transition: opacity 180ms ease !important;
+
+}
+
+/* Keep final Player Contour restrained and colorful, no center glow. */
+
+.heritage-voice-thread-map--read-player:not(.heritage-voice-thread-map--morphing) .heritage-player-read-polygon-soft {
+
+  opacity: 0.07 !important;
+
+  stroke-width: 2px !important;
+
+  fill: none !important;
+
+  fill-opacity: 0 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player:not(.heritage-voice-thread-map--morphing) .heritage-player-read-polygon-core {
+
+  opacity: 0.42 !important;
+
+  stroke-width: 1px !important;
+
+  fill: none !important;
+
+  fill-opacity: 0 !important;
+
+  filter: none !important;
+
+}
+
+/* No white glow around frame anchors in Player Analysis. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
+
+  filter: none !important;
+
+  opacity: 0.54 !important;
+
+  fill-opacity: 0.72 !important;
+
+  stroke-opacity: 0.08 !important;
+
+}
+
+/* END PLAYER ANALYSIS — FORWARD MORPH CLEANUP */
+
+/* =========================================================
+
+   PLAYER ANALYSIS — NEON BALANCE FINAL
+
+   Settled Player Contour should sit between:
+
+   - current Player Analysis: too hazy/glowy
+
+   - First Listen: thicker, colorful, more energetic
+
+   Result: less bloom, slightly thicker contour, more neon color presence.
+
+   ========================================================= */
+
+/* Final settled Player Contour: stronger color edge, less haze. */
+
+.heritage-voice-thread-map--read-player:not(.heritage-voice-thread-map--morphing) .heritage-player-read-polygon-soft {
+
+  opacity: 0.105 !important;
+
+  stroke-width: 2.65px !important;
+
+  fill: none !important;
+
+  fill-opacity: 0 !important;
+
+  filter: none !important;
+
+  mix-blend-mode: screen;
+
+}
+
+.heritage-voice-thread-map--read-player:not(.heritage-voice-thread-map--morphing) .heritage-player-read-polygon-core {
+
+  opacity: 0.58 !important;
+
+  stroke-width: 1.38px !important;
+
+  fill: none !important;
+
+  fill-opacity: 0 !important;
+
+  filter: none !important;
+
+  mix-blend-mode: normal;
+
+}
+
+/* Keep the animated morph line close to the final line weight so it does not
+
+   end with a bright flash or sudden glow shift. */
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--morphing .heritage-voice-thread-active-shape {
+
+  opacity: 0.62 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--morphing .heritage-voice-thread-shape-halo {
+
+  opacity: 0.035 !important;
+
+  stroke-width: 3.2px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--morphing .heritage-voice-thread-shape-glow {
+
+  opacity: 0.105 !important;
+
+  stroke-width: 2.25px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--morphing .heritage-voice-thread-shape-core {
+
+  opacity: 0.48 !important;
+
+  stroke-width: 1.35px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--morphing .heritage-voice-thread-shape-hotline {
+
+  opacity: 0.035 !important;
+
+  stroke-width: 0.5px !important;
+
+  filter: none !important;
+
+}
+
+/* Extra insurance: no center haze/fill in settled Player Analysis. */
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-layer path {
+
+  fill: none !important;
+
+  fill-opacity: 0 !important;
+
+}
+
+/* Frame anchors stay present but not glowing white. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
+
+  filter: none !important;
+
+  opacity: 0.52 !important;
+
+  fill-opacity: 0.72 !important;
+
+  stroke-opacity: 0.08 !important;
+
+}
+
+/* Keep frame/value rings quieter than the active contour. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-outer-line,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-line--base {
+
+  opacity: 0.14 !important;
+
+  filter: none !important;
+
+}
+
+/* END PLAYER ANALYSIS — NEON BALANCE FINAL */
+
+/* =========================================================
+
+   PLAYER ANALYSIS — SINGLE ACTIVE VOICE CONTOUR
+
+   Disable the separate Player polygon layer visually and use the
+
+   animated active shape as the final Player Contour. This prevents
+
+   the bright/white second contour from appearing after the morph.
+
+   ========================================================= */
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-layer {
+
+  display: none !important;
+
+  opacity: 0 !important;
+
+}
+
+/* Final settled Player Contour: thicker than current, less cloudy than before,
+
+   closer to First Listen color language without the white bloom. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-active-shape {
+
+  opacity: 1 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-halo {
+
+  opacity: 0.045 !important;
+
+  stroke-width: 4.1px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-glow {
+
+  opacity: 0.13 !important;
+
+  stroke-width: 2.75px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-core {
+
+  opacity: 0.62 !important;
+
+  stroke-width: 1.55px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-hotline {
+
+  opacity: 0.045 !important;
+
+  stroke-width: 0.55px !important;
+
+  filter: none !important;
+
+}
+
+/* No fill/haze in the middle of Player Analysis. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-complex-fill,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-complex-sheen {
+
+  display: none !important;
+
+  opacity: 0 !important;
+
+  fill-opacity: 0 !important;
+
+  filter: none !important;
+
+}
+
+/* No white glow on frame anchors/glyph wrappers. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node *,
+
+.heritage-voice-thread-map--read-player .lp-node-glyph-positioner,
+
+.heritage-voice-thread-map--read-player .lp-node-glyph-core,
+
+.heritage-voice-thread-map--read-player .oa-node-glyph-svg {
+
+  filter: none !important;
+
+  box-shadow: none !important;
+
+  text-shadow: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.52 !important;
+
+  fill-opacity: 0.72 !important;
+
+  stroke-opacity: 0.08 !important;
+
+}
+
+/* Keep frame/value rings behind the active contour. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-outer-line,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-line--base {
+
+  opacity: 0.13 !important;
+
+  filter: none !important;
+
+}
+
+/* END PLAYER ANALYSIS — SINGLE ACTIVE VOICE CONTOUR */
+
+/* =========================================================
+
+   PLAYER ANALYSIS — CLEAN SEGMENTED CONTOUR FINAL
+
+   Use the same idea as First Listen: colorful edge-by-edge contour.
+
+   The active shape handles the morph. The segmented Player Contour
+
+   appears only after the morph settles.
+
+   ========================================================= */
+
+/* During morph: use the active shape only. */
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--morphing .heritage-player-read-polygon-layer {
+
+  display: none !important;
+
+  opacity: 0 !important;
+
+}
+
+/* After morph: hide the single active-shape contour so it does not stack. */
+
+.heritage-voice-thread-map--read-player:not(.heritage-voice-thread-map--morphing) .heritage-voice-thread-active-shape {
+
+  opacity: 0 !important;
+
+  filter: none !important;
+
+  pointer-events: none !important;
+
+}
+
+/* After morph: show clean colorful segmented Player Contour. */
+
+.heritage-voice-thread-map--read-player:not(.heritage-voice-thread-map--morphing) .heritage-player-read-polygon-layer {
+
+  display: block !important;
+
+  opacity: 1 !important;
+
+  filter: none !important;
+
+}
+
+/* Soft color edge — not white glow. */
+
+.heritage-voice-thread-map--read-player:not(.heritage-voice-thread-map--morphing) .heritage-player-read-polygon-soft {
+
+  opacity: 0.16 !important;
+
+  stroke-width: 3.1px !important;
+
+  fill: none !important;
+
+  fill-opacity: 0 !important;
+
+  filter: none !important;
+
+  mix-blend-mode: screen;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+}
+
+/* Main colorful contour — slightly thinner than First Listen. */
+
+.heritage-voice-thread-map--read-player:not(.heritage-voice-thread-map--morphing) .heritage-player-read-polygon-core {
+
+  opacity: 0.82 !important;
+
+  stroke-width: 1.65px !important;
+
+  fill: none !important;
+
+  fill-opacity: 0 !important;
+
+  filter: none !important;
+
+  mix-blend-mode: normal;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+}
+
+/* Keep morph contour calm while switching tabs. */
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--morphing .heritage-voice-thread-active-shape {
+
+  opacity: 0.64 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--morphing .heritage-voice-thread-shape-halo {
+
+  opacity: 0.035 !important;
+
+  stroke-width: 3px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--morphing .heritage-voice-thread-shape-glow {
+
+  opacity: 0.1 !important;
+
+  stroke-width: 2.25px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--morphing .heritage-voice-thread-shape-core {
+
+  opacity: 0.5 !important;
+
+  stroke-width: 1.35px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--morphing .heritage-voice-thread-shape-hotline {
+
+  opacity: 0.03 !important;
+
+  stroke-width: 0.5px !important;
+
+  filter: none !important;
+
+}
+
+/* No center haze / no white anchor glow. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-complex-fill,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-complex-sheen {
+
+  display: none !important;
+
+  opacity: 0 !important;
+
+  fill-opacity: 0 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node *,
+
+.heritage-voice-thread-map--read-player .lp-node-glyph-positioner,
+
+.heritage-voice-thread-map--read-player .lp-node-glyph-core,
+
+.heritage-voice-thread-map--read-player .oa-node-glyph-svg {
+
+  filter: none !important;
+
+  box-shadow: none !important;
+
+  text-shadow: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.52 !important;
+
+  fill-opacity: 0.72 !important;
+
+  stroke-opacity: 0.08 !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-outer-line,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-line--base {
+
+  opacity: 0.13 !important;
+
+  filter: none !important;
+
+}
+
+/* END PLAYER ANALYSIS — CLEAN SEGMENTED CONTOUR FINAL */
+
+/* =========================================================
+
+   PLAYER ANALYSIS — SHAPE MODE SINGLE CONTOUR
+
+   Shape mode should not show the settled segmented polygon layer.
+
+   It should use the active contour only so adjusting values does not
+
+   flicker between two different contour treatments.
+
+   ========================================================= */
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--shape .heritage-player-read-polygon-layer {
+
+  display: none !important;
+
+  opacity: 0 !important;
+
+}
+
+/* Shape mode active contour: closer to First Listen color language,
+
+   slightly thinner, no cloudy glow. */
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--shape .heritage-voice-thread-active-shape {
+
+  opacity: 1 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--shape .heritage-voice-thread-shape-halo {
+
+  opacity: 0.04 !important;
+
+  stroke-width: 3.8px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--shape .heritage-voice-thread-shape-glow {
+
+  opacity: 0.14 !important;
+
+  stroke-width: 2.65px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--shape .heritage-voice-thread-shape-core {
+
+  opacity: 0.68 !important;
+
+  stroke-width: 1.55px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--shape .heritage-voice-thread-shape-hotline {
+
+  opacity: 0.045 !important;
+
+  stroke-width: 0.55px !important;
+
+  filter: none !important;
+
+}
+
+/* END PLAYER ANALYSIS — SHAPE MODE SINGLE CONTOUR */
+
+/* =========================================================
+
+   PLAYER ANALYSIS — ONE CONTOUR SYSTEM
+
+   Player Analysis now uses the same active segmented contour system
+
+   as First Listen. The separate player polygon layer is disabled so
+
+   no extra contour appears, disappears, or fights shape mode.
+
+   ========================================================= */
+
+.heritage-voice-thread-map--read-player .heritage-player-read-polygon-layer {
+
+  display: none !important;
+
+  opacity: 0 !important;
+
+}
+
+/* Player segmented contour: colorful like First Listen, slightly thinner. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-relationship-segments {
+
+  opacity: 1 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-segment .heritage-voice-thread-shape-halo {
+
+  opacity: 0.045 !important;
+
+  stroke-width: 4px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-segment .heritage-voice-thread-shape-glow {
+
+  opacity: 0.16 !important;
+
+  stroke-width: 2.9px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-segment .heritage-voice-thread-shape-core {
+
+  opacity: 0.78 !important;
+
+  stroke-width: 1.65px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-segment .heritage-voice-thread-shape-hotline {
+
+  opacity: 0.045 !important;
+
+  stroke-width: 0.55px !important;
+
+  filter: none !important;
+
+}
+
+/* Kill center haze/fills in Player Analysis. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-complex-fill,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-complex-sheen {
+
+  display: none !important;
+
+  opacity: 0 !important;
+
+  fill-opacity: 0 !important;
+
+  filter: none !important;
+
+}
+
+/* Remove white glow from anchors/glyph wrappers. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node *,
+
+.heritage-voice-thread-map--read-player .lp-node-glyph-positioner,
+
+.heritage-voice-thread-map--read-player .lp-node-glyph-core,
+
+.heritage-voice-thread-map--read-player .oa-node-glyph-svg {
+
+  filter: none !important;
+
+  box-shadow: none !important;
+
+  text-shadow: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.52 !important;
+
+  fill-opacity: 0.72 !important;
+
+  stroke-opacity: 0.08 !important;
+
+}
+
+/* Background frame/value lines stay quieter than the active contour. */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-outer-line,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-line--base {
+
+  opacity: 0.13 !important;
+
+  filter: none !important;
+
+}
+
+/* END PLAYER ANALYSIS — ONE CONTOUR SYSTEM */
+
+/* =========================================================
+
+   PLAYER ANALYSIS — FAST SHAPE MODE
+
+   In Shape mode, use one active contour path only.
+
+   No segmented polygon layer. No relationship segment stack.
+
+   This keeps node/contour adjustments responsive.
+
+   ========================================================= */
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--shape .heritage-player-read-polygon-layer,
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--shape .heritage-voice-thread-relationship-segments {
+
+  display: none !important;
+
+  opacity: 0 !important;
+
+}
+
+/* Single active contour while editing. */
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--shape .heritage-voice-thread-active-shape {
+
+  opacity: 1 !important;
+
+  filter: none !important;
+
+  pointer-events: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--shape .heritage-voice-thread-shape-halo {
+
+  opacity: 0.025 !important;
+
+  stroke-width: 3px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--shape .heritage-voice-thread-shape-glow {
+
+  opacity: 0.095 !important;
+
+  stroke-width: 2.1px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--shape .heritage-voice-thread-shape-core {
+
+  opacity: 0.72 !important;
+
+  stroke-width: 1.45px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--shape .heritage-voice-thread-shape-hotline {
+
+  opacity: 0.025 !important;
+
+  stroke-width: 0.45px !important;
+
+  filter: none !important;
+
+}
+
+/* No animated transitions while directly manipulating shape values. */
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--shape .heritage-voice-thread-active-shape,
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--shape .heritage-voice-thread-active-shape path {
+
+  transition: none !important;
+
+}
+
+/* END PLAYER ANALYSIS — FAST SHAPE MODE */
+
+/* =========================================================
+
+   PLAYER ANALYSIS — DIRECT SHAPE EDITING
+
+   Shape mode should update immediately from targetShapeItems and use
+
+   generous hit zones around Frame Anchors.
+
+   ========================================================= */
+
+.heritage-voice-thread-anchor-hit-zone {
+
+  pointer-events: all;
+
+  cursor: grab;
+
+}
+
+.heritage-voice-thread-anchor-hit-zone:active {
+
+  cursor: grabbing;
+
+}
+
+/* Keep hit zones invisible. */
+
+.heritage-voice-thread-anchor-hit-zone {
+
+  opacity: 0 !important;
+
+}
+
+/* Shape mode uses one lightweight active contour only. */
+
+.heritage-voice-thread-map--shape .heritage-player-read-polygon-layer,
+
+.heritage-voice-thread-map--shape .heritage-voice-thread-relationship-segments {
+
+  display: none !important;
+
+  opacity: 0 !important;
+
+}
+
+.heritage-voice-thread-map--shape .heritage-voice-thread-active-shape,
+
+.heritage-voice-thread-map--shape .heritage-voice-thread-active-shape path {
+
+  transition: none !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--shape .heritage-voice-thread-shape-halo {
+
+  opacity: 0.025 !important;
+
+  stroke-width: 3px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--shape .heritage-voice-thread-shape-glow {
+
+  opacity: 0.09 !important;
+
+  stroke-width: 2.1px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--shape .heritage-voice-thread-shape-core {
+
+  opacity: 0.76 !important;
+
+  stroke-width: 1.55px !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player.heritage-voice-thread-map--shape .heritage-voice-thread-shape-hotline {
+
+  opacity: 0.025 !important;
+
+  stroke-width: 0.45px !important;
+
+  filter: none !important;
+
+}
+
+/* END PLAYER ANALYSIS — DIRECT SHAPE EDITING */
+
+/* =========================================================
+
+   VOICE FIELD — ANCHOR ONLY DRAG TARGETS
+
+   Drag/edit interactions should only happen around Frame Anchors.
+
+   Contour lines, node paths, value rings, spider lines, polygon layers,
+
+   and glyph artwork should never become drag targets.
+
+   ========================================================= */
+
+/* Kill pointer capture on every visual SVG layer that is not an anchor target. */
+
+.heritage-voice-thread-svg path,
+
+.heritage-voice-thread-svg line,
+
+.heritage-voice-thread-svg polygon,
+
+.heritage-voice-thread-svg polyline,
+
+.heritage-voice-thread-svg .heritage-voice-thread-active-shape,
+
+.heritage-voice-thread-svg .heritage-voice-thread-active-shape *,
+
+.heritage-voice-thread-svg .heritage-voice-thread-relationship-segments,
+
+.heritage-voice-thread-svg .heritage-voice-thread-relationship-segments *,
+
+.heritage-voice-thread-svg .heritage-player-read-polygon-layer,
+
+.heritage-voice-thread-svg .heritage-player-read-polygon-layer *,
+
+.heritage-voice-thread-svg .heritage-voice-thread-network,
+
+.heritage-voice-thread-svg .heritage-voice-thread-network *,
+
+.heritage-voice-thread-svg .lp-node-glyph-positioner,
+
+.heritage-voice-thread-svg .lp-node-glyph-positioner *,
+
+.heritage-voice-thread-svg .lp-node-glyph-core,
+
+.heritage-voice-thread-svg .lp-node-glyph-core *,
+
+.heritage-voice-thread-svg .oa-node-glyph-svg,
+
+.heritage-voice-thread-svg .oa-node-glyph-svg * {
+
+  pointer-events: none !important;
+
+}
+
+/* Only the invisible anchor hit zone and visible anchor dot are interactive. */
+
+.heritage-voice-thread-svg .heritage-voice-thread-anchor-hit-zone,
+
+.heritage-voice-thread-svg .heritage-voice-thread-anchor-dot {
+
+  pointer-events: all !important;
+
+  cursor: grab;
+
+}
+
+.heritage-voice-thread-svg .heritage-voice-thread-anchor-hit-zone:active,
+
+.heritage-voice-thread-svg .heritage-voice-thread-anchor-dot:active {
+
+  cursor: grabbing;
+
+}
+
+/* Keep the hit zone invisible but usable. */
+
+.heritage-voice-thread-anchor-hit-zone {
+
+  opacity: 0 !important;
+
+  fill: transparent !important;
+
+  stroke: transparent !important;
+
+}
+
+/* In shape/edit mode, remove transition overhead from all contour visuals. */
+
+.heritage-voice-thread-map--shape .heritage-voice-thread-svg,
+
+.heritage-voice-thread-map--shape .heritage-voice-thread-svg *,
+
+.heritage-voice-thread-map--shape .heritage-voice-thread-active-shape,
+
+.heritage-voice-thread-map--shape .heritage-voice-thread-active-shape * {
+
+  transition: none !important;
+
+  animation: none !important;
+
+}
+
+/* END VOICE FIELD — ANCHOR ONLY DRAG TARGETS */
+
+
