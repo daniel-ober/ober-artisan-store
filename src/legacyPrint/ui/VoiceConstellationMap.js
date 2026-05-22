@@ -1,4 +1,3 @@
-
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import VoiceThreadMap from '../../components/VoiceThreadMap.js';
@@ -85,9 +84,7 @@ const READ_MODE_COPY = {
 
     title: 'Voice Identity',
 
-    description:
-
-      'The organic fingerprint of the selected voice profile.',
+    description: 'The organic fingerprint of the selected voice profile.',
 
   },
 
@@ -116,6 +113,12 @@ const READ_MODE_COPY = {
   },
 
 };
+
+const MAP_CENTER = 50;
+
+const FRAME_ANCHOR_RADIUS = 34;
+
+const DRAG_ZONE_SIZE = 78;
 
 const clamp01 = (value, fallback = 0.5) => {
 
@@ -201,15 +204,49 @@ const getTopNodes = (voice, count = 3) =>
 
     .map((item) => item.key);
 
+const getNodeAnchorPercent = (nodeKey) => {
+
+  const nodeIndex = VOICE_NODE_ORDER.indexOf(nodeKey);
+
+  if (nodeIndex < 0) {
+
+    return {
+
+      left: '50%',
+
+      top: '50%',
+
+    };
+
+  }
+
+  const angle = -Math.PI / 2 + (nodeIndex / VOICE_NODE_ORDER.length) * Math.PI * 2;
+
+  const x = MAP_CENTER + Math.cos(angle) * FRAME_ANCHOR_RADIUS;
+
+  const y = MAP_CENTER + Math.sin(angle) * FRAME_ANCHOR_RADIUS;
+
+  return {
+
+    left: `${x}%`,
+
+    top: `${y}%`,
+
+  };
+
+};
+
 const buildActiveThread = ({ readMode, voice, firstListenKeys }) => {
 
   const isFirstListen = readMode === 'firstListen';
 
-  const topNodes = isFirstListen && Array.isArray(firstListenKeys) && firstListenKeys.length
+  const topNodes =
 
-    ? firstListenKeys.slice(0, 3)
+    isFirstListen && Array.isArray(firstListenKeys) && firstListenKeys.length
 
-    : getTopNodes(voice, 3);
+      ? firstListenKeys.slice(0, 3)
+
+      : getTopNodes(voice, 3);
 
   const nodeKeys = isFirstListen ? topNodes : VOICE_NODE_ORDER;
 
@@ -297,23 +334,11 @@ export default function VoiceConstellationMap({
 
   const visualVoice = shapeMode ? localShapeVoice || normalizedVoice : normalizedVoice;
 
-  const profile = useMemo(
-
-    () => voiceToLegacyProfile(visualVoice),
-
-    [visualVoice]
-
-  );
+  const profile = useMemo(() => voiceToLegacyProfile(visualVoice), [visualVoice]);
 
   const compareProfile = useMemo(
 
-    () =>
-
-      normalizedCompareVoice
-
-        ? voiceToLegacyProfile(normalizedCompareVoice)
-
-        : null,
+    () => (normalizedCompareVoice ? voiceToLegacyProfile(normalizedCompareVoice) : null),
 
     [normalizedCompareVoice]
 
@@ -383,11 +408,11 @@ export default function VoiceConstellationMap({
 
     const projectedDistance = pointerVectorX * axisX + pointerVectorY * axisY;
 
-    const radius = Math.min(rect.width, rect.height) * 0.34;
+    const usableRadius = Math.min(rect.width, rect.height) * 0.34;
 
-    const rawValue = projectedDistance / radius;
+    const normalized = projectedDistance / usableRadius;
 
-    return Math.max(0.035, Math.min(1, rawValue));
+    return clamp01(normalized, 0.5);
 
   };
 
@@ -407,6 +432,8 @@ export default function VoiceConstellationMap({
 
     setLocalShapeVoice(updatedVoice);
 
+    onNodeDrag?.(nodeKey, nextValue);
+
   };
 
   const getShapeNodeStrength = (nodeKey) => {
@@ -415,7 +442,7 @@ export default function VoiceConstellationMap({
 
     if (!Number.isFinite(rawValue)) return 0.35;
 
-    return Math.max(0, Math.min(1, rawValue));
+    return clamp01(rawValue, 0.35);
 
   };
 
@@ -497,19 +524,9 @@ export default function VoiceConstellationMap({
 
     event.stopPropagation();
 
-    const committedNodeKey = draggingNodeKeyRef.current;
-
-    const committedVoice = localShapeVoiceRef.current;
-
     draggingNodeKeyRef.current = null;
 
     setDraggingNodeKey(null);
-
-    if (committedNodeKey && committedVoice?.[committedNodeKey] !== undefined) {
-
-      onNodeDrag?.(committedNodeKey, committedVoice[committedNodeKey]);
-
-    }
 
   };
 
@@ -581,7 +598,7 @@ export default function VoiceConstellationMap({
 
           currentSpec={{}}
 
-          displayMode="VoiceMapping"
+          displayMode={shapeMode ? 'shape' : 'VoiceMapping'}
 
           readVariant={readVariant}
 
@@ -601,39 +618,57 @@ export default function VoiceConstellationMap({
 
         >
 
-          {VOICE_NODE_ORDER.map((nodeKey) => (
+          {VOICE_NODE_ORDER.map((nodeKey) => {
 
-            <button
+            const anchorPosition = getNodeAnchorPercent(nodeKey);
 
-              key={nodeKey}
+            return (
 
-              type="button"
+              <button
 
-              className="vcm-node-click-target"
+                key={nodeKey}
 
-              onPointerDown={(event) => handleNodePointerDown(event, nodeKey)}
+                type="button"
 
-              onPointerMove={(event) => handleNodePointerMove(event, nodeKey)}
+                className="vcm-node-click-target"
 
-              onPointerUp={handleNodePointerEnd}
+                style={{
 
-              onPointerCancel={handleNodePointerEnd}
+                  left: anchorPosition.left,
 
-              onLostPointerCapture={handleNodePointerEnd}
+                  top: anchorPosition.top,
 
-              title={
+                  width: `${DRAG_ZONE_SIZE}px`,
 
-                isPlayerShapeDragEnabled
+                  height: `${DRAG_ZONE_SIZE}px`,
 
-                  ? `Drag ${NODE_LABELS[nodeKey]} along its spoke`
+                }}
 
-                  : `${NODE_LABELS[nodeKey]} / ${NODE_SHORT_LABELS[nodeKey]}`
+                onPointerDown={(event) => handleNodePointerDown(event, nodeKey)}
 
-              }
+                onPointerMove={(event) => handleNodePointerMove(event, nodeKey)}
 
-            />
+                onPointerUp={handleNodePointerEnd}
 
-          ))}
+                onPointerCancel={handleNodePointerEnd}
+
+                onLostPointerCapture={handleNodePointerEnd}
+
+                title={
+
+                  isPlayerShapeDragEnabled
+
+                    ? `Drag ${NODE_LABELS[nodeKey]} along its spoke`
+
+                    : `${NODE_LABELS[nodeKey]} / ${NODE_SHORT_LABELS[nodeKey]}`
+
+                }
+
+              />
+
+            );
+
+          })}
 
         </div>
 
@@ -644,4 +679,3 @@ export default function VoiceConstellationMap({
   );
 
 }
-
