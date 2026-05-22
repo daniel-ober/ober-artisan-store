@@ -587,8 +587,6 @@ const MetricIcon = ({ type, color = '#d6b277', size = 22 }) => {
         >
           <circle cx="12" cy="12" r="4" />
 
-          <circle cx="12" cy="12" r="1.6" fill={color} stroke="none" />
-
           <path d="M12 2v2" />
 
           <path d="M12 20v2" />
@@ -624,8 +622,6 @@ const MetricIcon = ({ type, color = '#d6b277', size = 22 }) => {
           aria-hidden="true"
         >
           <circle cx="12" cy="12" r="10" />
-
-          <circle cx="12" cy="12" r="2.2" />
 
           <line x1="22" x2="18" y1="12" y2="12" />
 
@@ -3646,7 +3642,7 @@ const VoiceThreadMap = ({
               return (
                 <g
                   key={nodeKey}
-                  className={`heritage-voice-thread-node ${
+                  className={`heritage-voice-thread-node heritage-voice-thread-node--${nodeKey} ${
                     isActive ? 'is-active' : ''
                   } heritage-voice-thread-node--rank-${rank}`}
                   style={{
