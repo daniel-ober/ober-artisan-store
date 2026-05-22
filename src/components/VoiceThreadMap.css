@@ -654,14 +654,6 @@
 
 }
 
-.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon svg {
-
-  color: var(--node-color) !important;
-
-  stroke: currentColor !important;
-
-}
-
 .heritage-voice-thread-map--read-player
 
   .heritage-voice-thread-node.is-active
@@ -1269,20 +1261,6 @@
     transform 180ms ease,
 
     filter 180ms ease;
-
-}
-
-.heritage-voice-thread-node-icon svg {
-
-  display: block;
-
-  width: 24px;
-
-  height: 24px;
-
-  stroke-width: 2.35;
-
-  overflow: visible;
 
 }
 
@@ -2041,3 +2019,210 @@
   }
 
 }
+
+/* =========================================================
+
+   PLAYER ANALYSIS — USE FIRST LISTEN GLYPH LANGUAGE
+
+   The Player Contour stays unique. The outer Voice Frame,
+
+   Frame Anchors, and Node Glyphs match First Listen.
+
+   ========================================================= */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-grid,
+
+.heritage-voice-thread-map--read-player .heritage-player-read-reference-line,
+
+.heritage-voice-thread-map--read-player .heritage-player-read-reference-dot,
+
+.heritage-voice-thread-map--read-player .heritage-player-read-map-key {
+
+  display: none !important;
+
+  visibility: hidden !important;
+
+  opacity: 0 !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.52 !important;
+
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--node-color), transparent 54%)) !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon {
+
+  opacity: 0.46 !important;
+
+  transform: none !important;
+
+  filter: drop-shadow(0 0 3px color-mix(in srgb, currentColor 34%, transparent)) !important;
+
+}
+
+
+
+/* =========================================================
+
+   CANONICAL NODE GLYPHS — DO NOT OVERRIDE BY READ
+
+   First Listen, Player Analysis, and LegacyPrint Identity
+
+   must use the exact same MetricIcon SVG paths.
+
+   ========================================================= */
+
+.heritage-voice-thread-node-icon .oa-node-glyph-svg {
+
+  display: block !important;
+
+  width: 22px !important;
+
+  height: 22px !important;
+
+  overflow: visible !important;
+
+  color: currentColor !important;
+
+  fill: none;
+
+}
+
+.heritage-voice-thread-node-icon .oa-node-glyph-svg * {
+
+  vector-effect: non-scaling-stroke !important;
+
+}
+
+
+/* =========================================================
+
+   FINAL SAFE OVERRIDE — UNIFY NODE GLYPHS ACROSS READS
+
+   Do not delete existing CSS. This only normalizes the rendered
+
+   glyph container and isolated SVG class at the end of the file.
+
+   ========================================================= */
+
+.heritage-voice-thread-map .heritage-voice-thread-node-icon-positioner {
+
+  pointer-events: none !important;
+
+  overflow: visible !important;
+
+}
+
+.heritage-voice-thread-map .heritage-voice-thread-node-icon {
+
+  width: 22px !important;
+
+  height: 22px !important;
+
+  display: block !important;
+
+  place-items: unset !important;
+
+  color: var(--node-color) !important;
+
+  background: transparent !important;
+
+  border: 0 !important;
+
+  box-shadow: none !important;
+
+  transform: none !important;
+
+}
+
+.heritage-voice-thread-map .heritage-voice-thread-node-icon .oa-node-glyph-svg {
+
+  display: block !important;
+
+  width: 22px !important;
+
+  height: 22px !important;
+
+  overflow: visible !important;
+
+  color: currentColor !important;
+
+}
+
+.heritage-voice-thread-map .heritage-voice-thread-node-icon .oa-node-glyph-svg * {
+
+  vector-effect: non-scaling-stroke !important;
+
+}
+
+.heritage-voice-thread-map--read-firstTell .heritage-voice-thread-node-icon,
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon,
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-node-icon {
+
+  transform: none !important;
+
+}
+
+
+/* =========================================================
+
+   ISOLATED LP NODE GLYPHS
+
+   These bypass old heritage-voice-thread-node-icon CSS entirely.
+
+   Same glyphs across First Listen, Player Analysis, LegacyPrint.
+
+   ========================================================= */
+
+.lp-node-glyph-positioner {
+
+  pointer-events: none !important;
+
+  overflow: visible !important;
+
+}
+
+.lp-node-glyph-core {
+
+  width: 22px !important;
+
+  height: 22px !important;
+
+  display: block !important;
+
+  color: currentColor !important;
+
+  transform: none !important;
+
+  opacity: 1 !important;
+
+  filter: none !important;
+
+}
+
+.lp-node-glyph-core .oa-node-glyph-svg {
+
+  display: block !important;
+
+  width: 22px !important;
+
+  height: 22px !important;
+
+  overflow: visible !important;
+
+  color: currentColor !important;
+
+}
+
+.lp-node-glyph-core .oa-node-glyph-svg * {
+
+  vector-effect: non-scaling-stroke !important;
+
+}
+
