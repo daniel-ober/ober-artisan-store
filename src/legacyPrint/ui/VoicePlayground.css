@@ -6972,3 +6972,177 @@
 
 }
 
+
+
+/* =========================================================
+
+   VOICE PLAYGROUND — SHAPE MODE NODE COLOR + ICON FIX
+
+   Shape mode only. Uses actual node keys, not nth-of-type.
+
+   ========================================================= */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shape-enabled,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shape-enabled *,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-target {
+
+  touch-action: none !important;
+
+  -webkit-user-select: none !important;
+
+  user-select: none !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shape-enabled[class*="vcm-is-dragging-node"] .heritage-voice-thread-svg *,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shape-enabled[class*="vcm-is-dragging-node"] .heritage-voice-thread-node,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shape-enabled[class*="vcm-is-dragging-node"] .heritage-voice-thread-node *,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shape-enabled[class*="vcm-is-dragging-node"] .heritage-player-read-polygon-layer *,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shape-enabled[class*="vcm-is-dragging-node"] .heritage-voice-thread-profile * {
+
+  transition: none !important;
+
+  animation: none !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable {
+
+  pointer-events: auto !important;
+
+  touch-action: none !important;
+
+  z-index: 20 !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-target {
+
+  pointer-events: auto !important;
+
+  touch-action: none !important;
+
+  cursor: grab !important;
+
+  background: transparent !important;
+
+  border-color: transparent !important;
+
+  box-shadow: none !important;
+
+  outline: none !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-target::before,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-target::after {
+
+  display: none !important;
+
+  content: none !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node-icon-wrap {
+
+  overflow: visible !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node-icon svg {
+
+  overflow: visible !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.28 !important;
+
+  filter:
+
+    grayscale(1)
+
+    saturate(0.18)
+
+    brightness(0.48)
+
+    drop-shadow(0 0 1px currentColor) !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node--attack {
+
+  --shape-node-strength: var(--shape-attack-strength, 0.5);
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node--brightness {
+
+  --shape-node-strength: var(--shape-brightness-strength, 0.5);
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node--projection {
+
+  --shape-node-strength: var(--shape-projection-strength, 0.5);
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node--sustain {
+
+  --shape-node-strength: var(--shape-sustain-strength, 0.5);
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node--warmth {
+
+  --shape-node-strength: var(--shape-warmth-strength, 0.5);
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node--sensitivity {
+
+  --shape-node-strength: var(--shape-sensitivity-strength, 0.5);
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node--control {
+
+  --shape-node-strength: var(--shape-control-strength, 0.5);
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node .heritage-voice-thread-anchor-dot {
+
+  opacity: calc(0.22 + (var(--shape-node-strength, 0.5) * 0.78)) !important;
+
+  filter:
+
+    grayscale(calc(1 - var(--shape-node-strength, 0.5)))
+
+    saturate(calc(0.2 + (var(--shape-node-strength, 0.5) * 2.9)))
+
+    brightness(calc(0.5 + (var(--shape-node-strength, 0.5) * 2.05)))
+
+    drop-shadow(0 0 calc(1px + (var(--shape-node-strength, 0.5) * 16px)) currentColor)
+
+    drop-shadow(0 0 calc(1px + (var(--shape-node-strength, 0.5) * 26px)) currentColor) !important;
+
+}
+
