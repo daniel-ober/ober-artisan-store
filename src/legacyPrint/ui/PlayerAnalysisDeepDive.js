@@ -3,6 +3,7 @@ import React, { useMemo, useState } from 'react';
 
 import VoiceThreadMap from '../../components/VoiceThreadMap';
 
+import derivePlayerAnalysisDeepDive from './derivePlayerAnalysisDeepDive.js';
 import './PlayerAnalysisDeepDive.css';
 
 const FALLBACK_FEEL_RESPONSE = [
@@ -233,7 +234,61 @@ export default function PlayerAnalysisDeepDive({
 
   const resolvedRead = read || {};
 
-  const normalizedPlayerAnalysis = playerAnalysis || resolvedRead?.playerAnalysis || {};
+  const derivedPlayerAnalysis = useMemo(
+
+    () => derivePlayerAnalysisDeepDive({
+
+      ...resolvedRead,
+
+      playerAnalysis: playerAnalysis || resolvedRead?.playerAnalysis || {},
+
+    }),
+
+    [resolvedRead, playerAnalysis]
+
+  );
+
+  const normalizedPlayerAnalysis = {
+
+    ...derivedPlayerAnalysis,
+
+    ...(resolvedRead?.playerAnalysis || {}),
+
+    ...(playerAnalysis || {}),
+
+    feelResponse:
+
+      playerAnalysis?.feelResponse ||
+
+      resolvedRead?.playerAnalysis?.feelResponse ||
+
+      derivedPlayerAnalysis.feelResponse,
+
+    legacyTuning:
+
+      playerAnalysis?.legacyTuning ||
+
+      resolvedRead?.playerAnalysis?.legacyTuning ||
+
+      derivedPlayerAnalysis.legacyTuning,
+
+    nodeRelationships:
+
+      playerAnalysis?.nodeRelationships ||
+
+      resolvedRead?.playerAnalysis?.nodeRelationships ||
+
+      derivedPlayerAnalysis.nodeRelationships,
+
+    setupImpact:
+
+      playerAnalysis?.setupImpact ||
+
+      resolvedRead?.playerAnalysis?.setupImpact ||
+
+      derivedPlayerAnalysis.setupImpact,
+
+  };
 
   const feelResponse = useMemo(
 

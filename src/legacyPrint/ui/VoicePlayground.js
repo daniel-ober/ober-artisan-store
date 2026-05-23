@@ -3949,6 +3949,14 @@ export function VoicePlayground({ firestore }) {
 
                     dominantNodes: topNodes,
 
+                        config: referenceIdentity,
+
+                        referenceIdentity,
+
+                        referenceModifiers,
+
+                        referenceIsModified,
+
 
 
                     playerAnalysis: {
@@ -3980,6 +3988,14 @@ export function VoicePlayground({ firestore }) {
 
 
                       dominantNodes: topNodes,
+
+                        config: referenceIdentity,
+
+                        referenceIdentity,
+
+                        referenceModifiers,
+
+                        referenceIsModified,
 
 
 
@@ -4020,6 +4036,14 @@ export function VoicePlayground({ firestore }) {
 
 
                     dominantNodes: topNodes,
+
+                        config: referenceIdentity,
+
+                        referenceIdentity,
+
+                        referenceModifiers,
+
+                        referenceIsModified,
 
 
 
