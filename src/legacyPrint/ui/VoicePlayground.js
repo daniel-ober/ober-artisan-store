@@ -39,6 +39,7 @@ import { VoiceMorphPanel } from './VoiceMorphPanel.js';
 import { morphVoice } from '../morph/morphVoice.js';
 
 import VoiceConstellationMap from './VoiceConstellationMap.js';
+import PlayerAnalysisDeepDive from './PlayerAnalysisDeepDive.js';
 
 import './VoicePlayground.css';
 
@@ -3919,6 +3920,118 @@ export function VoicePlayground({ firestore }) {
                 referenceIsModified={referenceIsModified}
 
               />
+
+
+
+              {readMode === 'playerAnalysis' && (
+
+
+
+                <PlayerAnalysisDeepDive
+
+
+
+                  read={{
+
+
+
+                    ...(selectedReferenceReadout || {}),
+
+
+
+                    title: selectedReferenceReadout?.title,
+
+
+
+                    summary: selectedReferenceReadout?.summary || selectedReferenceReadout?.description,
+
+
+
+                    dominantNodes: topNodes,
+
+
+
+                    playerAnalysis: {
+
+
+
+                      ...(selectedReferenceReadout || {}),
+
+
+
+                      title: selectedReferenceReadout?.title,
+
+
+
+                      overviewSummary:
+
+
+
+                        selectedReferenceReadout?.summary ||
+
+
+
+                        selectedReferenceReadout?.description ||
+
+
+
+                        selectedReadMode.description,
+
+
+
+                      dominantNodes: topNodes,
+
+
+
+                    },
+
+
+
+                  }}
+
+
+
+                  playerAnalysis={{
+
+
+
+                    ...(selectedReferenceReadout || {}),
+
+
+
+                    title: selectedReferenceReadout?.title,
+
+
+
+                    overviewSummary:
+
+
+
+                      selectedReferenceReadout?.summary ||
+
+
+
+                      selectedReferenceReadout?.description ||
+
+
+
+                      selectedReadMode.description,
+
+
+
+                    dominantNodes: topNodes,
+
+
+
+                  }}
+
+
+
+                />
+
+
+
+              )}
 
             </section>
 
