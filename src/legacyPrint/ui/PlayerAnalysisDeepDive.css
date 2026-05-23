@@ -1,3 +1,12 @@
+/* =========================================================
+
+   PLAYER ANALYSIS DEEP DIVE — TAB REFINEMENT
+
+   Keeps the deep tools inside one section, styled like the
+
+   primary LegacyPrint read tabs.
+
+   ========================================================= */
 
 .lp-player-deep-dive {
 
@@ -31,9 +40,9 @@
 
   gap: 18px;
 
-  padding: clamp(20px, 3vw, 30px);
+  padding: clamp(22px, 3vw, 34px) clamp(22px, 3vw, 34px) clamp(18px, 2.4vw, 26px);
 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
 
 }
 
@@ -47,9 +56,9 @@
 
   font-size: 0.68rem;
 
-  font-weight: 800;
+  font-weight: 850;
 
-  letter-spacing: 0.28em;
+  letter-spacing: 0.34em;
 
   text-transform: uppercase;
 
@@ -61,21 +70,21 @@
 
   color: #f8f1e8;
 
-  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
 
-  line-height: 1.1;
+  line-height: 1.08;
 
 }
 
 .lp-player-deep-dive__header p:last-child {
 
-  max-width: 720px;
+  max-width: 780px;
 
-  margin: 10px 0 0;
+  margin: 12px 0 0;
 
-  color: rgba(248, 241, 232, 0.68);
+  color: rgba(248, 241, 232, 0.66);
 
-  font-size: 0.95rem;
+  font-size: 0.98rem;
 
   line-height: 1.65;
 
@@ -85,13 +94,19 @@
 
   display: flex;
 
-  gap: 8px;
+  align-items: center;
 
-  padding: 14px clamp(16px, 3vw, 30px);
+  gap: clamp(18px, 3vw, 34px);
+
+  padding: 0 clamp(22px, 3vw, 34px);
+
+  min-height: 58px;
 
   overflow-x: auto;
 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+
+  background: rgba(0, 0, 0, 0.11);
 
   scrollbar-width: none;
 
@@ -105,23 +120,25 @@
 
 .lp-player-deep-dive__tab {
 
+  position: relative;
+
   flex: 0 0 auto;
 
-  border: 1px solid rgba(214, 178, 119, 0.13);
+  border: 0;
 
-  border-radius: 999px;
+  border-radius: 0;
 
-  padding: 9px 13px;
+  padding: 20px 0 17px;
 
-  color: rgba(248, 241, 232, 0.58);
+  color: rgba(248, 241, 232, 0.48);
 
-  background: rgba(255, 255, 255, 0.035);
+  background: transparent;
 
-  font-size: 0.68rem;
+  font-size: 0.7rem;
 
-  font-weight: 800;
+  font-weight: 850;
 
-  letter-spacing: 0.16em;
+  letter-spacing: 0.3em;
 
   text-transform: uppercase;
 
@@ -131,37 +148,65 @@
 
     color 160ms ease,
 
-    border-color 160ms ease,
+    opacity 160ms ease;
 
-    background 160ms ease,
+}
 
-    transform 160ms ease;
+.lp-player-deep-dive__tab::after {
+
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+
+  right: 0;
+
+  bottom: -1px;
+
+  height: 1px;
+
+  background: transparent;
+
+  transform: scaleX(0.25);
+
+  opacity: 0;
+
+  transition:
+
+    opacity 160ms ease,
+
+    transform 160ms ease,
+
+    background 160ms ease;
 
 }
 
 .lp-player-deep-dive__tab:hover {
 
-  color: #f8f1e8;
-
-  border-color: rgba(214, 178, 119, 0.35);
-
-  transform: translateY(-1px);
+  color: rgba(248, 241, 232, 0.82);
 
 }
 
 .lp-player-deep-dive__tab--active {
 
-  color: #080a12;
+  color: #f3d38e;
 
-  border-color: rgba(214, 178, 119, 0.82);
+}
 
-  background: linear-gradient(135deg, #d6b277, #f0d79d);
+.lp-player-deep-dive__tab--active::after {
+
+  background: #d6b277;
+
+  opacity: 1;
+
+  transform: scaleX(1);
 
 }
 
 .lp-player-deep-dive__panel {
 
-  padding: clamp(18px, 3vw, 30px);
+  padding: clamp(20px, 3vw, 34px);
 
 }
 
@@ -721,13 +766,23 @@
 
   }
 
+  .lp-player-deep-dive__tabs {
+
+    gap: 20px;
+
+    min-height: 52px;
+
+    padding: 0 18px;
+
+  }
+
   .lp-player-deep-dive__tab {
 
-    padding: 8px 10px;
+    padding: 18px 0 15px;
 
     font-size: 0.62rem;
 
-    letter-spacing: 0.12em;
+    letter-spacing: 0.2em;
 
   }
 
