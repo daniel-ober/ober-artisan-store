@@ -86,6 +86,7 @@ serviceAccountKey.json
 # Generated audit reports
 
 missingSnareReferenceFieldsReport.json
+eslint-report.json
 
 
 # Generated snare audit batches
