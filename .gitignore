@@ -88,6 +88,14 @@ serviceAccountKey.json
 missingSnareReferenceFieldsReport.json
 eslint-report.json
 
+# Local exports and captured events — may contain auth data or access tokens
+/users.json
+/users-dev.json
+/users-stg.json
+/users-prod.json
+/event.json
+/seedSoundLegendShowroom.js
+
 
 # Generated snare audit batches
 
